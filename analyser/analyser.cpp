@@ -1,0 +1,80 @@
+#include "analyser.h"
+#include <armadillo>
+
+Analyser::Analyser(Circuit* circuit){
+    this->circuit = circuit;
+    nodeNum = circuit->node_num;
+    bTypeDeviceNum = 0;
+    bTypeDeviceCounter = 0;
+    mna.zeros();
+    mna.set_size(nodeNum,nodeNum);
+}
+
+void Analyser::analyseDC(){
+    nodeNum = circuit->node_num;
+    bTypeDeviceCounter = 0;
+    bTypeDeviceNum = 0;
+    for (int i=0; i < circuit->devices.size(); i++){
+        if(circuit->devices[i]->deviceType == B_TYPE){
+            bTypeDeviceNum ++;
+        }
+    }
+
+    
+    mna.set_size(nodeNum+bTypeDeviceNum,nodeNum+bTypeDeviceNum);
+    mna.zeros();
+
+    rhs.set_size(nodeNum+bTypeDeviceNum);
+    rhs.zeros();
+
+    this->devicesStampDC();
+
+    this->solveDC();
+}
+
+void Analyser::devicesStampDC(){
+
+    for (auto it = circuit->nodemap.begin();it!=circuit->nodemap.end();it++){
+        if(it->second.isGround){
+            it->second.id = nodeNum - 1;//ground node id re-set
+            break;
+        }
+    }
+
+    for (int i=0; i < circuit->devices.size(); i++){
+        circuit->devices[i]->stampDC(this);
+    }
+    mna.print("nmaDC:");
+    rhs.print("rhs:");
+}
+
+void Analyser::solveDC(){
+    mna.shed_col(nodeNum-1);
+    mna.shed_row(nodeNum-1);
+    rhs.shed_row(nodeNum-1);
+    cx_vec x;
+    bool status = solve(x, mna, rhs, arma::solve_opts::allow_ugly);
+    x.print("x:");
+}
+
+void Analyser::devicesStampAC(){
+
+    int i = 0; //re rank
+    for (auto it = circuit->nodemap.begin();it!=circuit->nodemap.end();it++){
+        if(it->second.isGround){
+            it->second.id = nodeNum - 1;//ground node regconize
+        }
+        else{
+            it->second.id = i;//re rank;
+            i++;
+        }
+    }
+
+    for (int i=0; i < circuit->devices.size(); i++){
+        circuit->devices[i]->stampAC(this);
+    }
+    mat mna_real = real(mna);
+    vec rhs_real = real(rhs);
+    mna_real.print("nmaDC:");
+    rhs_real.print("rhs:");
+}
