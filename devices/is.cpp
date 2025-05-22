@@ -4,10 +4,10 @@
 
 using namespace arma;
 
-void VCCS::stampDC(Analyser* analyser){
+void Is::stampDC(Analyser* analyser){
 
 };
 
-void VCCS::stampAC(Analyser* analyser){
+void Is::stampAC(Analyser* analyser){
 
 };
