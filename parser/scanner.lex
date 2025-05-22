@@ -41,6 +41,10 @@ CAPACITOR [Cc]{ALPHANUM}+
 INDUCTOR  [Ll]{ALPHANUM}+
 VS        [Vv]{ALPHANUM}+
 VCCS      [Gg]{ALPHANUM}+
+VCVS      [Ee]{ALPHANUM}+
+CS        [Ii]{ALPHANUM}+
+CCVS      [Hh]{ALPHANUM}+
+CCCS      [Ff]{ALPHANUM}+
 
 EOL       [\n]
 DELIMITER [ \t]+
@@ -61,14 +65,18 @@ CMD_PRINT     [\.][Pp][Rr][Ii][Nn][Tt]
 CMD_OP        [\.][Oo][Pp]
 CMD_DC        [\.][Dd][Cc]
 CMD_AC        [\.][Aa][Cc]
+
 %%
 
-
-{CAPACITOR}  {yylval.s = copyStr(yytext); return CAPACITOR;}
+{CAPACITOR} {yylval.s = copyStr(yytext); return CAPACITOR;}
 {INDUCTOR}  {yylval.s = copyStr(yytext); return INDUCTOR;}
 {RESISTOR}  {yylval.s = copyStr(yytext); return RESISTOR;}
-{VS}        {yylval.s = copyStr(yytext); return VS;}
+{VS}      {yylval.s = copyStr(yytext); return VS;  }
 {VCCS}      {yylval.s = copyStr(yytext); return VCCS;}
+{VCVS}      {yylval.s = copyStr(yytext); return VCVS;}
+{CS}      {yylval.s = copyStr(yytext); return CS  ;}
+{CCVS}      {yylval.s = copyStr(yytext); return CCVS;}
+{CCCS}      {yylval.s = copyStr(yytext); return CCCS;}
 
 {EOL}       {return EOL;}
 <<EOF>>     {yyterminate();}
@@ -93,6 +101,7 @@ CMD_AC        [\.][Aa][Cc]
 {FLOAT}     {yylval.f = atof(yytext); return FLOAT;}
 {VALUE}     {yylval.f = parseValue(yytext); return VALUE;}
 {STRING}    {yylval.s = copyStr(yytext); return STRING;}
+
 %%
 
 char *copyStr(const char *str)

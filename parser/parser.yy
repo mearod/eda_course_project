@@ -29,10 +29,10 @@
 %token<f> FLOAT
 %token<s> STRING 
 %token<n> INTEGER
-%token<s> INDUCTOR CAPACITOR RESISTOR VCCS VS 
+%token<s> INDUCTOR CAPACITOR RESISTOR VS VCCS VCVS CS CCVS CCCS
 %token<s> COMMENTLINE
 %token<f> VALUE
-%type<s> inductor capacitor resistor vccs vs
+%type<s> inductor capacitor resistor vccs vs vcvs cs ccvs cccs
 %type<f> value
 %type<s> node
 %token END EOL
@@ -120,7 +120,7 @@ void ParseCapacitor(char const *name, char const *node1, char const *node2, doub
     circuit->devices.push_back(d);
 }
 
-void ParseVS(char const *name, char const *node1, char const *node2, double value)
+void ParseVs(char const *name, char const *node1, char const *node2, double value)
 {
     if (!checkName(name)) return;
     addNode(node1); addNode(node2);
@@ -128,7 +128,49 @@ void ParseVS(char const *name, char const *node1, char const *node2, double valu
     circuit->devices.push_back(d);
 }
 
+void ParseCs(char const *name, char const *node1, char const *node2, double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2);
+    Cs* d = new Cs(name, node1, node2, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseVccs(char const *name, char const *node1, char const *node2, char const *node3, char const *node4,double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(node3); addNode(node4); 
+    Vccs* d = new Vccs(name, node1, node2, node3, node4, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseVcvs(char const *name, char const *node1, char const *node2, char const *node3, char const *node4,double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(node3); addNode(node4); 
+    Vcvs* d = new Vcvs(name, node1, node2, node3, node4, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseCcvs(char const *name, char const *node1, char const *node2, char const *vc, double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(vc);
+    Ccvs* d = new Ccvs(name, node1, node2, vc, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseCccs(char const *name, char const *node1, char const *node2, char const *vc, double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(vc);
+    Cccs* d = new Cccs(name, node1, node2, vc, value);
+    circuit->devices.push_back(d);
+}
+
 %}
+
+
 
 %%
 
@@ -154,6 +196,10 @@ component: resistor
          | inductor
          | vccs
          | vs
+         | vcvs
+         | cs
+         | cccs
+         | ccvs
 ;
 
 command: print
@@ -189,19 +235,49 @@ inductor: INDUCTOR node node value
 ;
 
 vccs: VCCS node node node node value
-    {
+    {   
+        ParseVccs($1, $2, $3, $4, $5, $6);
         printf("[VCCS Line] Name(%s) N+(%s) N-(%s) NC+(%s) NC-(%s) val(%f)\n", $1, $2, $3, $4, $5, $6);
-        vsrc_number ++;
     }
 
 ;
 
 vs: VS node node value
         {
-            ParseVS($1, $2, $3, $4);
+            ParseVs($1, $2, $3, $4);
             printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, $4);
             vsrc_number ++;
         }
+;
+
+vcvs: VCVS node node node node value
+    {   
+        ParseVcvs($1, $2, $3, $4, $5, $6);
+        printf("[VCVS Line] Name(%s) N+(%s) N-(%s) NC+(%s) NC-(%s) val(%f)\n", $1, $2, $3, $4, $5, $6);
+        vsrc_number ++;
+    }
+;
+
+cs: CS node node value
+    {
+        ParseCs($1, $2, $3, $4);
+        printf("[CS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, $4);
+    }
+;
+
+cccs: CCCS node node VS value
+    {   
+        ParseCccs($1, $2, $3, $4, $5);
+        printf("[VCVS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", $1, $2, $3, $4, $5);
+    }
+;
+
+ccvs: CCVS node node VS value
+    {   
+        ParseCccs($1, $2, $3, $4, $5);
+        printf("[CCVS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", $1, $2, $3, $4, $5);
+        vsrc_number ++;
+    }
 ;
 
 

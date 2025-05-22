@@ -12,11 +12,11 @@ all: $(TARGET)
 
 demo: $(CSRCS) $(LSRC) $(YSRC)
 	@echo "compiling..."
-	make -C /home/kyon/eda_course/assignment4/hw4_project/parser flex_bison_output
+	make -C ./parser flex_bison_output
 	$(CXX) -g -I .  -o $@ $(CSRCS) -larmadillo -llapack -lblas -lfl -ly
 
 .PHOYN: clean distclean
 
 clean:
-	make -C /home/kyon/eda_course/assignment4/hw4_project/parser clean
+	make -C ./parser clean
 	$(RM) demo

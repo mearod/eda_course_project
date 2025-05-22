@@ -102,39 +102,47 @@ enum yysymbol_kind_t
   YYSYMBOL_INDUCTOR = 6,                   /* INDUCTOR  */
   YYSYMBOL_CAPACITOR = 7,                  /* CAPACITOR  */
   YYSYMBOL_RESISTOR = 8,                   /* RESISTOR  */
-  YYSYMBOL_VCCS = 9,                       /* VCCS  */
-  YYSYMBOL_VS = 10,                        /* VS  */
-  YYSYMBOL_COMMENTLINE = 11,               /* COMMENTLINE  */
-  YYSYMBOL_VALUE = 12,                     /* VALUE  */
-  YYSYMBOL_END = 13,                       /* END  */
-  YYSYMBOL_EOL = 14,                       /* EOL  */
-  YYSYMBOL_VAR_V = 15,                     /* VAR_V  */
-  YYSYMBOL_VAR_I = 16,                     /* VAR_I  */
-  YYSYMBOL_RK_OP = 17,                     /* RK_OP  */
-  YYSYMBOL_RK_AC = 18,                     /* RK_AC  */
-  YYSYMBOL_RK_DC = 19,                     /* RK_DC  */
-  YYSYMBOL_RK_TRAN = 20,                   /* RK_TRAN  */
-  YYSYMBOL_CMD_PRINT = 21,                 /* CMD_PRINT  */
-  YYSYMBOL_CMD_OP = 22,                    /* CMD_OP  */
-  YYSYMBOL_CMD_DC = 23,                    /* CMD_DC  */
-  YYSYMBOL_CMD_AC = 24,                    /* CMD_AC  */
-  YYSYMBOL_YYACCEPT = 25,                  /* $accept  */
-  YYSYMBOL_spice = 26,                     /* spice  */
-  YYSYMBOL_end = 27,                       /* end  */
-  YYSYMBOL_netlist = 28,                   /* netlist  */
-  YYSYMBOL_line = 29,                      /* line  */
-  YYSYMBOL_component = 30,                 /* component  */
-  YYSYMBOL_command = 31,                   /* command  */
-  YYSYMBOL_resistor = 32,                  /* resistor  */
-  YYSYMBOL_capacitor = 33,                 /* capacitor  */
-  YYSYMBOL_inductor = 34,                  /* inductor  */
-  YYSYMBOL_vccs = 35,                      /* vccs  */
-  YYSYMBOL_vs = 36,                        /* vs  */
-  YYSYMBOL_op = 37,                        /* op  */
-  YYSYMBOL_dc = 38,                        /* dc  */
-  YYSYMBOL_print = 39,                     /* print  */
-  YYSYMBOL_node = 40,                      /* node  */
-  YYSYMBOL_value = 41                      /* value  */
+  YYSYMBOL_VS = 9,                         /* VS  */
+  YYSYMBOL_VCCS = 10,                      /* VCCS  */
+  YYSYMBOL_VCVS = 11,                      /* VCVS  */
+  YYSYMBOL_CS = 12,                        /* CS  */
+  YYSYMBOL_CCVS = 13,                      /* CCVS  */
+  YYSYMBOL_CCCS = 14,                      /* CCCS  */
+  YYSYMBOL_COMMENTLINE = 15,               /* COMMENTLINE  */
+  YYSYMBOL_VALUE = 16,                     /* VALUE  */
+  YYSYMBOL_END = 17,                       /* END  */
+  YYSYMBOL_EOL = 18,                       /* EOL  */
+  YYSYMBOL_VAR_V = 19,                     /* VAR_V  */
+  YYSYMBOL_VAR_I = 20,                     /* VAR_I  */
+  YYSYMBOL_RK_OP = 21,                     /* RK_OP  */
+  YYSYMBOL_RK_AC = 22,                     /* RK_AC  */
+  YYSYMBOL_RK_DC = 23,                     /* RK_DC  */
+  YYSYMBOL_RK_TRAN = 24,                   /* RK_TRAN  */
+  YYSYMBOL_CMD_PRINT = 25,                 /* CMD_PRINT  */
+  YYSYMBOL_CMD_OP = 26,                    /* CMD_OP  */
+  YYSYMBOL_CMD_DC = 27,                    /* CMD_DC  */
+  YYSYMBOL_CMD_AC = 28,                    /* CMD_AC  */
+  YYSYMBOL_YYACCEPT = 29,                  /* $accept  */
+  YYSYMBOL_spice = 30,                     /* spice  */
+  YYSYMBOL_end = 31,                       /* end  */
+  YYSYMBOL_netlist = 32,                   /* netlist  */
+  YYSYMBOL_line = 33,                      /* line  */
+  YYSYMBOL_component = 34,                 /* component  */
+  YYSYMBOL_command = 35,                   /* command  */
+  YYSYMBOL_resistor = 36,                  /* resistor  */
+  YYSYMBOL_capacitor = 37,                 /* capacitor  */
+  YYSYMBOL_inductor = 38,                  /* inductor  */
+  YYSYMBOL_vccs = 39,                      /* vccs  */
+  YYSYMBOL_vs = 40,                        /* vs  */
+  YYSYMBOL_vcvs = 41,                      /* vcvs  */
+  YYSYMBOL_cs = 42,                        /* cs  */
+  YYSYMBOL_cccs = 43,                      /* cccs  */
+  YYSYMBOL_ccvs = 44,                      /* ccvs  */
+  YYSYMBOL_op = 45,                        /* op  */
+  YYSYMBOL_dc = 46,                        /* dc  */
+  YYSYMBOL_print = 47,                     /* print  */
+  YYSYMBOL_node = 48,                      /* node  */
+  YYSYMBOL_value = 49                      /* value  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -221,7 +229,7 @@ void ParseCapacitor(char const *name, char const *node1, char const *node2, doub
     circuit->devices.push_back(d);
 }
 
-void ParseVS(char const *name, char const *node1, char const *node2, double value)
+void ParseVs(char const *name, char const *node1, char const *node2, double value)
 {
     if (!checkName(name)) return;
     addNode(node1); addNode(node2);
@@ -229,8 +237,48 @@ void ParseVS(char const *name, char const *node1, char const *node2, double valu
     circuit->devices.push_back(d);
 }
 
+void ParseCs(char const *name, char const *node1, char const *node2, double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2);
+    Cs* d = new Cs(name, node1, node2, value);
+    circuit->devices.push_back(d);
+}
 
-#line 234 "parser.cpp"
+void ParseVccs(char const *name, char const *node1, char const *node2, char const *node3, char const *node4,double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(node3); addNode(node4); 
+    Vccs* d = new Vccs(name, node1, node2, node3, node4, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseVcvs(char const *name, char const *node1, char const *node2, char const *node3, char const *node4,double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(node3); addNode(node4); 
+    Vcvs* d = new Vcvs(name, node1, node2, node3, node4, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseCcvs(char const *name, char const *node1, char const *node2, char const *vc, double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(vc);
+    Ccvs* d = new Ccvs(name, node1, node2, vc, value);
+    circuit->devices.push_back(d);
+}
+
+void ParseCccs(char const *name, char const *node1, char const *node2, char const *vc, double value)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2); addNode(vc);
+    Cccs* d = new Cccs(name, node1, node2, vc, value);
+    circuit->devices.push_back(d);
+}
+
+
+#line 282 "parser.cpp"
 
 
 #ifdef short
@@ -555,21 +603,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  41
+#define YYFINAL  53
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   67
+#define YYLAST   104
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  25
+#define YYNTOKENS  29
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  17
+#define YYNNTS  21
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  42
+#define YYNRULES  50
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  69
+#define YYNSTATES  93
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   279
+#define YYMAXUTOK   283
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -610,18 +658,20 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   135,   135,   138,   139,   142,   143,   146,   147,   148,
-     149,   152,   153,   154,   155,   156,   159,   160,   161,   166,
-     174,   182,   191,   199,   208,   214,   218,   223,   227,   231,
-     235,   239,   243,   250,   257,   266,   267,   268,   269,   270,
-     273,   277,   281
+       0,   177,   177,   180,   181,   184,   185,   188,   189,   190,
+     191,   194,   195,   196,   197,   198,   199,   200,   201,   202,
+     205,   206,   207,   212,   220,   228,   237,   245,   253,   261,
+     268,   275,   284,   290,   294,   299,   303,   307,   311,   315,
+     319,   326,   333,   342,   343,   344,   345,   346,   349,   353,
+     357
 };
 #endif
 
@@ -638,12 +688,12 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "FLOAT", "STRING",
-  "INTEGER", "INDUCTOR", "CAPACITOR", "RESISTOR", "VCCS", "VS",
-  "COMMENTLINE", "VALUE", "END", "EOL", "VAR_V", "VAR_I", "RK_OP", "RK_AC",
-  "RK_DC", "RK_TRAN", "CMD_PRINT", "CMD_OP", "CMD_DC", "CMD_AC", "$accept",
-  "spice", "end", "netlist", "line", "component", "command", "resistor",
-  "capacitor", "inductor", "vccs", "vs", "op", "dc", "print", "node",
-  "value", YY_NULLPTR
+  "INTEGER", "INDUCTOR", "CAPACITOR", "RESISTOR", "VS", "VCCS", "VCVS",
+  "CS", "CCVS", "CCCS", "COMMENTLINE", "VALUE", "END", "EOL", "VAR_V",
+  "VAR_I", "RK_OP", "RK_AC", "RK_DC", "RK_TRAN", "CMD_PRINT", "CMD_OP",
+  "CMD_DC", "CMD_AC", "$accept", "spice", "end", "netlist", "line",
+  "component", "command", "resistor", "capacitor", "inductor", "vccs",
+  "vs", "vcvs", "cs", "cccs", "ccvs", "op", "dc", "print", "node", "value", YY_NULLPTR
 };
 
 static const char *
@@ -653,7 +703,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-14)
+#define YYPACT_NINF (-9)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -667,13 +717,16 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      13,     1,    57,    57,    57,    57,    57,   -14,   -12,   -14,
-     -14,    18,     3,   -14,    14,    31,   -14,   -14,   -14,   -14,
-     -14,   -14,    38,    28,   -14,   -14,   -14,   -14,   -14,   -14,
-     -14,   -14,    57,    57,    57,    57,    57,   -14,   -14,   -14,
-     -14,   -14,   -14,    33,   -14,   -14,   -14,    37,   -14,   -14,
-      37,    37,    37,    57,    37,   -14,   -14,   -14,   -14,    37,
-     -14,   -14,   -14,    57,   -14,    37,    37,   -14,   -14
+      47,    -8,    89,    89,    89,    89,    89,    89,    89,    89,
+      89,    -9,     5,    -9,    -9,    12,     7,    -9,    18,    28,
+      -9,    -9,    -9,    -9,    -9,    -9,    -9,    -9,    -9,    -9,
+      14,    11,    -9,    -9,    -9,    -9,    -9,    -9,    -9,    -9,
+      89,    89,    89,    89,    89,    89,    89,    89,    89,    -9,
+      -9,    -9,    -9,    -9,    -9,    29,    -9,    -9,    -9,     6,
+      -9,    -9,     6,     6,     6,     6,    89,    89,     6,    26,
+      40,    -9,    -9,    -9,    -9,     6,    -9,    -9,    -9,    -9,
+      89,    89,    -9,     6,     6,     6,     6,     6,    -9,    -9,
+      -9,    -9,    -9
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -681,27 +734,32 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     0,     0,     9,     0,    24,
-      25,     0,     0,     6,     0,     0,    11,    12,    13,    14,
-      15,    18,    17,    16,    10,    33,    34,    37,    36,    35,
-      39,    38,     0,     0,     0,     0,     0,    29,    27,    28,
-      30,     1,     4,     2,     5,     7,     8,     0,    31,    32,
-       0,     0,     0,     0,     0,     3,    41,    42,    40,     0,
-      21,    20,    19,     0,    23,     0,     0,    26,    22
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     9,     0,    32,    33,     0,     0,     6,     0,     0,
+      11,    12,    13,    14,    15,    16,    17,    18,    19,    22,
+      21,    20,    10,    41,    42,    45,    44,    43,    46,    47,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    37,
+      35,    36,    38,     1,     4,     2,     5,     7,     8,     0,
+      39,    40,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     3,    49,    50,    48,     0,    25,    24,    23,    27,
+       0,     0,    29,     0,     0,     0,     0,     0,    31,    30,
+      34,    26,    28
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -14,   -14,   -14,   -14,    39,   -14,   -14,   -14,   -14,   -14,
-     -14,   -14,   -14,   -14,   -14,    -3,   -13
+      -9,    -9,    -9,    -9,    34,    -9,    -9,    -9,    -9,    -9,
+      -9,    -9,    -9,    -9,    -9,    -9,    -9,    -9,    -9,    -3,
+      17
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,    11,    43,    12,    13,    14,    15,    16,    17,    18,
-      19,    20,    21,    22,    23,    32,    59
+       0,    15,    55,    16,    17,    18,    19,    20,    21,    22,
+      23,    24,    25,    26,    27,    28,    29,    30,    31,    40,
+      75
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -709,57 +767,70 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      33,    34,    35,    36,     1,    37,    38,    39,    40,     2,
-       3,     4,     5,     6,     1,    24,    42,     7,    41,     2,
-       3,     4,     5,     6,     8,     9,    10,     7,    45,    50,
-      51,    52,    53,    54,     8,     9,    10,    60,    61,    62,
-      56,    64,    57,    48,    49,    46,    65,    55,    47,    58,
-      63,    44,    67,    68,     0,     0,     0,     0,     0,     0,
-      66,    25,    26,    27,    28,    29,    30,    31
+      41,    42,    43,    44,    45,    46,    47,    48,     1,    72,
+      32,    73,    53,     2,     3,     4,     5,     6,     7,     8,
+       9,    10,    74,    59,    54,    11,    49,    50,    51,    52,
+      60,    61,    12,    13,    14,    83,    57,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    58,    71,     1,    84,
+      56,     0,     0,     2,     3,     4,     5,     6,     7,     8,
+       9,    10,     0,    80,    81,    11,     0,     0,     0,     0,
+       0,     0,    12,    13,    14,     0,     0,    86,    87,    76,
+      77,    78,    79,     0,     0,    82,     0,     0,     0,     0,
+       0,     0,    85,    33,    34,    35,    36,    37,    38,    39,
+      88,    89,    90,    91,    92
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     4,     5,     6,     1,    17,    18,    19,    20,     6,
-       7,     8,     9,    10,     1,    14,    13,    14,     0,     6,
-       7,     8,     9,    10,    21,    22,    23,    14,    14,    32,
-      33,    34,    35,    36,    21,    22,    23,    50,    51,    52,
-       3,    54,     5,    15,    16,    14,    59,    14,    10,    12,
-      53,    12,    65,    66,    -1,    -1,    -1,    -1,    -1,    -1,
-      63,     4,     5,     6,     7,     8,     9,    10
+       3,     4,     5,     6,     7,     8,     9,    10,     1,     3,
+      18,     5,     0,     6,     7,     8,     9,    10,    11,    12,
+      13,    14,    16,     9,    17,    18,    21,    22,    23,    24,
+      19,    20,    25,    26,    27,     9,    18,    40,    41,    42,
+      43,    44,    45,    46,    47,    48,    18,    18,     1,     9,
+      16,    -1,    -1,     6,     7,     8,     9,    10,    11,    12,
+      13,    14,    -1,    66,    67,    18,    -1,    -1,    -1,    -1,
+      -1,    -1,    25,    26,    27,    -1,    -1,    80,    81,    62,
+      63,    64,    65,    -1,    -1,    68,    -1,    -1,    -1,    -1,
+      -1,    -1,    75,     4,     5,     6,     7,     8,     9,    10,
+      83,    84,    85,    86,    87
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     1,     6,     7,     8,     9,    10,    14,    21,    22,
-      23,    26,    28,    29,    30,    31,    32,    33,    34,    35,
-      36,    37,    38,    39,    14,     4,     5,     6,     7,     8,
-       9,    10,    40,    40,    40,    40,    40,    17,    18,    19,
-      20,     0,    13,    27,    29,    14,    14,    10,    15,    16,
-      40,    40,    40,    40,    40,    14,     3,     5,    12,    41,
-      41,    41,    41,    40,    41,    41,    40,    41,    41
+       0,     1,     6,     7,     8,     9,    10,    11,    12,    13,
+      14,    18,    25,    26,    27,    30,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
+      46,    47,    18,     4,     5,     6,     7,     8,     9,    10,
+      48,    48,    48,    48,    48,    48,    48,    48,    48,    21,
+      22,    23,    24,     0,    17,    31,    33,    18,    18,     9,
+      19,    20,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    18,     3,     5,    16,    49,    49,    49,    49,    49,
+      48,    48,    49,     9,     9,    49,    48,    48,    49,    49,
+      49,    49,    49
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    25,    26,    27,    27,    28,    28,    29,    29,    29,
-      29,    30,    30,    30,    30,    30,    31,    31,    31,    32,
-      33,    34,    35,    36,    37,    38,    38,    39,    39,    39,
-      39,    39,    39,    40,    40,    40,    40,    40,    40,    40,
-      41,    41,    41
+       0,    29,    30,    31,    31,    32,    32,    33,    33,    33,
+      33,    34,    34,    34,    34,    34,    34,    34,    34,    34,
+      35,    35,    35,    36,    37,    38,    39,    40,    41,    42,
+      43,    44,    45,    46,    46,    47,    47,    47,    47,    47,
+      47,    48,    48,    48,    48,    48,    48,    48,    49,    49,
+      49
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     2,     2,     1,     2,     1,     2,     2,     1,
-       2,     1,     1,     1,     1,     1,     1,     1,     1,     4,
-       4,     4,     6,     4,     1,     1,     5,     2,     2,     2,
-       2,     2,     2,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1
+       2,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     4,     4,     4,     6,     4,     6,     4,
+       5,     5,     1,     1,     5,     2,     2,     2,     2,     2,
+       2,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1
 };
 
 
@@ -1606,140 +1677,178 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 19: /* resistor: RESISTOR node node value  */
-#line 167 "parser.yy"
+  case 23: /* resistor: RESISTOR node node value  */
+#line 213 "parser.yy"
         {   
             ParseResistor((yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             printf("[Resistor Line] Name(%s) N+(%s) N-(%s) val(%e)\n", (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             r_number ++;
         }
-#line 1617 "parser.cpp"
+#line 1688 "parser.cpp"
     break;
 
-  case 20: /* capacitor: CAPACITOR node node value  */
-#line 175 "parser.yy"
+  case 24: /* capacitor: CAPACITOR node node value  */
+#line 221 "parser.yy"
         {
             ParseCapacitor((yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             printf("[Capacitor Line] Name(%s) N+(%s) N-(%s) val(%e)\n", (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             c_number ++;
         }
-#line 1627 "parser.cpp"
+#line 1698 "parser.cpp"
     break;
 
-  case 21: /* inductor: INDUCTOR node node value  */
-#line 183 "parser.yy"
+  case 25: /* inductor: INDUCTOR node node value  */
+#line 229 "parser.yy"
         {
             ParseInductor((yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             printf("[Inductor Line] Name(%s) N+(%s) N-(%s) val(%e)\n", (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             l_number ++;
         }
-#line 1637 "parser.cpp"
+#line 1708 "parser.cpp"
     break;
 
-  case 22: /* vccs: VCCS node node node node value  */
-#line 192 "parser.yy"
-    {
+  case 26: /* vccs: VCCS node node node node value  */
+#line 238 "parser.yy"
+    {   
+        ParseVccs((yyvsp[-5].s), (yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
         printf("[VCCS Line] Name(%s) N+(%s) N-(%s) NC+(%s) NC-(%s) val(%f)\n", (yyvsp[-5].s), (yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
-        vsrc_number ++;
     }
-#line 1646 "parser.cpp"
+#line 1717 "parser.cpp"
     break;
 
-  case 23: /* vs: VS node node value  */
-#line 200 "parser.yy"
+  case 27: /* vs: VS node node value  */
+#line 246 "parser.yy"
         {
-            ParseVS((yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+            ParseVs((yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
             vsrc_number ++;
         }
-#line 1656 "parser.cpp"
+#line 1727 "parser.cpp"
     break;
 
-  case 24: /* op: CMD_OP  */
-#line 209 "parser.yy"
+  case 28: /* vcvs: VCVS node node node node value  */
+#line 254 "parser.yy"
+    {   
+        ParseVcvs((yyvsp[-5].s), (yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+        printf("[VCVS Line] Name(%s) N+(%s) N-(%s) NC+(%s) NC-(%s) val(%f)\n", (yyvsp[-5].s), (yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+        vsrc_number ++;
+    }
+#line 1737 "parser.cpp"
+    break;
+
+  case 29: /* cs: CS node node value  */
+#line 262 "parser.yy"
+    {
+        ParseCs((yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+        printf("[CS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+    }
+#line 1746 "parser.cpp"
+    break;
+
+  case 30: /* cccs: CCCS node node VS value  */
+#line 269 "parser.yy"
+    {   
+        ParseCccs((yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+        printf("[VCVS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", (yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+    }
+#line 1755 "parser.cpp"
+    break;
+
+  case 31: /* ccvs: CCVS node node VS value  */
+#line 276 "parser.yy"
+    {   
+        ParseCccs((yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+        printf("[CCVS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", (yyvsp[-4].s), (yyvsp[-3].s), (yyvsp[-2].s), (yyvsp[-1].s), (yyvsp[0].f));
+        vsrc_number ++;
+    }
+#line 1765 "parser.cpp"
+    break;
+
+  case 32: /* op: CMD_OP  */
+#line 285 "parser.yy"
     {
         printf("[OP Line] OP\n");
     }
-#line 1664 "parser.cpp"
+#line 1773 "parser.cpp"
     break;
 
-  case 25: /* dc: CMD_DC  */
-#line 215 "parser.yy"
+  case 33: /* dc: CMD_DC  */
+#line 291 "parser.yy"
     {
 
     }
-#line 1672 "parser.cpp"
+#line 1781 "parser.cpp"
     break;
 
-  case 26: /* dc: dc VS value value value  */
-#line 218 "parser.yy"
+  case 34: /* dc: dc VS value value value  */
+#line 294 "parser.yy"
                               { 
         printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", (yyvsp[-3].s), (yyvsp[-2].f), (yyvsp[-1].f), (yyvsp[0].f));
     }
-#line 1680 "parser.cpp"
+#line 1789 "parser.cpp"
     break;
 
-  case 27: /* print: CMD_PRINT RK_AC  */
-#line 224 "parser.yy"
+  case 35: /* print: CMD_PRINT RK_AC  */
+#line 300 "parser.yy"
     {
         //printf("[PRINT Line] AC\n");
     }
-#line 1688 "parser.cpp"
+#line 1797 "parser.cpp"
     break;
 
-  case 28: /* print: CMD_PRINT RK_DC  */
-#line 228 "parser.yy"
+  case 36: /* print: CMD_PRINT RK_DC  */
+#line 304 "parser.yy"
     {
         //printf("[PRINT Line] DC\n");
     }
-#line 1696 "parser.cpp"
+#line 1805 "parser.cpp"
     break;
 
-  case 29: /* print: CMD_PRINT RK_OP  */
-#line 232 "parser.yy"
+  case 37: /* print: CMD_PRINT RK_OP  */
+#line 308 "parser.yy"
     {
         //printf("[PRINT Line] OP\n");
     }
-#line 1704 "parser.cpp"
+#line 1813 "parser.cpp"
     break;
 
-  case 30: /* print: CMD_PRINT RK_TRAN  */
-#line 236 "parser.yy"
+  case 38: /* print: CMD_PRINT RK_TRAN  */
+#line 312 "parser.yy"
     {
         //printf("[PRINT Line] TRAN\n");
     }
-#line 1712 "parser.cpp"
+#line 1821 "parser.cpp"
     break;
 
-  case 31: /* print: print VAR_V  */
-#line 240 "parser.yy"
+  case 39: /* print: print VAR_V  */
+#line 316 "parser.yy"
     {
         printf("[PRINT Line] Node(%s)\n",(yyvsp[0].s));
     }
-#line 1720 "parser.cpp"
+#line 1829 "parser.cpp"
     break;
 
-  case 32: /* print: print VAR_I  */
-#line 244 "parser.yy"
+  case 40: /* print: print VAR_I  */
+#line 320 "parser.yy"
     {
         printf("[PRINT Line] Node(%s)\n",(yyvsp[0].s));
     }
-#line 1728 "parser.cpp"
+#line 1837 "parser.cpp"
     break;
 
-  case 33: /* node: STRING  */
-#line 251 "parser.yy"
+  case 41: /* node: STRING  */
+#line 327 "parser.yy"
     {
         (yyval.s) = new char[strlen((yyvsp[0].s)) + 1];
         strcpy((yyval.s), (yyvsp[0].s));
         (yyval.s)[strlen((yyvsp[0].s))] = '\0';
         node_add((yyval.s));
     }
-#line 1739 "parser.cpp"
+#line 1848 "parser.cpp"
     break;
 
-  case 34: /* node: INTEGER  */
-#line 258 "parser.yy"
+  case 42: /* node: INTEGER  */
+#line 334 "parser.yy"
     {
         char s[30];
         sprintf(s, "%d", (yyvsp[0].n));
@@ -1748,65 +1857,65 @@ yyreduce:
         (yyval.s)[strlen(s)] = '\0';
         node_add((yyval.s));
     }
-#line 1752 "parser.cpp"
+#line 1861 "parser.cpp"
     break;
 
-  case 35: /* node: RESISTOR  */
-#line 266 "parser.yy"
+  case 43: /* node: RESISTOR  */
+#line 342 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 1758 "parser.cpp"
+#line 1867 "parser.cpp"
     break;
 
-  case 36: /* node: CAPACITOR  */
-#line 267 "parser.yy"
+  case 44: /* node: CAPACITOR  */
+#line 343 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 1764 "parser.cpp"
+#line 1873 "parser.cpp"
     break;
 
-  case 37: /* node: INDUCTOR  */
-#line 268 "parser.yy"
+  case 45: /* node: INDUCTOR  */
+#line 344 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 1770 "parser.cpp"
+#line 1879 "parser.cpp"
     break;
 
-  case 38: /* node: VS  */
-#line 269 "parser.yy"
+  case 46: /* node: VS  */
+#line 345 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 1776 "parser.cpp"
+#line 1885 "parser.cpp"
     break;
 
-  case 39: /* node: VCCS  */
-#line 270 "parser.yy"
+  case 47: /* node: VCCS  */
+#line 346 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 1782 "parser.cpp"
+#line 1891 "parser.cpp"
     break;
 
-  case 40: /* value: VALUE  */
-#line 274 "parser.yy"
+  case 48: /* value: VALUE  */
+#line 350 "parser.yy"
      {
         (yyval.f) = (yyvsp[0].f);
      }
-#line 1790 "parser.cpp"
+#line 1899 "parser.cpp"
     break;
 
-  case 41: /* value: FLOAT  */
-#line 278 "parser.yy"
+  case 49: /* value: FLOAT  */
+#line 354 "parser.yy"
      {
         (yyval.f) = (yyvsp[0].f);
      }
-#line 1798 "parser.cpp"
+#line 1907 "parser.cpp"
     break;
 
-  case 42: /* value: INTEGER  */
-#line 282 "parser.yy"
+  case 50: /* value: INTEGER  */
+#line 358 "parser.yy"
      {
         (yyval.f) = (yyvsp[0].n);
      }
-#line 1806 "parser.cpp"
+#line 1915 "parser.cpp"
     break;
 
 
-#line 1810 "parser.cpp"
+#line 1919 "parser.cpp"
 
       default: break;
     }
@@ -2035,5 +2144,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 287 "parser.yy"
+#line 363 "parser.yy"
 

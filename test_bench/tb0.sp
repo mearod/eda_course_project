@@ -2,10 +2,9 @@ TestBench0 for Homework4 - Stamp Example
 * 2024 EDA course testbench netlist
 
 V1 2 0 2
-V2 1 2 2
-R1 1 0 100
+R1 2 1 100
 R2 1 0 200
-
+R3 1 0 200
 
 
 .op

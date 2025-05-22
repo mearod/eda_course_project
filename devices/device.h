@@ -6,11 +6,12 @@
 #include "../circuit/node.h"
 
 class Analyser;
+class Circuit;
 
 enum DEVICE_TYPE
 {
-    G_TYPE=0,//belong to g matrix of mna
-    B_TYPE//belong to b matrix of mna
+    G_TYPE=0,//每次stamp不创建矩阵分支
+    B_TYPE//每次stamp涉及新的矩阵分支
 };
 
 class BaseDevice
@@ -26,6 +27,16 @@ public:
     virtual void stampAC(Analyser* analyser) = 0;
 };
 
+class BTypeDevice: virtual public BaseDevice
+{
+public:
+    int bTypeDeviceNo;
+
+    BTypeDevice(std::string name): BaseDevice(name,B_TYPE),bTypeDeviceNo(0){};
+
+    void stampDC(Analyser* analyser){};
+    void stampAC(Analyser* analyser){};
+};
 
 class Resistor: virtual public BaseDevice
 {
@@ -69,6 +80,7 @@ public:
 
 class Vccs: virtual public BaseDevice
 {
+public:
     std::string pos;
     std::string neg;
     std::string posC;
@@ -82,37 +94,44 @@ class Vccs: virtual public BaseDevice
     void stampAC(Analyser* analyser);
 };
 
-class Ccvs: virtual public BaseDevice
+class Ccvs: virtual public BTypeDevice
 {
-    std::string pos;
-    std::string neg;
+private:
+    bool findVs(Circuit* circuit);
+
     std::string posC;
     std::string negC;
+    double vsValue;
+    int vsBTypeDeviceNo;
+
+public:
+    std::string pos;
+    std::string neg;
+    std::string vsName;
     double ccvs_value;
 
-    Ccvs(std::string name,std::string pos,std::string neg,std::string posC,std::string negC,double ccvs_value)
-    : BaseDevice(name,B_TYPE),pos(pos),neg(neg),posC(posC),negC(negC),ccvs_value(ccvs_value){};
+    Ccvs(std::string name,std::string pos,std::string neg,std::string vsName,double ccvs_value)
+    : BaseDevice(name,B_TYPE),BTypeDevice(name),pos(pos),neg(neg),vsName(vsName),ccvs_value(ccvs_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
 };
 
-class Vs: virtual public BaseDevice
+class Vs: public BTypeDevice
 {
 public:
     std::string pos;
     std::string neg;
     double vs_value;
-    int bTypeDeviceNo;
 
     Vs(std::string name,std::string pos,std::string neg,double vs_value)
-    : BaseDevice(name,B_TYPE),pos(pos),neg(neg),vs_value(vs_value),bTypeDeviceNo(0){};
+    : BaseDevice(name, B_TYPE),BTypeDevice(name),pos(pos),neg(neg),vs_value(vs_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
 };
 
-class Vcvs: virtual public BaseDevice
+class Vcvs: virtual public BTypeDevice
 {
 public:
     std::string pos;
@@ -120,10 +139,9 @@ public:
     std::string posC;
     std::string negC;
     double vcvs_value;
-    int bTypeDeviceNo;
 
-    Vcvs(std::string name,std::string pos,std::string neg,double vcvs_value)
-    : BaseDevice(name,B_TYPE),pos(pos),neg(neg),vcvs_value(vcvs_value),bTypeDeviceNo(0){};
+    Vcvs(std::string name,std::string pos,std::string neg,std::string posC,std::string negC,double vcvs_value)
+    : BaseDevice(name,B_TYPE),BTypeDevice(name),pos(pos),neg(neg),posC(posC),negC(negC),vcvs_value(vcvs_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
@@ -131,31 +149,39 @@ public:
 
 class Cccs: virtual public BaseDevice
 {
+private:
+    bool findVs(Circuit* circuit);
+
+    std::string posC;
+    std::string negC;
+    double vsValue;
+    int vsBTypeDeviceNo;
+
 public:
     std::string pos;
     std::string neg;
     std::string vsName;
+
     double cccs_value;
-    int bTypeDeviceNo;
 
     Cccs(std::string name,std::string pos,std::string neg,std::string vsName,double cccs_value)
-    : BaseDevice(name,B_TYPE),pos(pos),neg(neg),vsName(vsName),cccs_value(cccs_value),bTypeDeviceNo(0){};
+    : BaseDevice(name,G_TYPE),pos(pos),neg(neg),vsName(vsName),cccs_value(cccs_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
 };
 
-class Is: virtual public BaseDevice
+class Cs: virtual public BaseDevice
 {
 public:
     std::string pos;
     std::string neg;
     std::string posC;
     std::string negC;
-    double is_value;
+    double cs_value;
 
-    Is(std::string name,std::string pos,std::string neg,double is_value)
-    : BaseDevice(name,G_TYPE),pos(pos),neg(neg),is_value(is_value){};
+    Cs(std::string name,std::string pos,std::string neg,double is_value)
+    : BaseDevice(name,G_TYPE),pos(pos),neg(neg),cs_value(cs_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);

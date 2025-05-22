@@ -67,22 +67,26 @@ extern int yydebug;
     INDUCTOR = 261,                /* INDUCTOR  */
     CAPACITOR = 262,               /* CAPACITOR  */
     RESISTOR = 263,                /* RESISTOR  */
-    VCCS = 264,                    /* VCCS  */
-    VS = 265,                      /* VS  */
-    COMMENTLINE = 266,             /* COMMENTLINE  */
-    VALUE = 267,                   /* VALUE  */
-    END = 268,                     /* END  */
-    EOL = 269,                     /* EOL  */
-    VAR_V = 270,                   /* VAR_V  */
-    VAR_I = 271,                   /* VAR_I  */
-    RK_OP = 272,                   /* RK_OP  */
-    RK_AC = 273,                   /* RK_AC  */
-    RK_DC = 274,                   /* RK_DC  */
-    RK_TRAN = 275,                 /* RK_TRAN  */
-    CMD_PRINT = 276,               /* CMD_PRINT  */
-    CMD_OP = 277,                  /* CMD_OP  */
-    CMD_DC = 278,                  /* CMD_DC  */
-    CMD_AC = 279                   /* CMD_AC  */
+    VS = 264,                      /* VS  */
+    VCCS = 265,                    /* VCCS  */
+    VCVS = 266,                    /* VCVS  */
+    CS = 267,                      /* CS  */
+    CCVS = 268,                    /* CCVS  */
+    CCCS = 269,                    /* CCCS  */
+    COMMENTLINE = 270,             /* COMMENTLINE  */
+    VALUE = 271,                   /* VALUE  */
+    END = 272,                     /* END  */
+    EOL = 273,                     /* EOL  */
+    VAR_V = 274,                   /* VAR_V  */
+    VAR_I = 275,                   /* VAR_I  */
+    RK_OP = 276,                   /* RK_OP  */
+    RK_AC = 277,                   /* RK_AC  */
+    RK_DC = 278,                   /* RK_DC  */
+    RK_TRAN = 279,                 /* RK_TRAN  */
+    CMD_PRINT = 280,               /* CMD_PRINT  */
+    CMD_OP = 281,                  /* CMD_OP  */
+    CMD_DC = 282,                  /* CMD_DC  */
+    CMD_AC = 283                   /* CMD_AC  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -97,7 +101,7 @@ union YYSTYPE
     int    n;
     char  *s;
 
-#line 101 "parser.hpp"
+#line 105 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

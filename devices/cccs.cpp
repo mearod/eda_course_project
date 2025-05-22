@@ -1,30 +1,51 @@
 #include "device.h"
 #include "../analyser/analyser.h"
-
+#include <assert.h>
 
 using namespace arma;
 
+bool Cccs::findVs(Circuit* circuit){
+
+    for (auto it = circuit->devices.begin();it!=circuit->devices.end();it++){
+        //cout<<"find:"<<(*it)->name<<std::endl;
+        if((*it)->name == this->vsName){
+            this->posC = dynamic_cast<Vs*>(*it)->pos;
+            this->negC = dynamic_cast<Vs*>(*it)->neg;
+            this->vsValue = dynamic_cast<Vs*>(*it)->vs_value;
+            this->vsBTypeDeviceNo = dynamic_cast<Vs*>(*it)->bTypeDeviceNo;
+            return 1;
+        }
+    }
+    return 0;
+};
+
 void Cccs::stampDC(Analyser* analyser){
-    // circuit->namemap.find(device_name) != circuit->namemap.end()
-    // std::string posC = analyser->circuit->devices.find();
-    // std::string negC;
 
-    // analyser->mna(analyser->circuit->nodemap[posC].id,analyser->bTypeDeviceCounter+analyser->nodeNum) += 1;
-    // analyser->mna(analyser->circuit->nodemap[negC].id,analyser->bTypeDeviceCounter+analyser->nodeNum) += -1;
+    assert(findVs(analyser->circuit));
 
-    // analyser->mna(analyser->bTypeDeviceCounter+analyser->nodeNum,analyser->circuit->nodemap[posC].id) += 1;
-    // analyser->mna(analyser->bTypeDeviceCounter+analyser->nodeNum,analyser->circuit->nodemap[negC].id) += -1;
+    analyser->mna(analyser->circuit->nodemap[posC].id,this->vsBTypeDeviceNo+analyser->nodeNum) += 1;
+    analyser->mna(analyser->circuit->nodemap[negC].id,this->vsBTypeDeviceNo+analyser->nodeNum) += -1;
 
-    // analyser->mna(analyser->circuit->nodemap[pos].id,analyser->bTypeDeviceCounter+analyser->nodeNum) += cccs_value;
-    // analyser->mna(analyser->circuit->nodemap[neg].id,analyser->bTypeDeviceCounter+analyser->nodeNum) += -cccs_value;
+    analyser->mna(this->vsBTypeDeviceNo+analyser->nodeNum,analyser->circuit->nodemap[posC].id) += 1;
+    analyser->mna(this->vsBTypeDeviceNo+analyser->nodeNum,analyser->circuit->nodemap[negC].id) += -1;
 
-    // analyser->rhs(analyser->bTypeDeviceCounter+analyser->nodeNum,0) += vs_value;
+    analyser->mna(analyser->circuit->nodemap[pos].id,this->vsBTypeDeviceNo+analyser->nodeNum) += cccs_value;
+    analyser->mna(analyser->circuit->nodemap[neg].id,this->vsBTypeDeviceNo+analyser->nodeNum) += -cccs_value;
+
 };
 
 
 void Cccs::stampAC(Analyser* analyser){
-    // analyser->mna(analyser->circuit->nodemap[pos].id,analyser->circuit->nodemap[posC].id) += 1/g_value;
-    // analyser->mna(analyser->circuit->nodemap[pos].id,analyser->circuit->nodemap[negC].id) -= 1/g_value;
-    // analyser->mna(analyser->circuit->nodemap[neg].id,analyser->circuit->nodemap[posC].id) -= 1/g_value;
-    // analyser->mna(analyser->circuit->nodemap[neg].id,analyser->circuit->nodemap[negC].id) += 1/g_value;
+
+    assert(!findVs(analyser->circuit));
+
+    analyser->mna(analyser->circuit->nodemap[posC].id,this->vsBTypeDeviceNo+analyser->nodeNum) += 1;
+    analyser->mna(analyser->circuit->nodemap[negC].id,this->vsBTypeDeviceNo+analyser->nodeNum) += -1;
+
+    analyser->mna(this->vsBTypeDeviceNo+analyser->nodeNum,analyser->circuit->nodemap[posC].id) += 1;
+    analyser->mna(this->vsBTypeDeviceNo+analyser->nodeNum,analyser->circuit->nodemap[negC].id) += -1;
+
+    analyser->mna(analyser->circuit->nodemap[pos].id,this->vsBTypeDeviceNo+analyser->nodeNum) += cccs_value;
+    analyser->mna(analyser->circuit->nodemap[neg].id,this->vsBTypeDeviceNo+analyser->nodeNum) += -cccs_value;
+
 };

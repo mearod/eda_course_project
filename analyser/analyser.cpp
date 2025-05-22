@@ -16,11 +16,10 @@ void Analyser::analyseDC(){
     bTypeDeviceNum = 0;
     for (int i=0; i < circuit->devices.size(); i++){
         if(circuit->devices[i]->deviceType == B_TYPE){
+            dynamic_cast<BTypeDevice*>(circuit->devices[i])->bTypeDeviceNo = bTypeDeviceNum;
             bTypeDeviceNum ++;
         }
     }
-
-    
     mna.set_size(nodeNum+bTypeDeviceNum,nodeNum+bTypeDeviceNum);
     mna.zeros();
 
