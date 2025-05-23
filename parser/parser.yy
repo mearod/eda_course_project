@@ -55,7 +55,7 @@
     extern std::vector<char* > node_list;
     extern void node_add(char node_name[]);
     extern int node_number ;
-    static int node_id_counter = 0;
+    extern int parser_node_id_counter ;
 
     extern Circuit* circuit;
 
@@ -79,9 +79,9 @@ void addNode(std::string node_name){
     } else{
         circuit->nodemap[node_name].isGround = 0;
         circuit->nodemap[node_name].number = 1;
-        circuit->nodemap[node_name].id = node_id_counter;
+        circuit->nodemap[node_name].id = parser_node_id_counter;
         
-        node_id_counter ++;
+        parser_node_id_counter ++;
         circuit->node_num ++;
     }
 }
@@ -120,12 +120,14 @@ void ParseCapacitor(char const *name, char const *node1, char const *node2, doub
     circuit->devices.push_back(d);
 }
 
-void ParseVs(char const *name, char const *node1, char const *node2, double value)
+Vs* vsource_d;
+
+void ParseVs(char const *name, char const *node1, char const *node2, double value1, double value2)
 {
     if (!checkName(name)) return;
     addNode(node1); addNode(node2);
-    Vs* d = new Vs(name, node1, node2, value);
-    circuit->devices.push_back(d);
+    vsource_d = new Vs(name, node1, node2, value1, value2);
+    circuit->devices.push_back(vsource_d);
 }
 
 void ParseCs(char const *name, char const *node1, char const *node2, double value)
@@ -242,11 +244,28 @@ vccs: VCCS node node node node value
 
 ;
 
-vs: VS node node value
+vs: VS node node
         {
-            ParseVs($1, $2, $3, $4);
-            printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, $4);
+            ParseVs($1, $2, $3, 0, 0);
+            printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, 0);
             vsrc_number ++;
+        }
+    |
+    VS node node value
+        {
+            ParseVs($1, $2, $3, $4, 0);
+            printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, $4, 0);
+            vsrc_number ++;
+        }
+    |
+    vs RK_DC value
+        {
+            vsource_d -> dc_value = $3;
+        }
+    |
+    vs RK_AC value
+        {
+            vsource_d -> ac_value = $3;
         }
 ;
 

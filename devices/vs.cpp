@@ -8,7 +8,7 @@ void Vs::stampDC(Analyser* analyser){
     analyser->mna(analyser->circuit->nodemap[pos].id,this->bTypeDeviceNo+analyser->nodeNum) += 1;
     analyser->mna(analyser->circuit->nodemap[neg].id,this->bTypeDeviceNo+analyser->nodeNum) += -1;
     
-    analyser->rhs(this->bTypeDeviceNo+analyser->nodeNum,0) += vs_value;
+    analyser->rhs(this->bTypeDeviceNo+analyser->nodeNum,0) += dc_value;
 };
 
 void Vs::stampAC(Analyser* analyser){
@@ -17,6 +17,6 @@ void Vs::stampAC(Analyser* analyser){
     analyser->mna(analyser->circuit->nodemap[pos].id,this->bTypeDeviceNo+analyser->nodeNum) += 1;
     analyser->mna(analyser->circuit->nodemap[neg].id,this->bTypeDeviceNo+analyser->nodeNum) += -1;
     
-    analyser->rhs(this->bTypeDeviceNo+analyser->nodeNum,0) += vs_value;
+    analyser->rhs(this->bTypeDeviceNo+analyser->nodeNum,0) += ac_value;
 
 };

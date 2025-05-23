@@ -1,11 +1,8 @@
 TestBench0 for Homework4 - Stamp Example
 * 2024 EDA course testbench netlist
 
-V1 2 0 2
-R1 2 1 100
-R2 1 0 200
-R3 1 0 200
-
+R1 1 2 200
+R2 2 0 100
 
 .op
 .end
@@ -31,6 +28,3 @@ R3 1 0 200
 *       RHS Vector
 *           [0.]
 *           [0.]
-
-
-

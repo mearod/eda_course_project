@@ -9,7 +9,6 @@ bool Ccvs::findVs(Circuit* circuit){
         if((*it)->name == this->vsName){
             this->posC = dynamic_cast<Vs*>(*it)->pos;
             this->negC = dynamic_cast<Vs*>(*it)->neg;
-            this->vsValue = dynamic_cast<Vs*>(*it)->vs_value;
             this->vsBTypeDeviceNo = dynamic_cast<Vs*>(*it)->bTypeDeviceNo;
             return 1;
         }

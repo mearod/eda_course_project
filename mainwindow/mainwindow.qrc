@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="../">
+        <file>../asset/images/editcopy.png</file>
+        <file>../asset/images/editcut.png</file>
+        <file>../asset/images/editdelete.png</file>
+        <file>../asset/images/editpaste.png</file>
+        <file>../asset/images/fileclose.png</file>
+        <file>../asset/images/filenew.png</file>
+        <file>../asset/images/fileopen.png</file>
+        <file>../asset/images/fileprint.png</file>
+        <file>../asset/images/filesave.png</file>
+        <file>../asset/images/filesaveall.png</file>
+        <file>../asset/images/filesaveas.png</file>
+        <file>../asset/images/simulate.png</file>
+    </qresource>
+</RCC>

@@ -34,8 +34,6 @@ public:
 
     BTypeDevice(std::string name): BaseDevice(name,B_TYPE),bTypeDeviceNo(0){};
 
-    void stampDC(Analyser* analyser){};
-    void stampAC(Analyser* analyser){};
 };
 
 class Resistor: virtual public BaseDevice
@@ -64,15 +62,14 @@ public:
     void stampAC(Analyser* analyser);
 };
 
-class Inductor: virtual public BaseDevice
+class Inductor: virtual public BTypeDevice
 {
 public:
     std::string pos;
     std::string neg;
     double l_value;
-    int bTypeDeviceNo;
 
-    Inductor(std::string name,std::string pos,std::string neg,double l_value): BaseDevice(name,B_TYPE),pos(pos),neg(neg),l_value(l_value){};
+    Inductor(std::string name,std::string pos,std::string neg,double l_value): BaseDevice(name,B_TYPE),BTypeDevice(name),pos(pos),neg(neg),l_value(l_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
@@ -101,7 +98,7 @@ private:
 
     std::string posC;
     std::string negC;
-    double vsValue;
+    
     int vsBTypeDeviceNo;
 
 public:
@@ -122,10 +119,11 @@ class Vs: public BTypeDevice
 public:
     std::string pos;
     std::string neg;
-    double vs_value;
+    double dc_value;
+    double ac_value;
 
-    Vs(std::string name,std::string pos,std::string neg,double vs_value)
-    : BaseDevice(name, B_TYPE),BTypeDevice(name),pos(pos),neg(neg),vs_value(vs_value){};
+    Vs(std::string name,std::string pos,std::string neg,double dc_value,double ac_value)
+    : BaseDevice(name, B_TYPE),BTypeDevice(name),pos(pos),neg(neg),dc_value(dc_value),ac_value(ac_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
@@ -154,7 +152,7 @@ private:
 
     std::string posC;
     std::string negC;
-    double vsValue;
+
     int vsBTypeDeviceNo;
 
 public:
@@ -176,11 +174,9 @@ class Cs: virtual public BaseDevice
 public:
     std::string pos;
     std::string neg;
-    std::string posC;
-    std::string negC;
     double cs_value;
 
-    Cs(std::string name,std::string pos,std::string neg,double is_value)
+    Cs(std::string name,std::string pos,std::string neg,double cs_value)
     : BaseDevice(name,G_TYPE),pos(pos),neg(neg),cs_value(cs_value){};
 
     void stampDC(Analyser* analyser);

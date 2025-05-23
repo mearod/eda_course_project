@@ -12,6 +12,7 @@ private:
     void devicesStampDC();
     void devicesStampAC();
     void solveDC();
+    void solveAC();
 public:
 
 
@@ -26,6 +27,7 @@ public:
 
 public:
     Analyser(Circuit* circuit);
+    ~Analyser();
 
     void analyseDC();
     void analyseAC();

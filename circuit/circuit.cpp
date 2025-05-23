@@ -10,11 +10,14 @@ Circuit::Circuit() {
 
 void Circuit::debug_display(){ 
     std::cout<<"node num:"<<this->node_num<<std::endl;
+    std::cout<<"node list:"<<std::endl;
     for (auto it = nodemap.begin(); it != nodemap.end(); ++it){
-        std::cout << "Key: " << it->first << ", id: " << it->second.id <<",ground:"<<it->second.isGround<< std::endl;
+        std::cout << "node name: " << it->first << ", id: " << it->second.id <<",ground:"<<it->second.isGround<< std::endl;
     }
+    std::cout<<std::endl;
+    std::cout<<"device list:"<<std::endl;
     for (auto it = namemap.begin(); it != namemap.end(); ++it){
-        std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+        std::cout << "device name: " << it->first << std::endl;
     }
 };
 
@@ -25,6 +28,7 @@ void Circuit::stampDC(){
 
 Circuit::~Circuit() {
     for (int i = 0;i < devices.size();i++){
+        std::cout<<i;
         delete devices[i];
     }
 }

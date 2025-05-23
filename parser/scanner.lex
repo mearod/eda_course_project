@@ -12,7 +12,6 @@ MSDA Lab, SJTU
 
 *******************************************************/
 
-%option noyywrap case-insensitive
 %option yylineno
 %option header-file="scanner.hpp"
 
@@ -103,6 +102,8 @@ CMD_AC        [\.][Aa][Cc]
 {STRING}    {yylval.s = copyStr(yytext); return STRING;}
 
 %%
+
+int yywrap() { return 1; }
 
 char *copyStr(const char *str)
 {

@@ -342,9 +342,6 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
-
-#define yywrap() (/*CONSTCOND*/1)
-#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -536,16 +533,16 @@ MSDA Lab, SJTU
 2024-03-05
 
 *******************************************************/
-#line 20 "scanner.lex"
+#line 19 "scanner.lex"
 #include "parser.hpp"
 
 
 char *copyStr(const char *str);
 double parseValue(const char *str);
-#line 546 "scanner.cpp"
+#line 543 "scanner.cpp"
 /* Defining output file name */
 /* Defining regular expressions of the patterns */
-#line 549 "scanner.cpp"
+#line 546 "scanner.cpp"
 
 #define INITIAL 0
 
@@ -762,10 +759,10 @@ YY_DECL
 		}
 
 	{
-#line 69 "scanner.lex"
+#line 68 "scanner.lex"
 
 
-#line 769 "scanner.cpp"
+#line 766 "scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -834,151 +831,151 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 71 "scanner.lex"
+#line 70 "scanner.lex"
 {yylval.s = copyStr(yytext); return CAPACITOR;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 72 "scanner.lex"
+#line 71 "scanner.lex"
 {yylval.s = copyStr(yytext); return INDUCTOR;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 73 "scanner.lex"
+#line 72 "scanner.lex"
 {yylval.s = copyStr(yytext); return RESISTOR;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 74 "scanner.lex"
+#line 73 "scanner.lex"
 {yylval.s = copyStr(yytext); return VS;  }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 75 "scanner.lex"
+#line 74 "scanner.lex"
 {yylval.s = copyStr(yytext); return VCCS;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 76 "scanner.lex"
+#line 75 "scanner.lex"
 {yylval.s = copyStr(yytext); return VCVS;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 77 "scanner.lex"
+#line 76 "scanner.lex"
 {yylval.s = copyStr(yytext); return CS  ;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 78 "scanner.lex"
+#line 77 "scanner.lex"
 {yylval.s = copyStr(yytext); return CCVS;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 79 "scanner.lex"
+#line 78 "scanner.lex"
 {yylval.s = copyStr(yytext); return CCCS;}
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 81 "scanner.lex"
+#line 80 "scanner.lex"
 {return EOL;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 82 "scanner.lex"
+#line 81 "scanner.lex"
 {yyterminate();}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 83 "scanner.lex"
+#line 82 "scanner.lex"
 {}
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 84 "scanner.lex"
+#line 83 "scanner.lex"
 {}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 85 "scanner.lex"
+#line 84 "scanner.lex"
 {return END;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 87 "scanner.lex"
+#line 86 "scanner.lex"
 {yylval.s = copyStr(yytext);return VAR_V;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 88 "scanner.lex"
+#line 87 "scanner.lex"
 {yylval.s = copyStr(yytext);return VAR_I;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 90 "scanner.lex"
+#line 89 "scanner.lex"
 {return RK_OP;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 91 "scanner.lex"
+#line 90 "scanner.lex"
 {return RK_AC;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 92 "scanner.lex"
+#line 91 "scanner.lex"
 {return RK_DC;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 93 "scanner.lex"
+#line 92 "scanner.lex"
 {return RK_TRAN;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 95 "scanner.lex"
+#line 94 "scanner.lex"
 {return CMD_PRINT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 96 "scanner.lex"
+#line 95 "scanner.lex"
 {return CMD_DC;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 97 "scanner.lex"
+#line 96 "scanner.lex"
 {return CMD_OP;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 98 "scanner.lex"
+#line 97 "scanner.lex"
 {return CMD_AC;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 100 "scanner.lex"
+#line 99 "scanner.lex"
 {yylval.n = atoi(yytext); return INTEGER;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 101 "scanner.lex"
+#line 100 "scanner.lex"
 {yylval.f = atof(yytext); return FLOAT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 102 "scanner.lex"
+#line 101 "scanner.lex"
 {yylval.f = parseValue(yytext); return VALUE;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 103 "scanner.lex"
+#line 102 "scanner.lex"
 {yylval.s = copyStr(yytext); return STRING;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 105 "scanner.lex"
+#line 104 "scanner.lex"
 ECHO;
 	YY_BREAK
-#line 982 "scanner.cpp"
+#line 979 "scanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1993,8 +1990,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 105 "scanner.lex"
+#line 104 "scanner.lex"
 
+
+int yywrap() { return 1; }
 
 char *copyStr(const char *str)
 {
