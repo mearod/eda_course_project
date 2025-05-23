@@ -70,10 +70,19 @@ void Analyser::devicesStampDC(){
     for (int i=0; i < circuit->devices.size(); i++){
         circuit->devices[i]->stampDC(this);
     }
-    mat mna_real = real(mna);
-    vec rhs_real = real(rhs);
-    mna_real.print("nmaDC:");
-    rhs_real.print("rhsDC:");
+    mat mna_display = real(mna);
+    vec rhs_display = real(rhs);
+    mna_display.print("nmaDC(including ground):");
+    rhs_display.print("rhsDC(including ground):");
+    printf("\n");
+
+    mna_display.shed_col(nodeNum-1);
+    mna_display.shed_row(nodeNum-1);
+    rhs_display.shed_row(nodeNum-1);//delete ground node
+
+    mna_display.print("nmaDC(excluding ground):");
+    rhs_display.print("rhsDC(excluding ground):");
+    printf("\n");
 }
 
 void Analyser::devicesStampAC(){
@@ -88,8 +97,20 @@ void Analyser::devicesStampAC(){
     for (int i=0; i < circuit->devices.size(); i++){
         circuit->devices[i]->stampAC(this);
     }
-    mna.print("nmaAC:");
-    rhs.print("rhsAC:");
+
+    cx_mat mna_display = mna;
+    cx_vec rhs_display = rhs;
+    mna_display.print("nmaAC(including ground):");
+    rhs_display.print("rhsAC(including ground):");
+    printf("\n");
+
+    mna_display.shed_col(nodeNum-1);
+    mna_display.shed_row(nodeNum-1);
+    rhs_display.shed_row(nodeNum-1);//delete ground node
+
+    mna_display.print("nmaAC(excluding ground):");
+    rhs_display.print("rhsAC(excluding ground):");
+    printf("\n");
 }
 
 void Analyser::solveDC(){
@@ -98,7 +119,8 @@ void Analyser::solveDC(){
     rhs.shed_row(nodeNum-1);//delete ground node
     cx_vec x;
     bool status = solve(x, mna, rhs, arma::solve_opts::allow_ugly);
-    x.print("x:");
+    real(x).print("dc solve result:");
+    printf("\n");
 }
 
 void Analyser::solveAC(){
@@ -107,6 +129,7 @@ void Analyser::solveAC(){
     rhs.shed_row(nodeNum-1);//delete ground node
     cx_vec x;
     bool status = solve(x, mna, rhs, arma::solve_opts::allow_ugly);
-    x.print("x:");
+    x.print("ac solve result:");
+    printf("\n");
 }
 

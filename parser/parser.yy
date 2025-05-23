@@ -253,8 +253,8 @@ vs: VS node node
     |
     VS node node value
         {
-            ParseVs($1, $2, $3, $4, 0);
-            printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, $4, 0);
+            ParseVs($1, $2, $3, $4, $4);
+            printf("[VS Line] Name(%s) N+(%s) N-(%s) val(%e)\n", $1, $2, $3, $4);
             vsrc_number ++;
         }
     |
