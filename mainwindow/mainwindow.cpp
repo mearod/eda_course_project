@@ -212,7 +212,7 @@ void MainWindow::slotSimulate()
     label->setText("simulation start!");
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("font:30px;color:black;background-color:white");
-    label->resize(400, 300);
+    label->resize(360, 120);
     label->setAttribute(Qt::WA_DeleteOnClose);
     label->show(); // label should be shown to be seen.
 

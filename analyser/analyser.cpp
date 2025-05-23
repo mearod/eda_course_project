@@ -21,7 +21,7 @@ void Analyser::analyseDC(){
     for (int i=0; i < circuit->devices.size(); i++){
         if(circuit->devices[i]->deviceType == B_TYPE){
             dynamic_cast<BTypeDevice*>(circuit->devices[i])->bTypeDeviceNo = bTypeDeviceNum;
-            bTypeDeviceNum ++;
+            bTypeDeviceNum ++; //统计会增加矩阵branch类型的器件数量
         }
     }
 
@@ -68,13 +68,28 @@ void Analyser::devicesStampDC(){
         }
     }
     for (int i=0; i < circuit->devices.size(); i++){
-        //std::cout<<"123123:"<<circuit->devices[i]->name<<"\n";
         circuit->devices[i]->stampDC(this);
     }
     mat mna_real = real(mna);
     vec rhs_real = real(rhs);
     mna_real.print("nmaDC:");
     rhs_real.print("rhsDC:");
+}
+
+void Analyser::devicesStampAC(){
+    int i = 0; //re rank
+    for (auto it = circuit->nodemap.begin();it!=circuit->nodemap.end();it++){
+        if(it->second.isGround){
+            it->second.id = nodeNum - 1;//ground node id re-set
+            break;
+        }
+    }
+    
+    for (int i=0; i < circuit->devices.size(); i++){
+        circuit->devices[i]->stampAC(this);
+    }
+    mna.print("nmaAC:");
+    rhs.print("rhsAC:");
 }
 
 void Analyser::solveDC(){
@@ -95,18 +110,3 @@ void Analyser::solveAC(){
     x.print("x:");
 }
 
-void Analyser::devicesStampAC(){
-    int i = 0; //re rank
-    for (auto it = circuit->nodemap.begin();it!=circuit->nodemap.end();it++){
-        if(it->second.isGround){
-            it->second.id = nodeNum - 1;//ground node id re-set
-            break;
-        }
-    }
-    
-    for (int i=0; i < circuit->devices.size(); i++){
-        circuit->devices[i]->stampAC(this);
-    }
-    mna.print("nmaAC:");
-    rhs.print("rhsAC:");
-}

@@ -22,10 +22,6 @@ void Circuit::debug_display(){
 };
 
 
-void Circuit::stampDC(){ 
-
-};
-
 Circuit::~Circuit() {
     for (int i = 0;i < devices.size();i++){
         std::cout<<i;

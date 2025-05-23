@@ -12,7 +12,7 @@ class BaseDevice;
 class Circuit
 {
 private:
-    void stampDC();
+
 public:
     std::string title;
 
@@ -31,7 +31,7 @@ public:
 
 
 public:
-    void debug_display();
+    void debug_display();//debug用展示函数
 
     Circuit();
 

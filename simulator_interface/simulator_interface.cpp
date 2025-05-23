@@ -52,9 +52,7 @@ int startSimulate(char *fileName)
     endSimulate(fileName);
 
     delete analyser;
-    //delete circuit;
     
-
     return 0;
 }
 
