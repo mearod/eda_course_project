@@ -86,7 +86,9 @@ extern int yydebug;
     CMD_PRINT = 280,               /* CMD_PRINT  */
     CMD_OP = 281,                  /* CMD_OP  */
     CMD_DC = 282,                  /* CMD_DC  */
-    CMD_AC = 283                   /* CMD_AC  */
+    CMD_AC = 283,                  /* CMD_AC  */
+    CMD_PLOT = 284,                /* CMD_PLOT  */
+    CMD_OPTION = 285               /* CMD_OPTION  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -101,7 +103,7 @@ union YYSTYPE
     int    n;
     char  *s;
 
-#line 105 "parser.hpp"
+#line 107 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

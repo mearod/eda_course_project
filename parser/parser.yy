@@ -38,12 +38,13 @@
 %token END EOL
 %token<s> VAR_V VAR_I
 %token<s> RK_OP RK_AC RK_DC RK_TRAN
-%token<s> CMD_PRINT CMD_OP CMD_DC CMD_AC
+%token CMD_PRINT CMD_OP CMD_DC CMD_AC CMD_PLOT CMD_OPTION
 
 %{
 #include <cstdio>
 #include "../circuit/circuit.h"
 #include "../devices/device.h"
+#include "../spice_command/command_plot.h"
 
     extern int yylineno;
     extern int r_number;
@@ -207,6 +208,7 @@ component: resistor
 command: print
         | dc
         | op
+        | plot
 ;
 
 
@@ -310,26 +312,22 @@ dc: CMD_DC
     {
 
     }
-    | dc VS value value value { 
+    | dc VS value value value {
         printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", $2, $3, $4, $5);
     }
 ;
 
 print: CMD_PRINT RK_AC
     {
-        //printf("[PRINT Line] AC\n");
     }
     |  CMD_PRINT RK_DC
     {
-        //printf("[PRINT Line] DC\n");
     }
     |  CMD_PRINT RK_OP
     {
-        //printf("[PRINT Line] OP\n");
     }
     |  CMD_PRINT RK_TRAN
     {
-        //printf("[PRINT Line] TRAN\n");
     }
     |  print VAR_V
     {
@@ -341,6 +339,39 @@ print: CMD_PRINT RK_AC
     }
 ;
 
+plot: CMD_PLOT RK_AC
+    {
+    }
+    |  CMD_PLOT RK_DC
+    {
+    }
+    |  CMD_PLOT RK_OP
+    {
+    }
+    |  CMD_PLOT RK_TRAN
+    {
+    }
+    |  plot VAR_V
+    {
+        CommandPlot::NodeToPlot nodeToPlot;
+        std::string node = $2;
+        nodeToPlot.nodeName = node.substr(2, node.length() - 3);
+        nodeToPlot.prefix = "V";
+        circuit->commandPlot.plotEnable = 1;
+        circuit->commandPlot.nodePlotQueue.push_back(nodeToPlot);
+        printf("[PLOT Line] Node(%s)\n",$2);
+    }
+    |  plot VAR_I
+    {
+        CommandPlot::NodeToPlot nodeToPlot;
+        std::string node = $2;
+        nodeToPlot.nodeName = node.substr(2, node.length() - 3);
+        nodeToPlot.prefix = "I";
+        circuit->commandPlot.plotEnable = 1;
+        circuit->commandPlot.nodePlotQueue.push_back(nodeToPlot);
+        printf("[PLOT Line] Node(%s)\n",$2);
+    }
+;
 
 node: STRING
     {

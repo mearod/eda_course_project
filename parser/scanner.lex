@@ -64,6 +64,8 @@ CMD_PRINT     [\.][Pp][Rr][Ii][Nn][Tt]
 CMD_OP        [\.][Oo][Pp]
 CMD_DC        [\.][Dd][Cc]
 CMD_AC        [\.][Aa][Cc]
+CMD_PLOT      [\.][Pp][Ll][Oo][Tt]
+CMD_OPTION    [\.][Oo][Pp][Tt][Ii][Oo][Nn]
 
 %%
 
@@ -95,6 +97,8 @@ CMD_AC        [\.][Aa][Cc]
 {CMD_DC}    {return CMD_DC;}
 {CMD_OP}     {return CMD_OP;}
 {CMD_AC}     {return CMD_AC;}
+{CMD_PLOT}   { return CMD_PLOT; }
+{CMD_OPTION}   { return CMD_OPTION; }
 
 {INTEGER}   {yylval.n = atoi(yytext); return INTEGER;}
 {FLOAT}     {yylval.f = atof(yytext); return FLOAT;}

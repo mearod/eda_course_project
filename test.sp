@@ -8,7 +8,7 @@ R4 2 0 0.1
 V1 2 0 1
 
 *.op
-*.print op v(2)
+.print op v(2)
 
 * Is 0 2 10
 

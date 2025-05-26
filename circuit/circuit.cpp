@@ -6,7 +6,10 @@
 
 Circuit::Circuit() {
     node_num = 0;
+
+    commandPlot.plotEnable = 0;
 }
+
 
 void Circuit::debug_display(){ 
     std::cout<<"node num:"<<this->node_num<<std::endl;
