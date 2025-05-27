@@ -92,12 +92,16 @@ CMD_OPTION    [\.][Oo][Pp][Tt][Ii][Oo][Nn]
 {RK_AC}     {return RK_AC;}
 {RK_DC}     {return RK_DC;}
 {RK_TRAN}    {return RK_TRAN;}
+{RK_DEC}    { return RK_DEC  ; }
+{RK_LIN}    { return RK_LIN  ; }
+{RK_OCT}     { return RK_OCT  ; }
 
 {CMD_PRINT}  {return CMD_PRINT;}
 {CMD_DC}    {return CMD_DC;}
 {CMD_OP}     {return CMD_OP;}
 {CMD_AC}     {return CMD_AC;}
 {CMD_PLOT}   { return CMD_PLOT; }
+{CMD_TRAN}     { return CMD_TRAN; }
 {CMD_OPTION}   { return CMD_OPTION; }
 
 {INTEGER}   {yylval.n = atoi(yytext); return INTEGER;}

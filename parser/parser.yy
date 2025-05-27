@@ -37,8 +37,8 @@
 %type<s> node
 %token END EOL
 %token<s> VAR_V VAR_I
-%token<s> RK_OP RK_AC RK_DC RK_TRAN
-%token CMD_PRINT CMD_OP CMD_DC CMD_AC CMD_PLOT CMD_OPTION
+%token<s> RK_OP RK_AC RK_DC RK_TRAN RK_DEC RK_OCT RK_LIN
+%token CMD_PRINT CMD_OP CMD_DC CMD_AC CMD_PLOT CMD_OPTION CMD_TRAN
 
 %{
 #include <cstdio>
@@ -207,6 +207,8 @@ component: resistor
 
 command: print
         | dc
+        | ac
+        | tran
         | op
         | plot
 ;
@@ -316,6 +318,23 @@ dc: CMD_DC
         printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", $2, $3, $4, $5);
     }
 ;
+
+ac: CMD_AC RK_DEC value value value
+    {
+        printf("[AC Line]");
+    }
+;
+
+tran:
+    CMD_TRAN value value { 
+        printf("[TRAN Line]");
+    }
+    |
+    CMD_TRAN value value value { 
+        printf("[TRAN Line]");
+
+    }
+    ;
 
 print: CMD_PRINT RK_AC
     {

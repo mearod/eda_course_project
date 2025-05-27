@@ -42,9 +42,11 @@ int startSimulate(char *fileName)
 
     analyser = new Analyser(circuit);
 
-    analyser->analyseDC();
+    std::string test = "Vin";
+
+    analyser->analyseDC(test,0,1,0.3);
     
-    analyser->analyseAC();
+    analyser->analyseStepAC();
 
     circuit->debug_display();
     //device_static();

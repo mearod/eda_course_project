@@ -33,7 +33,10 @@ HEADERS += analyser/analyser.h \
             mainwindow/mainwindow.h \
             parser/parser.hpp \
             parser/scanner.hpp \
-            simulator_interface/simulator_interface.h
+            simulator_interface/simulator_interface.h \
+            spice_command/command_plot.h \
+            result_recorder/result_recorder.h
+
 
 SOURCES += main.cpp \
            analyser/analyser.cpp \
@@ -51,7 +54,9 @@ SOURCES += main.cpp \
            mainwindow/mainwindow.cpp \
            parser/parser.cpp \
            parser/scanner.cpp \
-           simulator_interface/simulator_interface.cpp
+           simulator_interface/simulator_interface.cpp \
+           result_recorder/result_recorder.cpp \
+           spice_command/command_plot.cpp
 
 RESOURCES += mainwindow/mainwindow.qrc
 

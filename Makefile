@@ -68,7 +68,9 @@ SOURCES       = main.cpp \
 		mainwindow/mainwindow.cpp \
 		parser/parser.cpp \
 		parser/scanner.cpp \
-		simulator_interface/simulator_interface.cpp build/qrc_mainwindow.cpp \
+		simulator_interface/simulator_interface.cpp \
+		result_recorder/result_recorder.cpp \
+		spice_command/command_plot.cpp build/qrc_mainwindow.cpp \
 		build/moc_mainwindow.cpp
 OBJECTS       = build/main.o \
 		build/analyser.o \
@@ -87,6 +89,8 @@ OBJECTS       = build/main.o \
 		build/parser.o \
 		build/scanner.o \
 		build/simulator_interface.o \
+		build/result_recorder.o \
+		build/command_plot.o \
 		build/qrc_mainwindow.o \
 		build/moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -181,7 +185,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		mainwindow/mainwindow.h \
 		parser/parser.hpp \
 		parser/scanner.hpp \
-		simulator_interface/simulator_interface.h main.cpp \
+		simulator_interface/simulator_interface.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h main.cpp \
 		analyser/analyser.cpp \
 		circuit/circuit.cpp \
 		devices/capacitor.cpp \
@@ -197,7 +203,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		mainwindow/mainwindow.cpp \
 		parser/parser.cpp \
 		parser/scanner.cpp \
-		simulator_interface/simulator_interface.cpp
+		simulator_interface/simulator_interface.cpp \
+		result_recorder/result_recorder.cpp \
+		spice_command/command_plot.cpp
 QMAKE_TARGET  = test
 DESTDIR       = 
 TARGET        = test
@@ -400,8 +408,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow/mainwindow.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents analyser/analyser.h circuit/circuit.h circuit/node.h devices/device.h mainwindow/mainwindow.h parser/parser.hpp parser/scanner.hpp simulator_interface/simulator_interface.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp analyser/analyser.cpp circuit/circuit.cpp devices/capacitor.cpp devices/cccs.cpp devices/ccvs.cpp devices/cs.cpp devices/device.cpp devices/inductor.cpp devices/resistor.cpp devices/vccs.cpp devices/vcvs.cpp devices/vs.cpp mainwindow/mainwindow.cpp parser/parser.cpp parser/scanner.cpp simulator_interface/simulator_interface.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents analyser/analyser.h circuit/circuit.h circuit/node.h devices/device.h mainwindow/mainwindow.h parser/parser.hpp parser/scanner.hpp simulator_interface/simulator_interface.h spice_command/command_plot.h result_recorder/result_recorder.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp analyser/analyser.cpp circuit/circuit.cpp devices/capacitor.cpp devices/cccs.cpp devices/ccvs.cpp devices/cs.cpp devices/device.cpp devices/inductor.cpp devices/resistor.cpp devices/vccs.cpp devices/vcvs.cpp devices/vs.cpp mainwindow/mainwindow.cpp parser/parser.cpp parser/scanner.cpp simulator_interface/simulator_interface.cpp result_recorder/result_recorder.cpp spice_command/command_plot.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -478,74 +486,98 @@ build/main.o: main.cpp mainwindow/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/main.o main.cpp
 
 build/analyser.o: analyser/analyser.cpp analyser/analyser.h \
-		circuit/circuit.h \
 		devices/device.h \
-		circuit/node.h
+		circuit/node.h \
+		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/analyser.o analyser/analyser.cpp
 
 build/circuit.o: circuit/circuit.cpp circuit/circuit.h \
 		analyser/analyser.h \
 		devices/device.h \
-		circuit/node.h
+		circuit/node.h \
+		result_recorder/result_recorder.h \
+		spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/circuit.o circuit/circuit.cpp
 
 build/capacitor.o: devices/capacitor.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/capacitor.o devices/capacitor.cpp
 
 build/cccs.o: devices/cccs.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/cccs.o devices/cccs.cpp
 
 build/ccvs.o: devices/ccvs.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/ccvs.o devices/ccvs.cpp
 
 build/cs.o: devices/cs.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/cs.o devices/cs.cpp
 
 build/device.o: devices/device.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/device.o devices/device.cpp
 
 build/inductor.o: devices/inductor.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/inductor.o devices/inductor.cpp
 
 build/resistor.o: devices/resistor.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/resistor.o devices/resistor.cpp
 
 build/vccs.o: devices/vccs.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vccs.o devices/vccs.cpp
 
 build/vcvs.o: devices/vcvs.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vcvs.o devices/vcvs.cpp
 
 build/vs.o: devices/vs.cpp devices/device.h \
 		analyser/analyser.h \
 		circuit/circuit.h \
+		spice_command/command_plot.h \
+		result_recorder/result_recorder.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vs.o devices/vs.cpp
 
@@ -557,7 +589,9 @@ build/parser.o: parser/parser.cpp parser/parser.hpp \
 		circuit/circuit.h \
 		analyser/analyser.h \
 		devices/device.h \
-		circuit/node.h
+		circuit/node.h \
+		result_recorder/result_recorder.h \
+		spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/parser.o parser/parser.cpp
 
 build/scanner.o: parser/scanner.cpp parser/parser.hpp
@@ -567,8 +601,16 @@ build/simulator_interface.o: simulator_interface/simulator_interface.cpp parser/
 		circuit/circuit.h \
 		analyser/analyser.h \
 		devices/device.h \
-		circuit/node.h
+		circuit/node.h \
+		result_recorder/result_recorder.h \
+		spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/simulator_interface.o simulator_interface/simulator_interface.cpp
+
+build/result_recorder.o: result_recorder/result_recorder.cpp result_recorder/result_recorder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/result_recorder.o result_recorder/result_recorder.cpp
+
+build/command_plot.o: spice_command/command_plot.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/command_plot.o spice_command/command_plot.cpp
 
 build/qrc_mainwindow.o: build/qrc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/qrc_mainwindow.o build/qrc_mainwindow.cpp
