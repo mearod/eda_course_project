@@ -17,7 +17,9 @@ private:
     void devicesStampAC();
     void solveDC();
     void solveAC();
-    void matrixNodeRecord(double scanValue,ResultRecorder* resultRecorder);
+    void matrixNodeRecordDC(double scanValue,ResultRecorder* resultRecorder);
+    void matrixNodeRecordAC(double scanValue,ResultRecorder* resultRecorder);
+    bool checkPlotNodeExists();
 public:
 
     ResultRecorder* resultRecorderDC;
@@ -31,18 +33,24 @@ public:
     cx_mat mna;//mna Matrix
     cx_vec rhs;
     cx_vec x;
+
     double freq;
+
+//tran analysis
+    double tranTime;
+    double tranStep;
 
 public:
     Analyser(Circuit* circuit);
     ~Analyser();
 
-    void analyseDC(string scannedDevice, double start,double end,double step);
-    void analyseAC(int denseNum,double start,double end);
-    void analyseTRAN(double start,double end,double step);
+    void analyseDC();
+    void analyseAC();
+    void analyseTRAN();
 
     void analyseStepDC();
     void analyseStepAC();
+    void analyseStepTRAN();
 
     void createSingleRecord();
     void stepRecord();

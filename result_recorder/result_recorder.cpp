@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include "result_recorder.h"
+
 using namespace std;
 
 void SingleRecord::pointRecord(double x,double y){
@@ -21,14 +22,18 @@ ResultRecorder::~ResultRecorder(){
     }
 }
 
-int ResultRecorder::addRecord(string description,double x,double y){
+int ResultRecorder::addRecord(string description,string xLabel,string yLabel,double x,double y){
     if (records.find(description) != records.end()) {
         records[description]->pointRecord(x,y);
+        records[description]->xLabel = xLabel;
+        records[description]->yLabel = yLabel;
         return recordsNum;
     }
     recordsNum ++;
     SingleRecord* newRecord = new SingleRecord(description);
     newRecord->pointRecord(x,y);
+    newRecord->xLabel = xLabel;
+    newRecord->yLabel = yLabel;
     records[description]=newRecord;
     return recordsNum;
 }
@@ -46,17 +51,17 @@ void SingleRecord::debug_print(){
     }
 };
 
-void SingleRecord::plotNewWindow(string xLabel,string yLabel,PlotType plotType){
+void SingleRecord::plotNewWindow(PlotType plotType){
     vector<double> xData,yData;
     for (auto it = recordData.begin(); it != recordData.end(); ++it) {
         xData.push_back(it->x);
         yData.push_back(it->y);
     }
-    newPlotWindow(xData,yData,xLabel,yLabel, plotType);
+    newPlotWindow(xData,yData,xLabel,yLabel,description,plotType);
 }
 
-void ResultRecorder::debugPlotAllRecords(){
+void ResultRecorder::debugPlotAllRecords(PlotType plotType){
     for (auto it = records.begin(); it != records.end(); ++it) {
-        it->second->plotNewWindow(it->first,"V");
+        it->second->plotNewWindow(plotType);
     }
 }

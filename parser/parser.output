@@ -1,7 +1,6 @@
 Terminals unused in grammar
 
     COMMENTLINE
-    CMD_AC
     CMD_OPTION
 
 
@@ -34,163 +33,184 @@ Grammar
 
    19 command: print
    20        | dc
-   21        | op
-   22        | plot
+   21        | ac
+   22        | tran
+   23        | op
+   24        | plot
 
-   23 resistor: RESISTOR node node value
+   25 resistor: RESISTOR node node value
 
-   24 capacitor: CAPACITOR node node value
+   26 capacitor: CAPACITOR node node value
 
-   25 inductor: INDUCTOR node node value
+   27 inductor: INDUCTOR node node value
 
-   26 vccs: VCCS node node node node value
+   28 vccs: VCCS node node node node value
 
-   27 vs: VS node node
-   28   | VS node node value
-   29   | vs RK_DC value
-   30   | vs RK_AC value
+   29 vs: VS node node
+   30   | VS node node value
+   31   | vs RK_DC value
+   32   | vs RK_AC value
 
-   31 vcvs: VCVS node node node node value
+   33 vcvs: VCVS node node node node value
 
-   32 cs: CS node node value
+   34 cs: CS node node value
 
-   33 cccs: CCCS node node VS value
+   35 cccs: CCCS node node VS value
 
-   34 ccvs: CCVS node node VS value
+   36 ccvs: CCVS node node VS value
 
-   35 op: CMD_OP
+   37 op: CMD_OP
 
-   36 dc: CMD_DC
-   37   | dc VS value value value
+   38 dc: CMD_DC
+   39   | dc VS value value value
+   40   | dc CS value value value
 
-   38 print: CMD_PRINT RK_AC
-   39      | CMD_PRINT RK_DC
-   40      | CMD_PRINT RK_OP
-   41      | CMD_PRINT RK_TRAN
-   42      | print VAR_V
-   43      | print VAR_I
+   41 ac: CMD_AC RK_DEC value value value
+   42   | CMD_AC RK_LIN value value value
+   43   | CMD_AC RK_OCT value value value
 
-   44 plot: CMD_PLOT RK_AC
-   45     | CMD_PLOT RK_DC
-   46     | CMD_PLOT RK_OP
-   47     | CMD_PLOT RK_TRAN
-   48     | plot VAR_V
-   49     | plot VAR_I
+   44 tran: CMD_TRAN value
+   45     | CMD_TRAN value value
+   46     | CMD_TRAN value value value
 
-   50 node: STRING
-   51     | INTEGER
-   52     | RESISTOR
-   53     | CAPACITOR
-   54     | INDUCTOR
-   55     | VS
-   56     | VCCS
+   47 print: CMD_PRINT RK_AC
+   48      | CMD_PRINT RK_DC
+   49      | CMD_PRINT RK_OP
+   50      | CMD_PRINT RK_TRAN
+   51      | print VAR_V
+   52      | print VAR_I
 
-   57 value: VALUE
-   58      | FLOAT
-   59      | INTEGER
+   53 plot: CMD_PLOT RK_AC
+   54     | CMD_PLOT RK_DC
+   55     | CMD_PLOT RK_OP
+   56     | CMD_PLOT RK_TRAN
+   57     | plot VAR_V
+   58     | plot VAR_I
+
+   59 node: STRING
+   60     | INTEGER
+   61     | RESISTOR
+   62     | CAPACITOR
+   63     | INDUCTOR
+   64     | VS
+   65     | VCCS
+
+   66 value: VALUE
+   67      | FLOAT
+   68      | INTEGER
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256) 9
-    FLOAT <f> (258) 58
-    STRING <s> (259) 50
-    INTEGER <n> (260) 51 59
-    INDUCTOR <s> (261) 25 54
-    CAPACITOR <s> (262) 24 53
-    RESISTOR <s> (263) 23 52
-    VS <s> (264) 27 28 33 34 37 55
-    VCCS <s> (265) 26 56
-    VCVS <s> (266) 31
-    CS <s> (267) 32
-    CCVS <s> (268) 34
-    CCCS <s> (269) 33
+    FLOAT <f> (258) 67
+    STRING <s> (259) 59
+    INTEGER <n> (260) 60 68
+    INDUCTOR <s> (261) 27 63
+    CAPACITOR <s> (262) 26 62
+    RESISTOR <s> (263) 25 61
+    VS <s> (264) 29 30 35 36 39 64
+    VCCS <s> (265) 28 65
+    VCVS <s> (266) 33
+    CS <s> (267) 34 40
+    CCVS <s> (268) 36
+    CCCS <s> (269) 35
     COMMENTLINE <s> (270)
-    VALUE <f> (271) 57
+    VALUE <f> (271) 66
     END (272) 3
     EOL (273) 2 6 7 8 9
-    VAR_V <s> (274) 42 48
-    VAR_I <s> (275) 43 49
-    RK_OP <s> (276) 40 46
-    RK_AC <s> (277) 30 38 44
-    RK_DC <s> (278) 29 39 45
-    RK_TRAN <s> (279) 41 47
-    CMD_PRINT (280) 38 39 40 41
-    CMD_OP (281) 35
-    CMD_DC (282) 36
-    CMD_AC (283)
-    CMD_PLOT (284) 44 45 46 47
-    CMD_OPTION (285)
+    VAR_V <s> (274) 51 57
+    VAR_I <s> (275) 52 58
+    RK_OP <s> (276) 49 55
+    RK_AC <s> (277) 32 47 53
+    RK_DC <s> (278) 31 48 54
+    RK_TRAN <s> (279) 50 56
+    RK_DEC <s> (280) 41
+    RK_OCT <s> (281) 43
+    RK_LIN <s> (282) 42
+    CMD_PRINT (283) 47 48 49 50
+    CMD_OP (284) 37
+    CMD_DC (285) 38
+    CMD_AC (286) 41 42 43
+    CMD_PLOT (287) 53 54 55 56
+    CMD_OPTION (288)
+    CMD_TRAN (289) 44 45 46
 
 
 Nonterminals, with rules where they appear
 
-    $accept (31)
+    $accept (35)
         on left: 0
-    spice (32)
+    spice (36)
         on left: 1
         on right: 0
-    end (33)
+    end (37)
         on left: 2 3
         on right: 1 2
-    netlist (34)
+    netlist (38)
         on left: 4 5
         on right: 1 4
-    line (35)
+    line (39)
         on left: 6 7 8 9
         on right: 4 5
-    component (36)
+    component (40)
         on left: 10 11 12 13 14 15 16 17 18
         on right: 6
-    command (37)
-        on left: 19 20 21 22
+    command (41)
+        on left: 19 20 21 22 23 24
         on right: 7
-    resistor <s> (38)
-        on left: 23
-        on right: 10
-    capacitor <s> (39)
-        on left: 24
-        on right: 11
-    inductor <s> (40)
+    resistor <s> (42)
         on left: 25
-        on right: 12
-    vccs <s> (41)
+        on right: 10
+    capacitor <s> (43)
         on left: 26
+        on right: 11
+    inductor <s> (44)
+        on left: 27
+        on right: 12
+    vccs <s> (45)
+        on left: 28
         on right: 13
-    vs <s> (42)
-        on left: 27 28 29 30
-        on right: 14 29 30
-    vcvs <s> (43)
-        on left: 31
-        on right: 15
-    cs <s> (44)
-        on left: 32
-        on right: 16
-    cccs <s> (45)
+    vs <s> (46)
+        on left: 29 30 31 32
+        on right: 14 31 32
+    vcvs <s> (47)
         on left: 33
-        on right: 17
-    ccvs <s> (46)
+        on right: 15
+    cs <s> (48)
         on left: 34
-        on right: 18
-    op (47)
+        on right: 16
+    cccs <s> (49)
         on left: 35
+        on right: 17
+    ccvs <s> (50)
+        on left: 36
+        on right: 18
+    op (51)
+        on left: 37
+        on right: 23
+    dc (52)
+        on left: 38 39 40
+        on right: 20 39 40
+    ac (53)
+        on left: 41 42 43
         on right: 21
-    dc (48)
-        on left: 36 37
-        on right: 20 37
-    print (49)
-        on left: 38 39 40 41 42 43
-        on right: 19 42 43
-    plot (50)
-        on left: 44 45 46 47 48 49
-        on right: 22 48 49
-    node <s> (51)
-        on left: 50 51 52 53 54 55 56
-        on right: 23 24 25 26 27 28 31 32 33 34
-    value <f> (52)
-        on left: 57 58 59
-        on right: 23 24 25 26 28 29 30 31 32 33 34 37
+    tran (54)
+        on left: 44 45 46
+        on right: 22
+    print (55)
+        on left: 47 48 49 50 51 52
+        on right: 19 51 52
+    plot (56)
+        on left: 53 54 55 56 57 58
+        on right: 24 57 58
+    node <s> (57)
+        on left: 59 60 61 62 63 64 65
+        on right: 25 26 27 28 29 30 33 34 35 36
+    value <f> (58)
+        on left: 66 67 68
+        on right: 25 26 27 28 30 31 32 33 34 35 36 39 40 41 42 43 44 45 46
 
 
 State 0
@@ -211,169 +231,173 @@ State 0
     CMD_PRINT  shift, and go to state 12
     CMD_OP     shift, and go to state 13
     CMD_DC     shift, and go to state 14
-    CMD_PLOT   shift, and go to state 15
+    CMD_AC     shift, and go to state 15
+    CMD_PLOT   shift, and go to state 16
+    CMD_TRAN   shift, and go to state 17
 
-    spice      go to state 16
-    netlist    go to state 17
-    line       go to state 18
-    component  go to state 19
-    command    go to state 20
-    resistor   go to state 21
-    capacitor  go to state 22
-    inductor   go to state 23
-    vccs       go to state 24
-    vs         go to state 25
-    vcvs       go to state 26
-    cs         go to state 27
-    cccs       go to state 28
-    ccvs       go to state 29
-    op         go to state 30
-    dc         go to state 31
-    print      go to state 32
-    plot       go to state 33
+    spice      go to state 18
+    netlist    go to state 19
+    line       go to state 20
+    component  go to state 21
+    command    go to state 22
+    resistor   go to state 23
+    capacitor  go to state 24
+    inductor   go to state 25
+    vccs       go to state 26
+    vs         go to state 27
+    vcvs       go to state 28
+    cs         go to state 29
+    cccs       go to state 30
+    ccvs       go to state 31
+    op         go to state 32
+    dc         go to state 33
+    ac         go to state 34
+    tran       go to state 35
+    print      go to state 36
+    plot       go to state 37
 
 
 State 1
 
     9 line: error • EOL
 
-    EOL  shift, and go to state 34
+    EOL  shift, and go to state 38
 
 
 State 2
 
-   25 inductor: INDUCTOR • node node value
+   27 inductor: INDUCTOR • node node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 42
-
-
-State 3
-
-   24 capacitor: CAPACITOR • node node value
-
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 43
-
-
-State 4
-
-   23 resistor: RESISTOR • node node value
-
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 44
-
-
-State 5
-
-   27 vs: VS • node node
-   28   | VS • node node value
-
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 45
-
-
-State 6
-
-   26 vccs: VCCS • node node node node value
-
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
     node  go to state 46
 
 
-State 7
+State 3
 
-   31 vcvs: VCVS • node node node node value
+   26 capacitor: CAPACITOR • node node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
     node  go to state 47
 
 
-State 8
+State 4
 
-   32 cs: CS • node node value
+   25 resistor: RESISTOR • node node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
     node  go to state 48
 
 
-State 9
+State 5
 
-   34 ccvs: CCVS • node node VS value
+   29 vs: VS • node node
+   30   | VS • node node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
     node  go to state 49
 
 
-State 10
+State 6
 
-   33 cccs: CCCS • node node VS value
+   28 vccs: VCCS • node node node node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
     node  go to state 50
+
+
+State 7
+
+   33 vcvs: VCVS • node node node node value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 51
+
+
+State 8
+
+   34 cs: CS • node node value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 52
+
+
+State 9
+
+   36 ccvs: CCVS • node node VS value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 53
+
+
+State 10
+
+   35 cccs: CCCS • node node VS value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 54
 
 
 State 11
@@ -385,37 +409,10 @@ State 11
 
 State 12
 
-   38 print: CMD_PRINT • RK_AC
-   39      | CMD_PRINT • RK_DC
-   40      | CMD_PRINT • RK_OP
-   41      | CMD_PRINT • RK_TRAN
-
-    RK_OP    shift, and go to state 51
-    RK_AC    shift, and go to state 52
-    RK_DC    shift, and go to state 53
-    RK_TRAN  shift, and go to state 54
-
-
-State 13
-
-   35 op: CMD_OP •
-
-    $default  reduce using rule 35 (op)
-
-
-State 14
-
-   36 dc: CMD_DC •
-
-    $default  reduce using rule 36 (dc)
-
-
-State 15
-
-   44 plot: CMD_PLOT • RK_AC
-   45     | CMD_PLOT • RK_DC
-   46     | CMD_PLOT • RK_OP
-   47     | CMD_PLOT • RK_TRAN
+   47 print: CMD_PRINT • RK_AC
+   48      | CMD_PRINT • RK_DC
+   49      | CMD_PRINT • RK_OP
+   50      | CMD_PRINT • RK_TRAN
 
     RK_OP    shift, and go to state 55
     RK_AC    shift, and go to state 56
@@ -423,14 +420,65 @@ State 15
     RK_TRAN  shift, and go to state 58
 
 
+State 13
+
+   37 op: CMD_OP •
+
+    $default  reduce using rule 37 (op)
+
+
+State 14
+
+   38 dc: CMD_DC •
+
+    $default  reduce using rule 38 (dc)
+
+
+State 15
+
+   41 ac: CMD_AC • RK_DEC value value value
+   42   | CMD_AC • RK_LIN value value value
+   43   | CMD_AC • RK_OCT value value value
+
+    RK_DEC  shift, and go to state 59
+    RK_OCT  shift, and go to state 60
+    RK_LIN  shift, and go to state 61
+
+
 State 16
 
-    0 $accept: spice • $end
+   53 plot: CMD_PLOT • RK_AC
+   54     | CMD_PLOT • RK_DC
+   55     | CMD_PLOT • RK_OP
+   56     | CMD_PLOT • RK_TRAN
 
-    $end  shift, and go to state 59
+    RK_OP    shift, and go to state 62
+    RK_AC    shift, and go to state 63
+    RK_DC    shift, and go to state 64
+    RK_TRAN  shift, and go to state 65
 
 
 State 17
+
+   44 tran: CMD_TRAN • value
+   45     | CMD_TRAN • value value
+   46     | CMD_TRAN • value value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 69
+
+
+State 18
+
+    0 $accept: spice • $end
+
+    $end  shift, and go to state 70
+
+
+State 19
 
     1 spice: netlist • end
     4 netlist: netlist • line
@@ -445,821 +493,1037 @@ State 17
     CS         shift, and go to state 8
     CCVS       shift, and go to state 9
     CCCS       shift, and go to state 10
-    END        shift, and go to state 60
+    END        shift, and go to state 71
     EOL        shift, and go to state 11
     CMD_PRINT  shift, and go to state 12
     CMD_OP     shift, and go to state 13
     CMD_DC     shift, and go to state 14
-    CMD_PLOT   shift, and go to state 15
+    CMD_AC     shift, and go to state 15
+    CMD_PLOT   shift, and go to state 16
+    CMD_TRAN   shift, and go to state 17
 
-    end        go to state 61
-    line       go to state 62
-    component  go to state 19
-    command    go to state 20
-    resistor   go to state 21
-    capacitor  go to state 22
-    inductor   go to state 23
-    vccs       go to state 24
-    vs         go to state 25
-    vcvs       go to state 26
-    cs         go to state 27
-    cccs       go to state 28
-    ccvs       go to state 29
-    op         go to state 30
-    dc         go to state 31
-    print      go to state 32
-    plot       go to state 33
+    end        go to state 72
+    line       go to state 73
+    component  go to state 21
+    command    go to state 22
+    resistor   go to state 23
+    capacitor  go to state 24
+    inductor   go to state 25
+    vccs       go to state 26
+    vs         go to state 27
+    vcvs       go to state 28
+    cs         go to state 29
+    cccs       go to state 30
+    ccvs       go to state 31
+    op         go to state 32
+    dc         go to state 33
+    ac         go to state 34
+    tran       go to state 35
+    print      go to state 36
+    plot       go to state 37
 
 
-State 18
+State 20
 
     5 netlist: line •
 
     $default  reduce using rule 5 (netlist)
 
 
-State 19
+State 21
 
     6 line: component • EOL
 
-    EOL  shift, and go to state 63
+    EOL  shift, and go to state 74
 
 
-State 20
+State 22
 
     7 line: command • EOL
 
-    EOL  shift, and go to state 64
+    EOL  shift, and go to state 75
 
 
-State 21
+State 23
 
    10 component: resistor •
 
     $default  reduce using rule 10 (component)
 
 
-State 22
+State 24
 
    11 component: capacitor •
 
     $default  reduce using rule 11 (component)
 
 
-State 23
+State 25
 
    12 component: inductor •
 
     $default  reduce using rule 12 (component)
 
 
-State 24
+State 26
 
    13 component: vccs •
 
     $default  reduce using rule 13 (component)
 
 
-State 25
+State 27
 
    14 component: vs •
-   29 vs: vs • RK_DC value
-   30   | vs • RK_AC value
+   31 vs: vs • RK_DC value
+   32   | vs • RK_AC value
 
-    RK_AC  shift, and go to state 65
-    RK_DC  shift, and go to state 66
+    RK_AC  shift, and go to state 76
+    RK_DC  shift, and go to state 77
 
     $default  reduce using rule 14 (component)
 
 
-State 26
+State 28
 
    15 component: vcvs •
 
     $default  reduce using rule 15 (component)
 
 
-State 27
+State 29
 
    16 component: cs •
 
     $default  reduce using rule 16 (component)
 
 
-State 28
+State 30
 
    17 component: cccs •
 
     $default  reduce using rule 17 (component)
 
 
-State 29
+State 31
 
    18 component: ccvs •
 
     $default  reduce using rule 18 (component)
 
 
-State 30
-
-   21 command: op •
-
-    $default  reduce using rule 21 (command)
-
-
-State 31
-
-   20 command: dc •
-   37 dc: dc • VS value value value
-
-    VS  shift, and go to state 67
-
-    $default  reduce using rule 20 (command)
-
-
 State 32
 
-   19 command: print •
-   42 print: print • VAR_V
-   43      | print • VAR_I
+   23 command: op •
 
-    VAR_V  shift, and go to state 68
-    VAR_I  shift, and go to state 69
-
-    $default  reduce using rule 19 (command)
+    $default  reduce using rule 23 (command)
 
 
 State 33
 
-   22 command: plot •
-   48 plot: plot • VAR_V
-   49     | plot • VAR_I
+   20 command: dc •
+   39 dc: dc • VS value value value
+   40   | dc • CS value value value
 
-    VAR_V  shift, and go to state 70
-    VAR_I  shift, and go to state 71
+    VS  shift, and go to state 78
+    CS  shift, and go to state 79
+
+    $default  reduce using rule 20 (command)
+
+
+State 34
+
+   21 command: ac •
+
+    $default  reduce using rule 21 (command)
+
+
+State 35
+
+   22 command: tran •
 
     $default  reduce using rule 22 (command)
 
 
-State 34
+State 36
+
+   19 command: print •
+   51 print: print • VAR_V
+   52      | print • VAR_I
+
+    VAR_V  shift, and go to state 80
+    VAR_I  shift, and go to state 81
+
+    $default  reduce using rule 19 (command)
+
+
+State 37
+
+   24 command: plot •
+   57 plot: plot • VAR_V
+   58     | plot • VAR_I
+
+    VAR_V  shift, and go to state 82
+    VAR_I  shift, and go to state 83
+
+    $default  reduce using rule 24 (command)
+
+
+State 38
 
     9 line: error EOL •
 
     $default  reduce using rule 9 (line)
 
 
-State 35
-
-   50 node: STRING •
-
-    $default  reduce using rule 50 (node)
-
-
-State 36
-
-   51 node: INTEGER •
-
-    $default  reduce using rule 51 (node)
-
-
-State 37
-
-   54 node: INDUCTOR •
-
-    $default  reduce using rule 54 (node)
-
-
-State 38
-
-   53 node: CAPACITOR •
-
-    $default  reduce using rule 53 (node)
-
-
 State 39
 
-   52 node: RESISTOR •
+   59 node: STRING •
 
-    $default  reduce using rule 52 (node)
+    $default  reduce using rule 59 (node)
 
 
 State 40
 
-   55 node: VS •
+   60 node: INTEGER •
 
-    $default  reduce using rule 55 (node)
+    $default  reduce using rule 60 (node)
 
 
 State 41
 
-   56 node: VCCS •
+   63 node: INDUCTOR •
 
-    $default  reduce using rule 56 (node)
+    $default  reduce using rule 63 (node)
 
 
 State 42
 
-   25 inductor: INDUCTOR node • node value
+   62 node: CAPACITOR •
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 72
+    $default  reduce using rule 62 (node)
 
 
 State 43
 
-   24 capacitor: CAPACITOR node • node value
+   61 node: RESISTOR •
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 73
+    $default  reduce using rule 61 (node)
 
 
 State 44
 
-   23 resistor: RESISTOR node • node value
+   64 node: VS •
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 74
+    $default  reduce using rule 64 (node)
 
 
 State 45
 
-   27 vs: VS node • node
-   28   | VS node • node value
+   65 node: VCCS •
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 75
+    $default  reduce using rule 65 (node)
 
 
 State 46
 
-   26 vccs: VCCS node • node node node value
+   27 inductor: INDUCTOR node • node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
-    node  go to state 76
+    node  go to state 84
 
 
 State 47
 
-   31 vcvs: VCVS node • node node node value
+   26 capacitor: CAPACITOR node • node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
-    node  go to state 77
+    node  go to state 85
 
 
 State 48
 
-   32 cs: CS node • node value
+   25 resistor: RESISTOR node • node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
-    node  go to state 78
+    node  go to state 86
 
 
 State 49
 
-   34 ccvs: CCVS node • node VS value
+   29 vs: VS node • node
+   30   | VS node • node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
-    node  go to state 79
+    node  go to state 87
 
 
 State 50
 
-   33 cccs: CCCS node • node VS value
+   28 vccs: VCCS node • node node node value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
 
-    node  go to state 80
+    node  go to state 88
 
 
 State 51
 
-   40 print: CMD_PRINT RK_OP •
+   33 vcvs: VCVS node • node node node value
 
-    $default  reduce using rule 40 (print)
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 89
 
 
 State 52
 
-   38 print: CMD_PRINT RK_AC •
+   34 cs: CS node • node value
 
-    $default  reduce using rule 38 (print)
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 90
 
 
 State 53
 
-   39 print: CMD_PRINT RK_DC •
+   36 ccvs: CCVS node • node VS value
 
-    $default  reduce using rule 39 (print)
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 91
 
 
 State 54
 
-   41 print: CMD_PRINT RK_TRAN •
+   35 cccs: CCCS node • node VS value
 
-    $default  reduce using rule 41 (print)
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 92
 
 
 State 55
 
-   46 plot: CMD_PLOT RK_OP •
+   49 print: CMD_PRINT RK_OP •
 
-    $default  reduce using rule 46 (plot)
+    $default  reduce using rule 49 (print)
 
 
 State 56
 
-   44 plot: CMD_PLOT RK_AC •
+   47 print: CMD_PRINT RK_AC •
 
-    $default  reduce using rule 44 (plot)
+    $default  reduce using rule 47 (print)
 
 
 State 57
 
-   45 plot: CMD_PLOT RK_DC •
+   48 print: CMD_PRINT RK_DC •
 
-    $default  reduce using rule 45 (plot)
+    $default  reduce using rule 48 (print)
 
 
 State 58
 
-   47 plot: CMD_PLOT RK_TRAN •
+   50 print: CMD_PRINT RK_TRAN •
 
-    $default  reduce using rule 47 (plot)
+    $default  reduce using rule 50 (print)
 
 
 State 59
+
+   41 ac: CMD_AC RK_DEC • value value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 93
+
+
+State 60
+
+   43 ac: CMD_AC RK_OCT • value value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 94
+
+
+State 61
+
+   42 ac: CMD_AC RK_LIN • value value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 95
+
+
+State 62
+
+   55 plot: CMD_PLOT RK_OP •
+
+    $default  reduce using rule 55 (plot)
+
+
+State 63
+
+   53 plot: CMD_PLOT RK_AC •
+
+    $default  reduce using rule 53 (plot)
+
+
+State 64
+
+   54 plot: CMD_PLOT RK_DC •
+
+    $default  reduce using rule 54 (plot)
+
+
+State 65
+
+   56 plot: CMD_PLOT RK_TRAN •
+
+    $default  reduce using rule 56 (plot)
+
+
+State 66
+
+   67 value: FLOAT •
+
+    $default  reduce using rule 67 (value)
+
+
+State 67
+
+   68 value: INTEGER •
+
+    $default  reduce using rule 68 (value)
+
+
+State 68
+
+   66 value: VALUE •
+
+    $default  reduce using rule 66 (value)
+
+
+State 69
+
+   44 tran: CMD_TRAN value •
+   45     | CMD_TRAN value • value
+   46     | CMD_TRAN value • value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    $default  reduce using rule 44 (tran)
+
+    value  go to state 96
+
+
+State 70
 
     0 $accept: spice $end •
 
     $default  accept
 
 
-State 60
+State 71
 
     3 end: END •
 
     $default  reduce using rule 3 (end)
 
 
-State 61
+State 72
 
     1 spice: netlist end •
     2 end: end • EOL
 
-    EOL  shift, and go to state 81
+    EOL  shift, and go to state 97
 
     $default  reduce using rule 1 (spice)
 
 
-State 62
+State 73
 
     4 netlist: netlist line •
 
     $default  reduce using rule 4 (netlist)
 
 
-State 63
+State 74
 
     6 line: component EOL •
 
     $default  reduce using rule 6 (line)
 
 
-State 64
+State 75
 
     7 line: command EOL •
 
     $default  reduce using rule 7 (line)
 
 
-State 65
-
-   30 vs: vs RK_AC • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 85
-
-
-State 66
-
-   29 vs: vs RK_DC • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 86
-
-
-State 67
-
-   37 dc: dc VS • value value value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 87
-
-
-State 68
-
-   42 print: print VAR_V •
-
-    $default  reduce using rule 42 (print)
-
-
-State 69
-
-   43 print: print VAR_I •
-
-    $default  reduce using rule 43 (print)
-
-
-State 70
-
-   48 plot: plot VAR_V •
-
-    $default  reduce using rule 48 (plot)
-
-
-State 71
-
-   49 plot: plot VAR_I •
-
-    $default  reduce using rule 49 (plot)
-
-
-State 72
-
-   25 inductor: INDUCTOR node node • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 88
-
-
-State 73
-
-   24 capacitor: CAPACITOR node node • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 89
-
-
-State 74
-
-   23 resistor: RESISTOR node node • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 90
-
-
-State 75
-
-   27 vs: VS node node •
-   28   | VS node node • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    $default  reduce using rule 27 (vs)
-
-    value  go to state 91
-
-
 State 76
 
-   26 vccs: VCCS node node • node node value
+   32 vs: vs RK_AC • value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
 
-    node  go to state 92
+    value  go to state 98
 
 
 State 77
 
-   31 vcvs: VCVS node node • node node value
+   31 vs: vs RK_DC • value
 
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
 
-    node  go to state 93
+    value  go to state 99
 
 
 State 78
 
-   32 cs: CS node node • value
+   39 dc: dc VS • value value value
 
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
 
-    value  go to state 94
+    value  go to state 100
 
 
 State 79
 
-   34 ccvs: CCVS node node • VS value
+   40 dc: dc CS • value value value
 
-    VS  shift, and go to state 95
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 101
 
 
 State 80
 
-   33 cccs: CCCS node node • VS value
+   51 print: print VAR_V •
 
-    VS  shift, and go to state 96
+    $default  reduce using rule 51 (print)
 
 
 State 81
+
+   52 print: print VAR_I •
+
+    $default  reduce using rule 52 (print)
+
+
+State 82
+
+   57 plot: plot VAR_V •
+
+    $default  reduce using rule 57 (plot)
+
+
+State 83
+
+   58 plot: plot VAR_I •
+
+    $default  reduce using rule 58 (plot)
+
+
+State 84
+
+   27 inductor: INDUCTOR node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 102
+
+
+State 85
+
+   26 capacitor: CAPACITOR node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 103
+
+
+State 86
+
+   25 resistor: RESISTOR node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 104
+
+
+State 87
+
+   29 vs: VS node node •
+   30   | VS node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    $default  reduce using rule 29 (vs)
+
+    value  go to state 105
+
+
+State 88
+
+   28 vccs: VCCS node node • node node value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 106
+
+
+State 89
+
+   33 vcvs: VCVS node node • node node value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 107
+
+
+State 90
+
+   34 cs: CS node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 108
+
+
+State 91
+
+   36 ccvs: CCVS node node • VS value
+
+    VS  shift, and go to state 109
+
+
+State 92
+
+   35 cccs: CCCS node node • VS value
+
+    VS  shift, and go to state 110
+
+
+State 93
+
+   41 ac: CMD_AC RK_DEC value • value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 111
+
+
+State 94
+
+   43 ac: CMD_AC RK_OCT value • value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 112
+
+
+State 95
+
+   42 ac: CMD_AC RK_LIN value • value value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 113
+
+
+State 96
+
+   45 tran: CMD_TRAN value value •
+   46     | CMD_TRAN value value • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    $default  reduce using rule 45 (tran)
+
+    value  go to state 114
+
+
+State 97
 
     2 end: end EOL •
 
     $default  reduce using rule 2 (end)
 
 
-State 82
-
-   58 value: FLOAT •
-
-    $default  reduce using rule 58 (value)
-
-
-State 83
-
-   59 value: INTEGER •
-
-    $default  reduce using rule 59 (value)
-
-
-State 84
-
-   57 value: VALUE •
-
-    $default  reduce using rule 57 (value)
-
-
-State 85
-
-   30 vs: vs RK_AC value •
-
-    $default  reduce using rule 30 (vs)
-
-
-State 86
-
-   29 vs: vs RK_DC value •
-
-    $default  reduce using rule 29 (vs)
-
-
-State 87
-
-   37 dc: dc VS value • value value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 97
-
-
-State 88
-
-   25 inductor: INDUCTOR node node value •
-
-    $default  reduce using rule 25 (inductor)
-
-
-State 89
-
-   24 capacitor: CAPACITOR node node value •
-
-    $default  reduce using rule 24 (capacitor)
-
-
-State 90
-
-   23 resistor: RESISTOR node node value •
-
-    $default  reduce using rule 23 (resistor)
-
-
-State 91
-
-   28 vs: VS node node value •
-
-    $default  reduce using rule 28 (vs)
-
-
-State 92
-
-   26 vccs: VCCS node node node • node value
-
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 98
-
-
-State 93
-
-   31 vcvs: VCVS node node node • node value
-
-    STRING     shift, and go to state 35
-    INTEGER    shift, and go to state 36
-    INDUCTOR   shift, and go to state 37
-    CAPACITOR  shift, and go to state 38
-    RESISTOR   shift, and go to state 39
-    VS         shift, and go to state 40
-    VCCS       shift, and go to state 41
-
-    node  go to state 99
-
-
-State 94
-
-   32 cs: CS node node value •
-
-    $default  reduce using rule 32 (cs)
-
-
-State 95
-
-   34 ccvs: CCVS node node VS • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 100
-
-
-State 96
-
-   33 cccs: CCCS node node VS • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 101
-
-
-State 97
-
-   37 dc: dc VS value value • value
-
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 102
-
-
 State 98
 
-   26 vccs: VCCS node node node node • value
+   32 vs: vs RK_AC value •
 
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 103
+    $default  reduce using rule 32 (vs)
 
 
 State 99
 
-   31 vcvs: VCVS node node node node • value
+   31 vs: vs RK_DC value •
 
-    FLOAT    shift, and go to state 82
-    INTEGER  shift, and go to state 83
-    VALUE    shift, and go to state 84
-
-    value  go to state 104
+    $default  reduce using rule 31 (vs)
 
 
 State 100
 
-   34 ccvs: CCVS node node VS value •
+   39 dc: dc VS value • value value
 
-    $default  reduce using rule 34 (ccvs)
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 115
 
 
 State 101
 
-   33 cccs: CCCS node node VS value •
+   40 dc: dc CS value • value value
 
-    $default  reduce using rule 33 (cccs)
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 116
 
 
 State 102
 
-   37 dc: dc VS value value value •
+   27 inductor: INDUCTOR node node value •
 
-    $default  reduce using rule 37 (dc)
+    $default  reduce using rule 27 (inductor)
 
 
 State 103
 
-   26 vccs: VCCS node node node node value •
+   26 capacitor: CAPACITOR node node value •
 
-    $default  reduce using rule 26 (vccs)
+    $default  reduce using rule 26 (capacitor)
 
 
 State 104
 
-   31 vcvs: VCVS node node node node value •
+   25 resistor: RESISTOR node node value •
 
-    $default  reduce using rule 31 (vcvs)
+    $default  reduce using rule 25 (resistor)
+
+
+State 105
+
+   30 vs: VS node node value •
+
+    $default  reduce using rule 30 (vs)
+
+
+State 106
+
+   28 vccs: VCCS node node node • node value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 117
+
+
+State 107
+
+   33 vcvs: VCVS node node node • node value
+
+    STRING     shift, and go to state 39
+    INTEGER    shift, and go to state 40
+    INDUCTOR   shift, and go to state 41
+    CAPACITOR  shift, and go to state 42
+    RESISTOR   shift, and go to state 43
+    VS         shift, and go to state 44
+    VCCS       shift, and go to state 45
+
+    node  go to state 118
+
+
+State 108
+
+   34 cs: CS node node value •
+
+    $default  reduce using rule 34 (cs)
+
+
+State 109
+
+   36 ccvs: CCVS node node VS • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 119
+
+
+State 110
+
+   35 cccs: CCCS node node VS • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 120
+
+
+State 111
+
+   41 ac: CMD_AC RK_DEC value value • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 121
+
+
+State 112
+
+   43 ac: CMD_AC RK_OCT value value • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 122
+
+
+State 113
+
+   42 ac: CMD_AC RK_LIN value value • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 123
+
+
+State 114
+
+   46 tran: CMD_TRAN value value value •
+
+    $default  reduce using rule 46 (tran)
+
+
+State 115
+
+   39 dc: dc VS value value • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 124
+
+
+State 116
+
+   40 dc: dc CS value value • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 125
+
+
+State 117
+
+   28 vccs: VCCS node node node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 126
+
+
+State 118
+
+   33 vcvs: VCVS node node node node • value
+
+    FLOAT    shift, and go to state 66
+    INTEGER  shift, and go to state 67
+    VALUE    shift, and go to state 68
+
+    value  go to state 127
+
+
+State 119
+
+   36 ccvs: CCVS node node VS value •
+
+    $default  reduce using rule 36 (ccvs)
+
+
+State 120
+
+   35 cccs: CCCS node node VS value •
+
+    $default  reduce using rule 35 (cccs)
+
+
+State 121
+
+   41 ac: CMD_AC RK_DEC value value value •
+
+    $default  reduce using rule 41 (ac)
+
+
+State 122
+
+   43 ac: CMD_AC RK_OCT value value value •
+
+    $default  reduce using rule 43 (ac)
+
+
+State 123
+
+   42 ac: CMD_AC RK_LIN value value value •
+
+    $default  reduce using rule 42 (ac)
+
+
+State 124
+
+   39 dc: dc VS value value value •
+
+    $default  reduce using rule 39 (dc)
+
+
+State 125
+
+   40 dc: dc CS value value value •
+
+    $default  reduce using rule 40 (dc)
+
+
+State 126
+
+   28 vccs: VCCS node node node node value •
+
+    $default  reduce using rule 28 (vccs)
+
+
+State 127
+
+   33 vcvs: VCVS node node node node value •
+
+    $default  reduce using rule 33 (vcvs)

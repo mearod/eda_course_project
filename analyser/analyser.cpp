@@ -1,5 +1,6 @@
 #include "analyser.h"
 #include <assert.h>
+#include <cmath>
 #include <armadillo>
 
 Analyser::Analyser(Circuit* circuit){
@@ -141,32 +142,50 @@ void Analyser::createSingleRecord(){
 
 }
 
-void Analyser::analyseDC(string scannedDevice,double start,double end,double step){
-    
+void Analyser::analyseDC(){
+    if(checkPlotNodeExists() == false){
+        return;
+    }
+    string sourceName = circuit->commandDC.sourceName;
+    double start = circuit->commandDC.startValue;
+    double end = circuit->commandDC.endValue;
+    double step = circuit->commandDC.stepValue;
+
     double scanValue = 0;
-    BaseDevice* scanDevice = NULL;
+    BaseDevice* sourceDevice = NULL;
     scanValue = start;
 
     for (auto it = circuit->devices.begin();it!=circuit->devices.end();it++){
         //cout<<"find:"<<(*it)->name<<std::endl;
-        if((*it)->name == scannedDevice){
-            scanDevice = (*it);
+        if((*it)->name == sourceName){
+            sourceDevice = (*it);
         }
     }//find scanned device
 
-    assert(scanDevice);
+    if(sourceDevice == NULL)
+    {
+        cout<<"DC analyse error: source device not found,please ensure the source device exists in the circuit."<<std::endl;
+        return;
+    }
 
     while(scanValue <= end){
-        scanDevice->valueUpdate(scanValue);
+        sourceDevice->valueUpdate(scanValue);
         analyseStepDC();
-        matrixNodeRecord(scanValue,resultRecorderDC);
+        matrixNodeRecordDC(scanValue,resultRecorderDC);
         scanValue += step;
     }
     resultRecorderDC->debug_print();
     resultRecorderDC->debugPlotAllRecords();
 }
 
-void Analyser::analyseAC(int denseNum,double start,double end){
+void Analyser::analyseAC(){
+    if(checkPlotNodeExists() == false){
+        return;
+    }
+    int denseNum = circuit->commandAC.numPerDec;
+    double start = circuit->commandAC.startFreq;
+    double end = circuit->commandAC.endFreq;
+
     double freqLevel = start;
     double levelStep = 1/(double)denseNum;
     freq = freqLevel;
@@ -174,7 +193,7 @@ void Analyser::analyseAC(int denseNum,double start,double end){
         while(freq < freqLevel*10 && freq < end)
         {
             analyseStepAC();
-            matrixNodeRecord(freq,resultRecorderAC);
+            matrixNodeRecordAC(freq,resultRecorderAC);
             this->freq += levelStep*(double)9*freqLevel;
         }
         freqLevel *= 10;
@@ -182,15 +201,39 @@ void Analyser::analyseAC(int denseNum,double start,double end){
     }
 
     resultRecorderAC->debug_print();
+    resultRecorderAC->debugPlotAllRecords(DEC);
 }
 
-void Analyser::analyseTRAN(double start,double end,double step){
-
-}
-
-void Analyser::matrixNodeRecord(double scanValue,ResultRecorder* resultRecorder){
-    for (auto it = circuit->nodemap.begin();it!=circuit->nodemap.end();it++){
-        double yRecord = circuit->nodemap[it->first].isGround? 0 : abs(x(circuit->nodemap[it->first].id));
-        resultRecorder->addRecord(it->first,scanValue,yRecord);
+void Analyser::analyseTRAN(){
+    if(checkPlotNodeExists() == false){
+        return;
     }
+}
+
+void Analyser::matrixNodeRecordDC(double scanValue,ResultRecorder* resultRecorder){
+    for (auto it = circuit->commandPlot.nodePlotQueue.begin();it!=circuit->commandPlot.nodePlotQueue.end();it++){
+        double yRecord = circuit->nodemap[it->nodeName].isGround? 0 : abs(x(circuit->nodemap[it->nodeName].id));
+        string description = it->prefix+it->nodeName;
+        string xLabel = circuit->commandDC.sourceName;
+        string yLabel = it->prefix;
+        resultRecorder->addRecord(description,xLabel,yLabel,scanValue,yRecord);
+    }
+}
+
+void Analyser::matrixNodeRecordAC(double scanValue,ResultRecorder* resultRecorder){
+    for (auto it = circuit->commandPlot.nodePlotQueue.begin();it!=circuit->commandPlot.nodePlotQueue.end();it++){
+        double yRecord = circuit->nodemap[it->nodeName].isGround? 0 : abs(x(circuit->nodemap[it->nodeName].id));
+        string description = it->prefix+it->nodeName;
+        resultRecorder->addRecord(description,"Frequency(Hz)","dB",scanValue,20*log10(yRecord));
+    }
+}
+
+bool Analyser::checkPlotNodeExists(){
+    for (auto it = circuit->commandPlot.nodePlotQueue.begin();it!=circuit->commandPlot.nodePlotQueue.end();it++){
+         if(circuit->nodemap.find(it->nodeName) == circuit->nodemap.end()){
+            cout<<"Plot command error: node "<<it->nodeName<<" does not exists in the circuit."<<std::endl;
+            return false;
+         }
+    }
+    return true;
 }

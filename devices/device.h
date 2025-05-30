@@ -34,6 +34,7 @@ public:
     virtual void valueUpdate(double value){};
     virtual void stampDC(Analyser* analyser) = 0;
     virtual void stampAC(Analyser* analyser) = 0;
+    virtual void stampTRAN(Analyser* analyser) = 0;
 };
 
 class BTypeDevice: virtual public BaseDevice
@@ -56,19 +57,21 @@ public:
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
-class Capacitor: virtual public BaseDevice
+class Capacitor: virtual public BTypeDevice
 {
 public:
     std::string pos;
     std::string neg;
     double c_value;
 
-    Capacitor(std::string name,std::string pos,std::string neg,double c_value): BaseDevice(name,G_TYPE,C),pos(pos),neg(neg),c_value(c_value){};
+    Capacitor(std::string name,std::string pos,std::string neg,double c_value): BaseDevice(name,B_TYPE,L),BTypeDevice(name),pos(pos),neg(neg),c_value(c_value){};
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Inductor: virtual public BTypeDevice
@@ -82,6 +85,7 @@ public:
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Vccs: virtual public BaseDevice
@@ -98,6 +102,7 @@ public:
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Ccvs: virtual public BTypeDevice
@@ -121,6 +126,7 @@ public:
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Vs: public BTypeDevice
@@ -137,6 +143,7 @@ public:
     void valueUpdate(double value){dc_value = value;ac_value = value;};
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Vcvs: virtual public BTypeDevice
@@ -153,6 +160,7 @@ public:
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Cccs: virtual public BaseDevice
@@ -177,6 +185,7 @@ public:
 
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 class Cs: virtual public BaseDevice
@@ -192,6 +201,7 @@ public:
     void valueUpdate(double value){cs_value = value;};
     void stampDC(Analyser* analyser);
     void stampAC(Analyser* analyser);
+    void stampTRAN(Analyser* analyser);
 };
 
 #endif

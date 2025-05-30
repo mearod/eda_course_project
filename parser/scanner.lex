@@ -59,11 +59,16 @@ RK_OP       [Oo][Pp]
 RK_TRAN     [Tt][Rr][Aa][Nn]
 RK_AC       [Aa][Cc]
 RK_DC       [Dd][Cc]
+RK_DEC      [Dd][Ee][Cc]
+RK_LIN      [Ll][Ii][Nn]
+RK_OCT      [Oo][Cc][Tt]
+
 
 CMD_PRINT     [\.][Pp][Rr][Ii][Nn][Tt]
 CMD_OP        [\.][Oo][Pp]
 CMD_DC        [\.][Dd][Cc]
 CMD_AC        [\.][Aa][Cc]
+CMD_TRAN      [\.][Tt][Rr][Aa][Nn]
 CMD_PLOT      [\.][Pp][Ll][Oo][Tt]
 CMD_OPTION    [\.][Oo][Pp][Tt][Ii][Oo][Nn]
 

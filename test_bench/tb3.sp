@@ -6,7 +6,7 @@ G2 n1 0 n1 n2 1
 R3 n1 n2 2
 R4 n2 0 5
 Is5 0 n2 1
-Vs6 n3 n2 dc 1
+Vin n3 n2 dc 1
 E7 n4 0 n1 n2 1
 R8 n3 n4 10
 

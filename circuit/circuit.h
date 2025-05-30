@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include "../analyser/analyser.h"
 #include "../devices/device.h"
-#include "../spice_command/command_plot.h"
+#include "../spice_command/command.h"
 
 class BaseDevice;
 class CommandPlot;
@@ -32,6 +32,9 @@ public:
     std::vector<BaseDevice*> devices;//器件列表
 
     CommandPlot commandPlot;
+    CommandDC commandDC;
+    CommandAC commandAC;
+    CommandTRAN commandTRAN;
 
 public:
     void debug_display();//debug用展示函数

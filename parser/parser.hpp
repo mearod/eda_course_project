@@ -83,12 +83,16 @@ extern int yydebug;
     RK_AC = 277,                   /* RK_AC  */
     RK_DC = 278,                   /* RK_DC  */
     RK_TRAN = 279,                 /* RK_TRAN  */
-    CMD_PRINT = 280,               /* CMD_PRINT  */
-    CMD_OP = 281,                  /* CMD_OP  */
-    CMD_DC = 282,                  /* CMD_DC  */
-    CMD_AC = 283,                  /* CMD_AC  */
-    CMD_PLOT = 284,                /* CMD_PLOT  */
-    CMD_OPTION = 285               /* CMD_OPTION  */
+    RK_DEC = 280,                  /* RK_DEC  */
+    RK_OCT = 281,                  /* RK_OCT  */
+    RK_LIN = 282,                  /* RK_LIN  */
+    CMD_PRINT = 283,               /* CMD_PRINT  */
+    CMD_OP = 284,                  /* CMD_OP  */
+    CMD_DC = 285,                  /* CMD_DC  */
+    CMD_AC = 286,                  /* CMD_AC  */
+    CMD_PLOT = 287,                /* CMD_PLOT  */
+    CMD_OPTION = 288,              /* CMD_OPTION  */
+    CMD_TRAN = 289                 /* CMD_TRAN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -103,7 +107,7 @@ union YYSTYPE
     int    n;
     char  *s;
 
-#line 107 "parser.hpp"
+#line 111 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -314,25 +314,61 @@ dc: CMD_DC
     {
 
     }
-    | dc VS value value value {
+    | dc VS value value value 
+    {
         printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", $2, $3, $4, $5);
+        circuit->commandDC.sourceName = $2;
+        circuit->commandDC.startValue = $3;
+        circuit->commandDC.endValue = $4;
+        circuit->commandDC.stepValue = $5;
+        circuit->commandDC.run = 1;
+    }
+    | dc CS value value value 
+    {
+        printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", $2, $3, $4, $5);
+        circuit->commandDC.sourceName = $2;
+        circuit->commandDC.startValue = $3;
+        circuit->commandDC.endValue = $4;
+        circuit->commandDC.stepValue = $5;
+        circuit->commandDC.run = 1;
     }
 ;
 
 ac: CMD_AC RK_DEC value value value
     {
-        printf("[AC Line]");
+        printf("[AC Line]:DEC numPerDec(%d) startFreq(%f) stopFreq(%f)\n", $3, $4, $5);
+        circuit->commandAC.run = 1;
+        circuit->commandAC.numPerDec = $3;
+        circuit->commandAC.startFreq = $4;
+        circuit->commandAC.endFreq = $5;
+    }
+    |
+    CMD_AC RK_LIN value value value
+    {
+        printf("[AC Line]:LIN numPerLin(%d) startFreq(%f) stopFreq(%f)\n", $3, $4, $5);
+        printf("[AC Line]:WARNING: LIN is not supported yet.");
+    }
+    |
+    CMD_AC RK_OCT value value value
+    {
+        printf("[AC Line]:OCT numPerOct(%d) startFreq(%f) stopFreq(%f)\n", $3, $4, $5);
+        printf("[AC Line]:WARNING: OCT is not supported yet.");
     }
 ;
 
 tran:
+    CMD_TRAN value { 
+        printf("[TRAN Line]:STOPTIME(%f)\n", $2);
+        circuit->commandTRAN.run = 1;
+        circuit->commandTRAN.stopTime = $2;
+    }
+    |
     CMD_TRAN value value { 
         printf("[TRAN Line]");
     }
     |
     CMD_TRAN value value value { 
         printf("[TRAN Line]");
-
     }
     ;
 

@@ -29,7 +29,7 @@ static void device_static();
 
 
 
-int startSimulate(char *fileName)
+int startDCSimulate(char *fileName)
 {
     initializeSimulate();
 
@@ -40,13 +40,76 @@ int startSimulate(char *fileName)
         return 0;
     }
 
+    if(!circuit->commandDC.run)
+    {
+        cout<<"DC analyse error: no DC command found.\n";
+        return 0;
+    }
+
     analyser = new Analyser(circuit);
 
-    std::string test = "Vin";
+    analyser->analyseDC();
 
-    analyser->analyseDC(test,0,1,0.1);
+    circuit->debug_display();
+    //device_static();
+
+    endSimulate(fileName);
+
+    delete analyser;
     
-    //analyser->analyseAC(3,10,1000);
+    return 0;
+}
+
+int startACSimulate(char *fileName)
+{
+    initializeSimulate();
+
+    circuit = new Circuit;
+
+    if(!callNetlistParser(fileName)) {
+        std::cout<<"file not found!\n";
+        return 0;
+    }
+
+    if(!circuit->commandAC.run)
+    {
+        cout<<"AC analyse error: no AC command found.\n";
+        return 0;
+    }
+
+    analyser = new Analyser(circuit);
+
+    analyser->analyseAC();
+
+    circuit->debug_display();
+    //device_static();
+
+    endSimulate(fileName);
+
+    delete analyser;
+    
+    return 0;
+}
+
+int startTRANSimulate(char *fileName){
+    initializeSimulate();
+
+    circuit = new Circuit;
+
+    if(!callNetlistParser(fileName)) {
+        std::cout<<"file not found!\n";
+        return 0;
+    }
+
+    if(!circuit->commandDC.run)
+    {
+        cout<<"TRAN analyse error: no TRAN command found.\n";
+        return 0;
+    }
+
+    analyser = new Analyser(circuit);
+
+    analyser->analyseTRAN();
 
     circuit->debug_display();
     //device_static();

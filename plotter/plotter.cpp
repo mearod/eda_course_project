@@ -18,11 +18,13 @@ void initPlot(QCustomPlot *plot)
 
 }
 
-void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, string yLabel, PlotType plotType)
+void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, string yLabel, string title, PlotType plotType)
 {
-    QString xQLabel, yQLabel;
+    QString xQLabel, yQLabel, titleQ;
     xQLabel = QString::fromStdString(xLabel);
     yQLabel = QString::fromStdString(yLabel);
+    titleQ = QString::fromStdString(title);
+
 
     QVector<double> xQData, yQData;
     for(int i = 0; i < xData.size(); i++)
@@ -32,6 +34,12 @@ void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, st
     }
 
     QCustomPlot *newPlot = new QCustomPlot();
+    
+    QCPTextElement *titleText = new QCPTextElement(newPlot, titleQ, QFont("sans", 12, QFont::Bold));
+    newPlot->plotLayout()->insertRow(0);
+    newPlot->plotLayout()->addElement(0, 0, titleText);
+
+
     newPlot->addGraph(newPlot->xAxis, newPlot->yAxis);
     newPlot->graph(0)->setPen(QPen(QPen(Qt::blue)));
     newPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -41,14 +49,9 @@ void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, st
     newPlot->xAxis->setLabel(xQLabel);
     QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
     newPlot->xAxis->setTicker(logTicker);
-    if(plotType == LINEAR)
-    {
-        newPlot->xAxis->setScaleType(QCPAxis::stLinear);
-    }
-    else if(plotType == DEC)
-    {
-        newPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
-    }
+
+    if(plotType == DEC) {newPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);}
+
     newPlot->yAxis->setLabel(yQLabel);
 
     newPlot->replot();

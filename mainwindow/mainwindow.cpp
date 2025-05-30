@@ -75,9 +75,17 @@ void MainWindow::createActions()
     pasteAction->setStatusTip(tr("Paste clipboard to selection"));
     connect(pasteAction, SIGNAL(triggered()), textEdit, SLOT(paste()));
 
-    simulateAction = new QAction(QIcon(":../asset/images/simulate.png"),tr("Simulate"), this);
-    simulateAction->setToolTip(tr("simulate current file"));
-    connect(simulateAction, SIGNAL(triggered()), this, SLOT(slotSimulate()));
+    simulateDCAction = new QAction(QIcon(":../asset/images/simulate.png"),tr("Simulate DC"), this);
+    simulateDCAction->setToolTip(tr("simulate current file with DC"));
+    connect(simulateDCAction, SIGNAL(triggered()), this, SLOT(slotSimulateDC()));
+
+    simulateACAction = new QAction(QIcon(":../asset/images/simulate.png"),tr("Simulate AC"), this);
+    simulateACAction->setToolTip(tr("simulate current file with AC"));
+    connect(simulateACAction, SIGNAL(triggered()), this, SLOT(slotSimulateAC()));
+
+    simulateTRANAction = new QAction(QIcon(":../asset/images/simulate.png"),tr("Simulate TRAN"), this);
+    simulateTRANAction->setToolTip(tr("simulate current file with TRAN"));
+    connect(simulateTRANAction, SIGNAL(triggered()), this, SLOT(slotSimulateTRAN()));
 }
 
 void MainWindow::createMenus()
@@ -95,7 +103,9 @@ void MainWindow::createMenus()
     editMenu->addAction(cutAction);
     editMenu->addAction(pasteAction);
 
-    simulateMenu->addAction(simulateAction);
+    simulateMenu->addAction(simulateDCAction);
+    simulateMenu->addAction(simulateACAction);
+    simulateMenu->addAction(simulateTRANAction);
 }
 
 void MainWindow::createToolBars()
@@ -113,7 +123,9 @@ void MainWindow::createToolBars()
     editTool->addAction(cutAction);
     editTool->addAction(pasteAction);
 
-    simulateTool->addAction(simulateAction);
+    simulateTool->addAction(simulateDCAction);
+    simulateTool->addAction(simulateACAction);
+    simulateTool->addAction(simulateTRANAction);
 }
 
 /**
@@ -206,10 +218,10 @@ void MainWindow::slotSaveFile()
 }
 
 
-void MainWindow::slotSimulate()
+void MainWindow::slotSimulateDC()
 {
     QLabel *label = new QLabel();
-    label->setText("simulation start!");
+    label->setText("DC simulation start!");
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("font:30px;color:black;background-color:white");
     label->resize(360, 120);
@@ -220,6 +232,40 @@ void MainWindow::slotSimulate()
     char *fileNameChar;
     QByteArray ba = this->fileName.toLatin1();
     fileNameChar = ba.data();
-    startSimulate(fileNameChar);
-    label->setText("simulation end!");
+    startDCSimulate(fileNameChar);
+    label->setText("DC simulation end!");
+}
+
+void MainWindow::slotSimulateAC()
+{
+    QLabel *label = new QLabel();
+    label->setText("AC simulation start!");
+    label->setAlignment(Qt::AlignCenter);
+    label->setStyleSheet("font:30px;color:black;background-color:white");
+    label->resize(360, 120);
+    label->setAttribute(Qt::WA_DeleteOnClose);
+    label->show(); // label should be shown to be seen.
+
+    char *fileNameChar;
+    QByteArray ba = this->fileName.toLatin1();
+    fileNameChar = ba.data();
+    startACSimulate(fileNameChar);
+    label->setText("AC simulation end!");
+}
+
+void MainWindow::slotSimulateTRAN()
+{
+    QLabel *label = new QLabel();
+    label->setText("TRAN simulation start!");
+    label->setAlignment(Qt::AlignCenter);
+    label->setStyleSheet("font:30px;color:black;background-color:white");
+    label->resize(360, 120);
+    label->setAttribute(Qt::WA_DeleteOnClose);
+    label->show(); // label should be shown to be seen.
+
+    char *fileNameChar;
+    QByteArray ba = this->fileName.toLatin1();
+    fileNameChar = ba.data();
+    startTRANSimulate(fileNameChar);
+    label->setText("TRAN simulation end!");
 }

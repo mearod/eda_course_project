@@ -5,9 +5,9 @@ Vin n1 0 10
 R1 n1 n2 1
 R2 n2 0 4
 
-.dc Vin 10 10 1
-.print dc v(n2)
+.dc Vin 7 10 1
+.plot dc v(n2)
 
-.options NODE
+*.options NODE
 
 .end

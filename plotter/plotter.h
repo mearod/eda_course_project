@@ -18,6 +18,6 @@ enum PlotType {
 
 void initPlot(QCustomPlot *plot);
 
-void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, string yLabel, PlotType plotType=LINEAR);
+void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, string yLabel, string title, PlotType plotType=LINEAR);
 
 #endif

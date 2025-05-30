@@ -46,7 +46,9 @@ public slots:
     void slotOpenFile();
     void slotSaveFile();
 
-    void slotSimulate();
+    void slotSimulateDC();
+    void slotSimulateAC();
+    void slotSimulateTRAN();
 
 private:
     QMenu    *fileMenu;
@@ -65,7 +67,9 @@ private:
     QAction *copyAction;
     QAction *pasteAction;
 
-    QAction *simulateAction;
+    QAction *simulateDCAction;
+    QAction *simulateACAction;
+    QAction *simulateTRANAction;
 
     QTextEdit *textEdit;
 

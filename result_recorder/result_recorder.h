@@ -16,12 +16,14 @@ public:
         double y;
     };
     string description;
+    string xLabel;
+    string yLabel;
     vector<Point> recordData;
 
     SingleRecord(string description):description(description) {};
     void pointRecord(double x,double y);
     void debug_print();
-    void plotNewWindow(string xLabel,string yLabel,PlotType plotType=LINEAR);
+    void plotNewWindow(PlotType plotType=LINEAR);
 };
 
 class ResultRecorder
@@ -35,10 +37,10 @@ public:
     ResultRecorder();
     ~ResultRecorder();
 
-    int addRecord(string description,double x,double y); //return single record index;
+    int addRecord(string description,string xLabel,string yLabel,double x,double y); //return single record index;
     void debug_print();
 
-    void debugPlotAllRecords();
+    void debugPlotAllRecords(PlotType plotType=LINEAR);
 };
 
 #endif

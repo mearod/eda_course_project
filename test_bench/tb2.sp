@@ -7,9 +7,9 @@ R3 1 2 6
 R4 2 0 8
 Is 0 2 10
 
-.dc Is 10 10 1
+.dc Is 9 10 1
 .print dc v(2)
 
-.options node list
+*.options node list
 
 .end
