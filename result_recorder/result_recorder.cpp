@@ -46,7 +46,7 @@ void SingleRecord::debug_print(){
     }
 };
 
-void SingleRecord::plotNewWindow(string xLabel,string yLabel,PlotType plotType=0){
+void SingleRecord::plotNewWindow(string xLabel,string yLabel,PlotType plotType){
     vector<double> xData,yData;
     for (auto it = recordData.begin(); it != recordData.end(); ++it) {
         xData.push_back(it->x);

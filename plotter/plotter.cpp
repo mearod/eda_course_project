@@ -5,7 +5,7 @@
 #include <QTextStream>
 #include <QVector>
 
-#include <vector.h>
+#include <vector>
 
 #include "qcustomplot/qcustomplot.h"
 #include "plotter.h"
@@ -18,11 +18,11 @@ void initPlot(QCustomPlot *plot)
 
 }
 
-void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, string yLabel, PlotType plotType=LINEAR);
+void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, string yLabel, PlotType plotType)
 {
-    Qstring xLabel, yLabel;
-    xLabel = QString::fromStdString(xLabelString);
-    yLabel = QString::fromStdString(yLabelString);
+    QString xQLabel, yQLabel;
+    xQLabel = QString::fromStdString(xLabel);
+    yQLabel = QString::fromStdString(yLabel);
 
     QVector<double> xQData, yQData;
     for(int i = 0; i < xData.size(); i++)
@@ -38,24 +38,24 @@ void newPlotWindow(vector<double> xData, vector<double> yData, string xLabel, st
     newPlot->graph(0)->setData(xQData, yQData);
     newPlot->graph(0)->rescaleAxes();
 
-    custPlot->xAxis->setLabel(xlabel);
+    newPlot->xAxis->setLabel(xQLabel);
     QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
-    custPlot->xAxis->setTicker(logTicker);
+    newPlot->xAxis->setTicker(logTicker);
     if(plotType == LINEAR)
     {
-        custPlot->xAxis->setScaleType(QCPAxis::stLinear);
+        newPlot->xAxis->setScaleType(QCPAxis::stLinear);
     }
     else if(plotType == DEC)
     {
-        custPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
+        newPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
     }
-    custPlot->yAxis->setLabel(yLabel);
+    newPlot->yAxis->setLabel(yQLabel);
 
-    custPlot->replot();
-    custPlot->setMinimumSize(450, 300);
+    newPlot->replot();
+    newPlot->setMinimumSize(450, 300);
 
-    custPlot->setAttribute(Qt::WA_DeleteOnClose);
-    custPlot->show();
+    newPlot->setAttribute(Qt::WA_DeleteOnClose);
+    newPlot->show();
 }
 
 

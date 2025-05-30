@@ -7,10 +7,10 @@
 
 #include <vector>
 #include "qcustomplot/qcustomplot.h"
-#include "../result_recorder/result_recorder.h"
 extern QCustomPlot *custPlot;
-class SingleRecord;
+
 using namespace std;
+
 enum PlotType {
     LINEAR=0,
     DEC

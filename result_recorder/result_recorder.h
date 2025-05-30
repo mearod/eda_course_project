@@ -7,6 +7,7 @@
 #include "../plotter/plotter.h"
 using namespace std;
 
+
 class SingleRecord
 {
 public:
