@@ -4,8 +4,8 @@ netlist example
 
 
 Vin n2 0 1
-R1 n2 n1 1
-R2 n1 0 1
+R1 n1 0 1
+c2 n2 n1 1m
 
 .dc Vin
 .plot dc V(2)

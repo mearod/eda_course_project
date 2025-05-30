@@ -44,7 +44,6 @@ void Analyser::analyseStepDC(){
 }
 
 void Analyser::analyseStepAC(){
-    freq = 10;
     nodeNum = circuit->node_num;
     bTypeDeviceCounter = 0;
     bTypeDeviceNum = 0;
@@ -164,6 +163,7 @@ void Analyser::analyseDC(string scannedDevice,double start,double end,double ste
         scanValue += step;
     }
     resultRecorderDC->debug_print();
+    resultRecorderDC->debugPlotAllRecords();
 }
 
 void Analyser::analyseAC(int denseNum,double start,double end){
@@ -171,12 +171,14 @@ void Analyser::analyseAC(int denseNum,double start,double end){
     double levelStep = 1/(double)denseNum;
     freq = freqLevel;
     while(freqLevel < end){
-        while(freq <= freqLevel*10){
+        while(freq < freqLevel*10 && freq < end)
+        {
             analyseStepAC();
             matrixNodeRecord(freq,resultRecorderAC);
-            freq += levelStep*9*freqLevel;
+            this->freq += levelStep*(double)9*freqLevel;
         }
         freqLevel *= 10;
+        freq = freqLevel;
     }
 
     resultRecorderAC->debug_print();
@@ -188,7 +190,7 @@ void Analyser::analyseTRAN(double start,double end,double step){
 
 void Analyser::matrixNodeRecord(double scanValue,ResultRecorder* resultRecorder){
     for (auto it = circuit->nodemap.begin();it!=circuit->nodemap.end();it++){
-        double yRecord = abs(x(circuit->nodemap[it->first].id));
-        resultRecorderDC->addRecord(it->first,scanValue,yRecord);
+        double yRecord = circuit->nodemap[it->first].isGround? 0 : abs(x(circuit->nodemap[it->first].id));
+        resultRecorder->addRecord(it->first,scanValue,yRecord);
     }
 }

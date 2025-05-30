@@ -70,8 +70,11 @@ SOURCES       = main.cpp \
 		parser/scanner.cpp \
 		simulator_interface/simulator_interface.cpp \
 		result_recorder/result_recorder.cpp \
-		spice_command/command_plot.cpp build/qrc_mainwindow.cpp \
-		build/moc_mainwindow.cpp
+		spice_command/command_plot.cpp \
+		plotter/plotter.cpp \
+		plotter/qcustomplot/qcustomplot.cpp build/qrc_mainwindow.cpp \
+		build/moc_mainwindow.cpp \
+		build/moc_qcustomplot.cpp
 OBJECTS       = build/main.o \
 		build/analyser.o \
 		build/circuit.o \
@@ -91,8 +94,11 @@ OBJECTS       = build/main.o \
 		build/simulator_interface.o \
 		build/result_recorder.o \
 		build/command_plot.o \
+		build/plotter.o \
+		build/qcustomplot.o \
 		build/qrc_mainwindow.o \
-		build/moc_mainwindow.o
+		build/moc_mainwindow.o \
+		build/moc_qcustomplot.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -187,7 +193,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		parser/scanner.hpp \
 		simulator_interface/simulator_interface.h \
 		spice_command/command_plot.h \
-		result_recorder/result_recorder.h main.cpp \
+		result_recorder/result_recorder.h \
+		plotter/qcustomplot/qcustomplot.h \
+		plotter/plotter.h main.cpp \
 		analyser/analyser.cpp \
 		circuit/circuit.cpp \
 		devices/capacitor.cpp \
@@ -205,7 +213,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		parser/scanner.cpp \
 		simulator_interface/simulator_interface.cpp \
 		result_recorder/result_recorder.cpp \
-		spice_command/command_plot.cpp
+		spice_command/command_plot.cpp \
+		plotter/plotter.cpp \
+		plotter/qcustomplot/qcustomplot.cpp
 QMAKE_TARGET  = test
 DESTDIR       = 
 TARGET        = test
@@ -408,8 +418,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow/mainwindow.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents analyser/analyser.h circuit/circuit.h circuit/node.h devices/device.h mainwindow/mainwindow.h parser/parser.hpp parser/scanner.hpp simulator_interface/simulator_interface.h spice_command/command_plot.h result_recorder/result_recorder.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp analyser/analyser.cpp circuit/circuit.cpp devices/capacitor.cpp devices/cccs.cpp devices/ccvs.cpp devices/cs.cpp devices/device.cpp devices/inductor.cpp devices/resistor.cpp devices/vccs.cpp devices/vcvs.cpp devices/vs.cpp mainwindow/mainwindow.cpp parser/parser.cpp parser/scanner.cpp simulator_interface/simulator_interface.cpp result_recorder/result_recorder.cpp spice_command/command_plot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents analyser/analyser.h circuit/circuit.h circuit/node.h devices/device.h mainwindow/mainwindow.h parser/parser.hpp parser/scanner.hpp simulator_interface/simulator_interface.h spice_command/command_plot.h result_recorder/result_recorder.h plotter/qcustomplot/qcustomplot.h plotter/plotter.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp analyser/analyser.cpp circuit/circuit.cpp devices/capacitor.cpp devices/cccs.cpp devices/ccvs.cpp devices/cs.cpp devices/device.cpp devices/inductor.cpp devices/resistor.cpp devices/vccs.cpp devices/vcvs.cpp devices/vs.cpp mainwindow/mainwindow.cpp parser/parser.cpp parser/scanner.cpp simulator_interface/simulator_interface.cpp result_recorder/result_recorder.cpp spice_command/command_plot.cpp plotter/plotter.cpp plotter/qcustomplot/qcustomplot.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -458,13 +468,18 @@ compiler_moc_predefs_clean:
 build/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o build/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: build/moc_mainwindow.cpp
+compiler_moc_header_make_all: build/moc_mainwindow.cpp build/moc_qcustomplot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) build/moc_mainwindow.cpp
+	-$(DEL_FILE) build/moc_mainwindow.cpp build/moc_qcustomplot.cpp
 build/moc_mainwindow.cpp: mainwindow/mainwindow.h \
 		build/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/kyon/eda_course/assignment4/hw4_project/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/kyon/eda_course/assignment4/hw4_project -I/home/kyon/eda_course/assignment4/hw4_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow/mainwindow.h -o build/moc_mainwindow.cpp
+
+build/moc_qcustomplot.cpp: plotter/qcustomplot/qcustomplot.h \
+		build/moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/kyon/eda_course/assignment4/hw4_project/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/kyon/eda_course/assignment4/hw4_project -I/home/kyon/eda_course/assignment4/hw4_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include plotter/qcustomplot/qcustomplot.h -o build/moc_qcustomplot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -490,7 +505,9 @@ build/analyser.o: analyser/analyser.cpp analyser/analyser.h \
 		circuit/node.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
-		result_recorder/result_recorder.h
+		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/analyser.o analyser/analyser.cpp
 
 build/circuit.o: circuit/circuit.cpp circuit/circuit.h \
@@ -498,6 +515,8 @@ build/circuit.o: circuit/circuit.cpp circuit/circuit.h \
 		devices/device.h \
 		circuit/node.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/circuit.o circuit/circuit.cpp
 
@@ -506,6 +525,8 @@ build/capacitor.o: devices/capacitor.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/capacitor.o devices/capacitor.cpp
 
@@ -514,6 +535,8 @@ build/cccs.o: devices/cccs.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/cccs.o devices/cccs.cpp
 
@@ -522,6 +545,8 @@ build/ccvs.o: devices/ccvs.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/ccvs.o devices/ccvs.cpp
 
@@ -530,6 +555,8 @@ build/cs.o: devices/cs.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/cs.o devices/cs.cpp
 
@@ -538,6 +565,8 @@ build/device.o: devices/device.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/device.o devices/device.cpp
 
@@ -546,6 +575,8 @@ build/inductor.o: devices/inductor.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/inductor.o devices/inductor.cpp
 
@@ -554,6 +585,8 @@ build/resistor.o: devices/resistor.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/resistor.o devices/resistor.cpp
 
@@ -562,6 +595,8 @@ build/vccs.o: devices/vccs.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vccs.o devices/vccs.cpp
 
@@ -570,6 +605,8 @@ build/vcvs.o: devices/vcvs.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vcvs.o devices/vcvs.cpp
 
@@ -578,6 +615,8 @@ build/vs.o: devices/vs.cpp devices/device.h \
 		circuit/circuit.h \
 		spice_command/command_plot.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		circuit/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vs.o devices/vs.cpp
 
@@ -591,6 +630,8 @@ build/parser.o: parser/parser.cpp parser/parser.hpp \
 		devices/device.h \
 		circuit/node.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/parser.o parser/parser.cpp
 
@@ -603,20 +644,35 @@ build/simulator_interface.o: simulator_interface/simulator_interface.cpp parser/
 		devices/device.h \
 		circuit/node.h \
 		result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h \
 		spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/simulator_interface.o simulator_interface/simulator_interface.cpp
 
-build/result_recorder.o: result_recorder/result_recorder.cpp result_recorder/result_recorder.h
+build/result_recorder.o: result_recorder/result_recorder.cpp result_recorder/result_recorder.h \
+		plotter/plotter.h \
+		plotter/qcustomplot/qcustomplot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/result_recorder.o result_recorder/result_recorder.cpp
 
 build/command_plot.o: spice_command/command_plot.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/command_plot.o spice_command/command_plot.cpp
+
+build/plotter.o: plotter/plotter.cpp plotter/qcustomplot/qcustomplot.h \
+		plotter/plotter.h \
+		result_recorder/result_recorder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/plotter.o plotter/plotter.cpp
+
+build/qcustomplot.o: plotter/qcustomplot/qcustomplot.cpp plotter/qcustomplot/qcustomplot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/qcustomplot.o plotter/qcustomplot/qcustomplot.cpp
 
 build/qrc_mainwindow.o: build/qrc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/qrc_mainwindow.o build/qrc_mainwindow.cpp
 
 build/moc_mainwindow.o: build/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/moc_mainwindow.o build/moc_mainwindow.cpp
+
+build/moc_qcustomplot.o: build/moc_qcustomplot.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/moc_qcustomplot.o build/moc_qcustomplot.cpp
 
 ####### Install
 

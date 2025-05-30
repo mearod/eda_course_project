@@ -35,7 +35,10 @@ HEADERS += analyser/analyser.h \
             parser/scanner.hpp \
             simulator_interface/simulator_interface.h \
             spice_command/command_plot.h \
-            result_recorder/result_recorder.h
+            result_recorder/result_recorder.h \
+            plotter/qcustomplot/qcustomplot.h \
+            plotter/plotter.h
+
 
 
 SOURCES += main.cpp \
@@ -56,8 +59,10 @@ SOURCES += main.cpp \
            parser/scanner.cpp \
            simulator_interface/simulator_interface.cpp \
            result_recorder/result_recorder.cpp \
-           spice_command/command_plot.cpp
-
+           spice_command/command_plot.cpp \
+           plotter/plotter.cpp \
+           plotter/qcustomplot/qcustomplot.cpp
+           
 RESOURCES += mainwindow/mainwindow.qrc
 
 LIBS += -larmadillo -llapack -lblas -lfl -ly

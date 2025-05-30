@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
-
+#include "../plotter/plotter.h"
 using namespace std;
 
 class SingleRecord
@@ -20,6 +20,7 @@ public:
     SingleRecord(string description):description(description) {};
     void pointRecord(double x,double y);
     void debug_print();
+    void plotNewWindow(string xLabel,string yLabel,PlotType plotType=LINEAR);
 };
 
 class ResultRecorder
@@ -35,6 +36,8 @@ public:
 
     int addRecord(string description,double x,double y); //return single record index;
     void debug_print();
+
+    void debugPlotAllRecords();
 };
 
 #endif

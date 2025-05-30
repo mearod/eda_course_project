@@ -45,3 +45,18 @@ void SingleRecord::debug_print(){
         cout<<"x:"<<it->x<<" y:"<<it->y<<endl;
     }
 };
+
+void SingleRecord::plotNewWindow(string xLabel,string yLabel,PlotType plotType=0){
+    vector<double> xData,yData;
+    for (auto it = recordData.begin(); it != recordData.end(); ++it) {
+        xData.push_back(it->x);
+        yData.push_back(it->y);
+    }
+    newPlotWindow(xData,yData,xLabel,yLabel, plotType);
+}
+
+void ResultRecorder::debugPlotAllRecords(){
+    for (auto it = records.begin(); it != records.end(); ++it) {
+        it->second->plotNewWindow(it->first,"V");
+    }
+}

@@ -44,9 +44,9 @@ int startSimulate(char *fileName)
 
     std::string test = "Vin";
 
-    analyser->analyseDC(test,0,1,0.3);
+    analyser->analyseDC(test,0,1,0.1);
     
-    analyser->analyseStepAC();
+    //analyser->analyseAC(3,10,1000);
 
     circuit->debug_display();
     //device_static();
