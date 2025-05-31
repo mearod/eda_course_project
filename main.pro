@@ -100,3 +100,9 @@ flex_bison.target = flexBison
 flex_bison.commands = make -C ./src/parser flex_bison_output
 flex_bison.depends = FORCE
 QMAKE_EXTRA_TARGETS += flex_bison
+
+# 添加需要清理的flex\bison输出文件
+QMAKE_CLEAN += ./src/parser/parser.cpp \
+               ./src/parser/parser.hpp \
+               ./src/parser/scanner.cpp \               
+               ./src/parser/scanner.hpp \

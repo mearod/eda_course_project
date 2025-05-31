@@ -407,6 +407,7 @@ distdir: FORCE
 
 clean: compiler_clean 
 	-$(DEL_FILE) $(OBJECTS)
+	-$(DEL_FILE) ./src/parser/parser.cpp ./src/parser/parser.hpp ./src/parser/scanner.cpp ./src/parser/scanner.hpp
 	-$(DEL_FILE) *~ core *.core
 
 
@@ -673,27 +674,13 @@ build/mainwindow.o: src/mainwindow/mainwindow.cpp src/mainwindow/mainwindow.h \
 		src/simulator_interface/simulator_interface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/mainwindow.o src/mainwindow/mainwindow.cpp
 
-build/parser.o: src/parser/parser.cpp src/parser/parser.hpp \
-		src/circuit/circuit.h \
-		src/analyser/analyser.h \
-		src/devices/device.h \
-		src/circuit/node.h \
-		src/function_generator/function_generator.h \
-		src/result_recorder/result_recorder.h \
-		src/plotter/plotter.h \
-		src/plotter/qcustomplot/qcustomplot.h \
-		src/spice_command/command.h \
-		src/spice_command/command_ac.h \
-		src/spice_command/command_dc.h \
-		src/spice_command/command_tran.h \
-		src/spice_command/command_plot.h
+build/parser.o: src/parser/parser.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/parser.o src/parser/parser.cpp
 
-build/scanner.o: src/parser/scanner.cpp src/parser/parser.hpp
+build/scanner.o: src/parser/scanner.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/scanner.o src/parser/scanner.cpp
 
-build/simulator_interface.o: src/simulator_interface/simulator_interface.cpp src/parser/parser.hpp \
-		src/circuit/circuit.h \
+build/simulator_interface.o: src/simulator_interface/simulator_interface.cpp src/circuit/circuit.h \
 		src/analyser/analyser.h \
 		src/devices/device.h \
 		src/circuit/node.h \
