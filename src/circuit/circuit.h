@@ -7,6 +7,7 @@
 #include "../analyser/analyser.h"
 #include "../devices/device.h"
 #include "../spice_command/command.h"
+#include "../spice-log/log.h"
 
 class BaseDevice;
 class CommandPlot;
@@ -32,6 +33,7 @@ public:
     std::vector<BaseDevice*> devices;//器件列表
 
     CommandPlot commandPlot;
+    CommandOP commandOP;
     CommandDC commandDC;
     CommandAC commandAC;
     CommandTRAN commandTRAN;

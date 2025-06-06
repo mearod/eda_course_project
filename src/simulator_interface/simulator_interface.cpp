@@ -3,6 +3,7 @@
 #include <vector>
 #include "circuit/circuit.h"
 #include "analyser/analyser.h"
+#include "../spice-log/log.h"
 
 extern FILE *yyin;
 
@@ -27,7 +28,36 @@ bool callNetlistParser(const char *fileName);
 static void device_static();
 
 
+int startOPSimulate(char *fileName)
+{
+    initializeSimulate();
 
+    circuit = new Circuit;
+
+    if(!callNetlistParser(fileName)) {
+        std::cout<<"file not found!\n";
+        return 0;
+    }
+
+    if(!circuit->commandOP.run)
+    {
+        logOutput("OP analyse error: no OP command found.\n",true);
+        return 0;
+    }
+
+    analyser = new Analyser(circuit);
+
+    analyser->analyseStepDC();
+    analyser->opResultPrint();
+    
+    circuit->debug_display();
+
+    endSimulate(fileName);
+
+    delete analyser;
+    
+    return 0;
+}
 
 int startDCSimulate(char *fileName)
 {
@@ -42,7 +72,7 @@ int startDCSimulate(char *fileName)
 
     if(!circuit->commandDC.run)
     {
-        cout<<"DC analyse error: no DC command found.\n";
+        logOutput("DC analyse error: no DC command found.\n",true);
         return 0;
     }
 
@@ -73,7 +103,7 @@ int startACSimulate(char *fileName)
 
     if(!circuit->commandAC.run)
     {
-        cout<<"AC analyse error: no AC command found.\n";
+        logOutput("AC analyse error: no AC command found.\n",true);
         return 0;
     }
 
@@ -103,7 +133,7 @@ int startTRANSimulate(char *fileName){
 
     if(!circuit->commandTRAN.run)
     {
-        cout<<"TRAN analyse error: no TRAN command found.\n";
+        logOutput("TRAN analyse error: no TRAN command found.\n",true);
         return 0;
     }
 

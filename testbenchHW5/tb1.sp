@@ -8,6 +8,8 @@ R12 n1 n2 1k
 R01 0  n1 2k
 Vin n3 0  dc 5
 
+.op
+
 .dc Vin 0 15 0.5
 .plot dc v(n1)
 

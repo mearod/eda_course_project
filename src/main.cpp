@@ -9,11 +9,13 @@
 #include "src/mainwindow/mainwindow.h"
 #include <QApplication>
 
+MainWindow *mainwindow;
+
 int main(int argc, char **args)
 {
     QApplication app(argc, args);
 
-    MainWindow *mainwindow = new MainWindow;
+    mainwindow = new MainWindow;
     mainwindow->show();
 
     return app.exec();

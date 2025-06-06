@@ -689,10 +689,10 @@ static const yytype_int16 yyrline[] =
      200,   203,   204,   205,   206,   207,   208,   209,   210,   211,
      214,   215,   216,   217,   218,   219,   224,   232,   240,   249,
      257,   264,   271,   276,   281,   288,   297,   305,   311,   317,
-     322,   327,   334,   343,   350,   359,   365,   369,   378,   389,
-     398,   404,   412,   419,   426,   435,   438,   441,   444,   447,
-     451,   457,   460,   463,   466,   469,   479,   491,   498,   507,
-     508,   509,   510,   511,   514,   518,   522
+     322,   327,   334,   343,   350,   359,   366,   370,   379,   390,
+     399,   405,   413,   420,   427,   436,   439,   442,   445,   448,
+     452,   458,   461,   464,   467,   470,   480,   492,   499,   508,
+     509,   510,   511,   512,   515,   519,   523
 };
 #endif
 
@@ -1929,20 +1929,21 @@ yyreduce:
 #line 360 "parser.yy"
     {
         printf("[OP Line] OP\n");
+        circuit->commandOP.run = 1;
     }
-#line 1934 "parser.cpp"
+#line 1935 "parser.cpp"
     break;
 
   case 46: /* dc: CMD_DC  */
-#line 366 "parser.yy"
+#line 367 "parser.yy"
     {
 
     }
-#line 1942 "parser.cpp"
+#line 1943 "parser.cpp"
     break;
 
   case 47: /* dc: dc VS value value value  */
-#line 370 "parser.yy"
+#line 371 "parser.yy"
     {
         printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", (yyvsp[-3].s), (yyvsp[-2].f), (yyvsp[-1].f), (yyvsp[0].f));
         circuit->commandDC.sourceName = (yyvsp[-3].s);
@@ -1951,11 +1952,11 @@ yyreduce:
         circuit->commandDC.stepValue = (yyvsp[0].f);
         circuit->commandDC.run = 1;
     }
-#line 1955 "parser.cpp"
+#line 1956 "parser.cpp"
     break;
 
   case 48: /* dc: dc CS value value value  */
-#line 379 "parser.yy"
+#line 380 "parser.yy"
     {
         printf("[DC Line] node(%s) start(%f) end(%f) step(%f)\n", (yyvsp[-3].s), (yyvsp[-2].f), (yyvsp[-1].f), (yyvsp[0].f));
         circuit->commandDC.sourceName = (yyvsp[-3].s);
@@ -1964,11 +1965,11 @@ yyreduce:
         circuit->commandDC.stepValue = (yyvsp[0].f);
         circuit->commandDC.run = 1;
     }
-#line 1968 "parser.cpp"
+#line 1969 "parser.cpp"
     break;
 
   case 49: /* ac: CMD_AC RK_DEC value value value  */
-#line 390 "parser.yy"
+#line 391 "parser.yy"
     {
         printf("[AC Line]:DEC numPerDec(%d) startFreq(%f) stopFreq(%f)\n", (yyvsp[-2].f), (yyvsp[-1].f), (yyvsp[0].f));
         circuit->commandAC.run = 1;
@@ -1976,51 +1977,51 @@ yyreduce:
         circuit->commandAC.startFreq = (yyvsp[-1].f);
         circuit->commandAC.endFreq = (yyvsp[0].f);
     }
-#line 1980 "parser.cpp"
+#line 1981 "parser.cpp"
     break;
 
   case 50: /* ac: CMD_AC RK_LIN value value value  */
-#line 399 "parser.yy"
+#line 400 "parser.yy"
     {
         printf("[AC Line]:LIN numPerLin(%d) startFreq(%f) stopFreq(%f)\n", (yyvsp[-2].f), (yyvsp[-1].f), (yyvsp[0].f));
         printf("[AC Line]:WARNING: LIN is not supported yet.");
     }
-#line 1989 "parser.cpp"
+#line 1990 "parser.cpp"
     break;
 
   case 51: /* ac: CMD_AC RK_OCT value value value  */
-#line 405 "parser.yy"
+#line 406 "parser.yy"
     {
         printf("[AC Line]:OCT numPerOct(%d) startFreq(%f) stopFreq(%f)\n", (yyvsp[-2].f), (yyvsp[-1].f), (yyvsp[0].f));
         printf("[AC Line]:WARNING: OCT is not supported yet.");
     }
-#line 1998 "parser.cpp"
+#line 1999 "parser.cpp"
     break;
 
   case 52: /* tran: CMD_TRAN value  */
-#line 412 "parser.yy"
+#line 413 "parser.yy"
                    { 
         printf("[TRAN Line]:STOPTIME(%f)\n", (yyvsp[0].f));
         circuit->commandTRAN.run = 1;
         circuit->commandTRAN.stopTime = (yyvsp[0].f);
         circuit->commandTRAN.stepTime = -1;
     }
-#line 2009 "parser.cpp"
+#line 2010 "parser.cpp"
     break;
 
   case 53: /* tran: CMD_TRAN value value  */
-#line 419 "parser.yy"
+#line 420 "parser.yy"
                          { 
         printf("[TRAN Line]");
         circuit->commandTRAN.run = 1;
         circuit->commandTRAN.stepTime = (yyvsp[-1].f);
         circuit->commandTRAN.stopTime = (yyvsp[0].f);
     }
-#line 2020 "parser.cpp"
+#line 2021 "parser.cpp"
     break;
 
   case 54: /* tran: CMD_TRAN value value value  */
-#line 426 "parser.yy"
+#line 427 "parser.yy"
                                { 
         printf("[TRAN Line]");
         circuit->commandTRAN.run = 1;
@@ -2028,83 +2029,83 @@ yyreduce:
         circuit->commandTRAN.stopTime = (yyvsp[-1].f);
         circuit->commandTRAN.startTime = (yyvsp[0].f);
     }
-#line 2032 "parser.cpp"
+#line 2033 "parser.cpp"
     break;
 
   case 55: /* print: CMD_PRINT RK_AC  */
-#line 436 "parser.yy"
+#line 437 "parser.yy"
     {
     }
-#line 2039 "parser.cpp"
+#line 2040 "parser.cpp"
     break;
 
   case 56: /* print: CMD_PRINT RK_DC  */
-#line 439 "parser.yy"
+#line 440 "parser.yy"
     {
     }
-#line 2046 "parser.cpp"
+#line 2047 "parser.cpp"
     break;
 
   case 57: /* print: CMD_PRINT RK_OP  */
-#line 442 "parser.yy"
+#line 443 "parser.yy"
     {
     }
-#line 2053 "parser.cpp"
+#line 2054 "parser.cpp"
     break;
 
   case 58: /* print: CMD_PRINT RK_TRAN  */
-#line 445 "parser.yy"
+#line 446 "parser.yy"
     {
     }
-#line 2060 "parser.cpp"
+#line 2061 "parser.cpp"
     break;
 
   case 59: /* print: print VAR_V  */
-#line 448 "parser.yy"
+#line 449 "parser.yy"
     {
         printf("[PRINT Line] Node(%s)\n",(yyvsp[0].s));
     }
-#line 2068 "parser.cpp"
+#line 2069 "parser.cpp"
     break;
 
   case 60: /* print: print VAR_I  */
-#line 452 "parser.yy"
+#line 453 "parser.yy"
     {
         printf("[PRINT Line] Node(%s)\n",(yyvsp[0].s));
     }
-#line 2076 "parser.cpp"
+#line 2077 "parser.cpp"
     break;
 
   case 61: /* plot: CMD_PLOT RK_AC  */
-#line 458 "parser.yy"
+#line 459 "parser.yy"
     {
     }
-#line 2083 "parser.cpp"
+#line 2084 "parser.cpp"
     break;
 
   case 62: /* plot: CMD_PLOT RK_DC  */
-#line 461 "parser.yy"
+#line 462 "parser.yy"
     {
     }
-#line 2090 "parser.cpp"
+#line 2091 "parser.cpp"
     break;
 
   case 63: /* plot: CMD_PLOT RK_OP  */
-#line 464 "parser.yy"
+#line 465 "parser.yy"
     {
     }
-#line 2097 "parser.cpp"
+#line 2098 "parser.cpp"
     break;
 
   case 64: /* plot: CMD_PLOT RK_TRAN  */
-#line 467 "parser.yy"
+#line 468 "parser.yy"
     {
     }
-#line 2104 "parser.cpp"
+#line 2105 "parser.cpp"
     break;
 
   case 65: /* plot: plot VAR_V  */
-#line 470 "parser.yy"
+#line 471 "parser.yy"
     {
         CommandPlot::NodeToPlot nodeToPlot;
         std::string node = (yyvsp[0].s);
@@ -2114,11 +2115,11 @@ yyreduce:
         circuit->commandPlot.nodePlotQueue.push_back(nodeToPlot);
         printf("[PLOT Line] Node(%s)\n",(yyvsp[0].s));
     }
-#line 2118 "parser.cpp"
+#line 2119 "parser.cpp"
     break;
 
   case 66: /* plot: plot VAR_I  */
-#line 480 "parser.yy"
+#line 481 "parser.yy"
     {
         CommandPlot::NodeToPlot nodeToPlot;
         std::string node = (yyvsp[0].s);
@@ -2128,22 +2129,22 @@ yyreduce:
         circuit->commandPlot.nodePlotQueue.push_back(nodeToPlot);
         printf("[PLOT Line] Node(%s)\n",(yyvsp[0].s));
     }
-#line 2132 "parser.cpp"
+#line 2133 "parser.cpp"
     break;
 
   case 67: /* node: STRING  */
-#line 492 "parser.yy"
+#line 493 "parser.yy"
     {
         (yyval.s) = new char[strlen((yyvsp[0].s)) + 1];
         strcpy((yyval.s), (yyvsp[0].s));
         (yyval.s)[strlen((yyvsp[0].s))] = '\0';
         node_add((yyval.s));
     }
-#line 2143 "parser.cpp"
+#line 2144 "parser.cpp"
     break;
 
   case 68: /* node: INTEGER  */
-#line 499 "parser.yy"
+#line 500 "parser.yy"
     {
         char s[30];
         sprintf(s, "%d", (yyvsp[0].n));
@@ -2152,65 +2153,65 @@ yyreduce:
         (yyval.s)[strlen(s)] = '\0';
         node_add((yyval.s));
     }
-#line 2156 "parser.cpp"
+#line 2157 "parser.cpp"
     break;
 
   case 69: /* node: RESISTOR  */
-#line 507 "parser.yy"
+#line 508 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 2162 "parser.cpp"
+#line 2163 "parser.cpp"
     break;
 
   case 70: /* node: CAPACITOR  */
-#line 508 "parser.yy"
+#line 509 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 2168 "parser.cpp"
+#line 2169 "parser.cpp"
     break;
 
   case 71: /* node: INDUCTOR  */
-#line 509 "parser.yy"
+#line 510 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 2174 "parser.cpp"
+#line 2175 "parser.cpp"
     break;
 
   case 72: /* node: VS  */
-#line 510 "parser.yy"
+#line 511 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 2180 "parser.cpp"
+#line 2181 "parser.cpp"
     break;
 
   case 73: /* node: VCCS  */
-#line 511 "parser.yy"
+#line 512 "parser.yy"
                   { (yyval.s) = strdup((yyvsp[0].s)); node_add((yyval.s));}
-#line 2186 "parser.cpp"
+#line 2187 "parser.cpp"
     break;
 
   case 74: /* value: VALUE  */
-#line 515 "parser.yy"
+#line 516 "parser.yy"
      {
         (yyval.f) = (yyvsp[0].f);
      }
-#line 2194 "parser.cpp"
+#line 2195 "parser.cpp"
     break;
 
   case 75: /* value: FLOAT  */
-#line 519 "parser.yy"
+#line 520 "parser.yy"
      {
         (yyval.f) = (yyvsp[0].f);
      }
-#line 2202 "parser.cpp"
+#line 2203 "parser.cpp"
     break;
 
   case 76: /* value: INTEGER  */
-#line 523 "parser.yy"
+#line 524 "parser.yy"
      {
         (yyval.f) = (yyvsp[0].n);
      }
-#line 2210 "parser.cpp"
+#line 2211 "parser.cpp"
     break;
 
 
-#line 2214 "parser.cpp"
+#line 2215 "parser.cpp"
 
       default: break;
     }
@@ -2439,5 +2440,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 528 "parser.yy"
+#line 529 "parser.yy"
 

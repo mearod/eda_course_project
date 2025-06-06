@@ -334,3 +334,12 @@ void Analyser::matrixNodeRecordTRAN(ResultRecorder* resultRecorder){
         resultRecorder->addRecord(description,"Time(s)",yLabel,tranTime,yRecord);
     }
 }
+
+void Analyser::opResultPrint(){
+    string resultInfo = "OP RESULT:\n";
+    for (auto it = circuit->commandPlot.nodePlotQueue.begin();it!=circuit->commandPlot.nodePlotQueue.end();it++){
+        double nodeResult = circuit->nodemap[it->nodeName].isGround? 0 : real(x(circuit->nodemap[it->nodeName].id));
+        resultInfo += it->prefix+it->nodeName+": "+to_string(nodeResult)+"\n";
+    }
+    logOutput(resultInfo,false);
+}

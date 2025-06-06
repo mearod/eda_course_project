@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Y-SPICE1.0.0
-DISTDIR = /home/kyon/eda_course/Y-HSPICE/build/Y-SPICE1.0.0
+DISTDIR = /home/kyon/eda_course/assignment4/hw4_project/build/Y-SPICE1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -larmadillo -llapack -lblas -lfl -ly /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -73,7 +73,8 @@ SOURCES       = src/main.cpp \
 		src/plotter/plotter.cpp \
 		src/plotter/qcustomplot/qcustomplot.cpp \
 		src/function_generator/pulse.cpp \
-		src/function_generator/sin.cpp build/qrc_mainwindow.cpp \
+		src/function_generator/sin.cpp \
+		src/spice-log/log.cpp build/qrc_mainwindow.cpp \
 		build/moc_mainwindow.cpp \
 		build/moc_qcustomplot.cpp
 OBJECTS       = build/main.o \
@@ -98,6 +99,7 @@ OBJECTS       = build/main.o \
 		build/qcustomplot.o \
 		build/pulse.o \
 		build/sin.o \
+		build/log.o \
 		build/qrc_mainwindow.o \
 		build/moc_mainwindow.o \
 		build/moc_qcustomplot.o
@@ -112,6 +114,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_charts.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core.pri \
@@ -141,9 +144,16 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmlmodels.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri \
@@ -193,7 +203,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/result_recorder/result_recorder.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/plotter/plotter.h \
-		src/function_generator/function_generator.h src/main.cpp \
+		src/function_generator/function_generator.h \
+		src/spice-log/log.h src/main.cpp \
 		src/analyser/analyser.cpp \
 		src/circuit/circuit.cpp \
 		src/devices/capacitor.cpp \
@@ -214,7 +225,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/plotter/plotter.cpp \
 		src/plotter/qcustomplot/qcustomplot.cpp \
 		src/function_generator/pulse.cpp \
-		src/function_generator/sin.cpp
+		src/function_generator/sin.cpp \
+		src/spice-log/log.cpp
 QMAKE_TARGET  = Y-SPICE
 DESTDIR       = 
 TARGET        = Y-SPICE
@@ -237,6 +249,7 @@ Makefile: main.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /u
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_charts.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core.pri \
@@ -266,9 +279,16 @@ Makefile: main.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /u
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmlmodels.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri \
@@ -317,6 +337,7 @@ Makefile: main.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /u
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_accessibility_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_charts.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core.pri:
@@ -346,9 +367,16 @@ Makefile: main.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /u
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformcompositor_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmlmodels.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmlworkerscript.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_service_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri:
@@ -401,8 +429,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents src/mainwindow/mainwindow.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/analyser/analyser.h src/circuit/circuit.h src/circuit/node.h src/devices/device.h src/mainwindow/mainwindow.h src/parser/parser.hpp src/parser/scanner.hpp src/simulator_interface/simulator_interface.h src/spice_command/command_plot.h src/spice_command/command_ac.h src/spice_command/command_dc.h src/spice_command/command_tran.h src/result_recorder/result_recorder.h src/plotter/qcustomplot/qcustomplot.h src/plotter/plotter.h src/function_generator/function_generator.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/analyser/analyser.cpp src/circuit/circuit.cpp src/devices/capacitor.cpp src/devices/cccs.cpp src/devices/ccvs.cpp src/devices/cs.cpp src/devices/device.cpp src/devices/inductor.cpp src/devices/resistor.cpp src/devices/vccs.cpp src/devices/vcvs.cpp src/devices/vs.cpp src/mainwindow/mainwindow.cpp src/parser/parser.cpp src/parser/scanner.cpp src/simulator_interface/simulator_interface.cpp src/result_recorder/result_recorder.cpp src/plotter/plotter.cpp src/plotter/qcustomplot/qcustomplot.cpp src/function_generator/pulse.cpp src/function_generator/sin.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/analyser/analyser.h src/circuit/circuit.h src/circuit/node.h src/devices/device.h src/mainwindow/mainwindow.h src/parser/parser.hpp src/parser/scanner.hpp src/simulator_interface/simulator_interface.h src/spice_command/command_plot.h src/spice_command/command_ac.h src/spice_command/command_dc.h src/spice_command/command_tran.h src/result_recorder/result_recorder.h src/plotter/qcustomplot/qcustomplot.h src/plotter/plotter.h src/function_generator/function_generator.h src/spice-log/log.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/analyser/analyser.cpp src/circuit/circuit.cpp src/devices/capacitor.cpp src/devices/cccs.cpp src/devices/ccvs.cpp src/devices/cs.cpp src/devices/device.cpp src/devices/inductor.cpp src/devices/resistor.cpp src/devices/vccs.cpp src/devices/vcvs.cpp src/devices/vs.cpp src/mainwindow/mainwindow.cpp src/parser/parser.cpp src/parser/scanner.cpp src/simulator_interface/simulator_interface.cpp src/result_recorder/result_recorder.cpp src/plotter/plotter.cpp src/plotter/qcustomplot/qcustomplot.cpp src/function_generator/pulse.cpp src/function_generator/sin.cpp src/spice-log/log.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -464,12 +492,12 @@ compiler_moc_header_clean:
 build/moc_mainwindow.cpp: src/mainwindow/mainwindow.h \
 		build/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/kyon/eda_course/Y-HSPICE/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/kyon/eda_course/Y-HSPICE -I/home/kyon/eda_course/Y-HSPICE/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/mainwindow/mainwindow.h -o build/moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/kyon/eda_course/assignment4/hw4_project/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/kyon/eda_course/assignment4/hw4_project -I/home/kyon/eda_course/assignment4/hw4_project/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/mainwindow/mainwindow.h -o build/moc_mainwindow.cpp
 
 build/moc_qcustomplot.cpp: src/plotter/qcustomplot/qcustomplot.h \
 		build/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/kyon/eda_course/Y-HSPICE/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/kyon/eda_course/Y-HSPICE -I/home/kyon/eda_course/Y-HSPICE/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/plotter/qcustomplot/qcustomplot.h -o build/moc_qcustomplot.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/kyon/eda_course/assignment4/hw4_project/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/kyon/eda_course/assignment4/hw4_project -I/home/kyon/eda_course/assignment4/hw4_project/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/plotter/qcustomplot/qcustomplot.h -o build/moc_qcustomplot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -674,13 +702,27 @@ build/mainwindow.o: src/mainwindow/mainwindow.cpp src/mainwindow/mainwindow.h \
 		src/simulator_interface/simulator_interface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/mainwindow.o src/mainwindow/mainwindow.cpp
 
-build/parser.o: src/parser/parser.cpp 
+build/parser.o: src/parser/parser.cpp src/parser/parser.hpp \
+		src/circuit/circuit.h \
+		src/analyser/analyser.h \
+		src/devices/device.h \
+		src/circuit/node.h \
+		src/function_generator/function_generator.h \
+		src/result_recorder/result_recorder.h \
+		src/plotter/plotter.h \
+		src/plotter/qcustomplot/qcustomplot.h \
+		src/spice_command/command.h \
+		src/spice_command/command_ac.h \
+		src/spice_command/command_dc.h \
+		src/spice_command/command_tran.h \
+		src/spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/parser.o src/parser/parser.cpp
 
-build/scanner.o: src/parser/scanner.cpp 
+build/scanner.o: src/parser/scanner.cpp src/parser/parser.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/scanner.o src/parser/scanner.cpp
 
-build/simulator_interface.o: src/simulator_interface/simulator_interface.cpp src/circuit/circuit.h \
+build/simulator_interface.o: src/simulator_interface/simulator_interface.cpp src/parser/parser.hpp \
+		src/circuit/circuit.h \
 		src/analyser/analyser.h \
 		src/devices/device.h \
 		src/circuit/node.h \
@@ -712,6 +754,10 @@ build/pulse.o: src/function_generator/pulse.cpp src/function_generator/function_
 
 build/sin.o: src/function_generator/sin.cpp src/function_generator/function_generator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/sin.o src/function_generator/sin.cpp
+
+build/log.o: src/spice-log/log.cpp src/spice-log/log.h \
+		src/mainwindow/mainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/log.o src/spice-log/log.cpp
 
 build/qrc_mainwindow.o: build/qrc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/qrc_mainwindow.o build/qrc_mainwindow.cpp

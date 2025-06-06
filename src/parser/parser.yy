@@ -359,6 +359,7 @@ ccvs: CCVS node node VS value
 op: CMD_OP
     {
         printf("[OP Line] OP\n");
+        circuit->commandOP.run = 1;
     }
 ;
 

@@ -4,6 +4,7 @@
 #include "../devices/device.h"
 #include "../circuit/circuit.h"
 #include "../result_recorder/result_recorder.h"
+#include "../spice-log/log.h"
 using namespace arma;
 
 class Circuit;
@@ -25,8 +26,6 @@ private:
     void matrixNodeRecordAC(double scanValue,ResultRecorder* resultRecorder);
     void matrixNodeRecordTRAN(ResultRecorder* resultRecorder); 
     
-    void analyseStepDC();
-    void analyseStepAC();
     void analyseStepTRAN();
 
     void analyseInitTRAN();
@@ -66,7 +65,11 @@ public:
     void analyseAC();
     void analyseTRAN();
 
+    void analyseStepDC();
+    void analyseStepAC();
+
     void createSingleRecord();
+    void opResultPrint();
 };
 
 #endif

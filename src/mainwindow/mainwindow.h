@@ -12,6 +12,12 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QSplitter>
+#include <string>
+
+using namespace std;
+
+
 
 class QAction;
 class QMenu;
@@ -28,8 +34,13 @@ class QTextStream;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    private:
+    void logMessage(const QString &message, bool isError);
 
-public:
+    public:
+    void externLogMessage(string message, bool isError);
+
+    public:
     /** @brief constructor */
     MainWindow(QWidget *parent = 0);
     /** @brief deconstructor */
@@ -46,6 +57,7 @@ public slots:
     void slotOpenFile();
     void slotSaveFile();
 
+    void slotSimulateOP();
     void slotSimulateDC();
     void slotSimulateAC();
     void slotSimulateTRAN();
@@ -67,13 +79,18 @@ private:
     QAction *copyAction;
     QAction *pasteAction;
 
+    QAction *simulateOPAction;
     QAction *simulateDCAction;
     QAction *simulateACAction;
     QAction *simulateTRANAction;
 
     QTextEdit *textEdit;
+    QTextEdit *logTextEdit;
+
+    QSplitter *splitter;
 
     QString fileName = "";
 };
 
 #endif // MAINWINDOW_H
+

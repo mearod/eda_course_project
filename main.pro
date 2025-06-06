@@ -41,7 +41,8 @@ HEADERS +=  src/analyser/analyser.h \
             src/result_recorder/result_recorder.h \
             src/plotter/qcustomplot/qcustomplot.h \
             src/plotter/plotter.h \
-            src/function_generator/function_generator.h
+            src/function_generator/function_generator.h \
+            src/spice-log/log.h
 
 
 
@@ -66,7 +67,8 @@ SOURCES +=  src/main.cpp \
             src/plotter/plotter.cpp \
             src/plotter/qcustomplot/qcustomplot.cpp \
             src/function_generator/pulse.cpp \
-            src/function_generator/sin.cpp
+            src/function_generator/sin.cpp \
+            src/spice-log/log.cpp
 
            
 RESOURCES += src/mainwindow/mainwindow.qrc
