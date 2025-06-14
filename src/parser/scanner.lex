@@ -46,6 +46,8 @@ CS        [Ii]{ALPHANUM}+
 CCVS      [Hh]{ALPHANUM}+
 CCCS      [Ff]{ALPHANUM}+
 
+DIODE     [Dd]{ALPHANUM}+
+
 EOL       [\n]
 DELIMITER [ \t]+
 UNIT      [Ff]|[Pp]|[Nn]|[Mm]|[Kk]|[Mm][Ee][Gg]|[Gg]|[Tt]|[Uu]
@@ -82,6 +84,16 @@ RBRACKET      \)
 {FLOAT}     {yylval.f = atof(yytext); return FLOAT;}
 {VALUE}     {yylval.f = parseValue(yytext); return VALUE;}
 
+{RK_OP}     {return RK_OP;}
+{RK_AC}     {return RK_AC;}
+{RK_DC}     {return RK_DC;}
+{RK_TRAN}    {return RK_TRAN;}
+{RK_DEC}    { return RK_DEC  ; }
+{RK_LIN}    { return RK_LIN  ; }
+{RK_OCT}     { return RK_OCT  ; }
+{RK_PULSE}   { return RK_PULSE; }
+{RK_SIN}     { return RK_SIN  ; }
+
 {CAPACITOR} {yylval.s = copyStr(yytext); return CAPACITOR;}
 {INDUCTOR}  {yylval.s = copyStr(yytext); return INDUCTOR;}
 {RESISTOR}  {yylval.s = copyStr(yytext); return RESISTOR;}
@@ -91,6 +103,7 @@ RBRACKET      \)
 {CS}      {yylval.s = copyStr(yytext); return CS  ;}
 {CCVS}      {yylval.s = copyStr(yytext); return CCVS;}
 {CCCS}      {yylval.s = copyStr(yytext); return CCCS;}
+{DIODE}     {yylval.s = copyStr(yytext); return DIODE;}
 
 {EOL}       {return EOL;}
 <<EOF>>     {yyterminate();}
@@ -101,15 +114,6 @@ RBRACKET      \)
 {VAR_V}     {yylval.s = copyStr(yytext);return VAR_V;}
 {VAR_I}     {yylval.s = copyStr(yytext);return VAR_I;}
 
-{RK_OP}     {return RK_OP;}
-{RK_AC}     {return RK_AC;}
-{RK_DC}     {return RK_DC;}
-{RK_TRAN}    {return RK_TRAN;}
-{RK_DEC}    { return RK_DEC  ; }
-{RK_LIN}    { return RK_LIN  ; }
-{RK_OCT}     { return RK_OCT  ; }
-{RK_PULSE}   { return RK_PULSE; }
-{RK_SIN}     { return RK_SIN  ; }
 
 {CMD_PRINT}  {return CMD_PRINT;}
 {CMD_DC}    {return CMD_DC;}

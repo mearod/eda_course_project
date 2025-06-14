@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 
 

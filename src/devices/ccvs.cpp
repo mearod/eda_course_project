@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 
 
@@ -83,4 +83,19 @@ void Ccvs::stampTRAN(Analyser* analyser,bool initFlag){
     else{
         //do nothing
     }
+};
+
+double Ccvs::getIDC(Analyser* analyser)
+{
+    return real(analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1));
+};
+
+complex<double> Ccvs::getIAC(Analyser* analyser)
+{
+    return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
+};
+
+double Ccvs::getITRAN(Analyser* analyser)
+{
+    return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };

@@ -54,6 +54,9 @@ OBJECTS_DIR   = build/
 
 SOURCES       = src/main.cpp \
 		src/analyser/analyser.cpp \
+		src/analyser/analyser_dc.cpp \
+		src/analyser/analyser_ac.cpp \
+		src/analyser/analyser_tran.cpp \
 		src/circuit/circuit.cpp \
 		src/devices/capacitor.cpp \
 		src/devices/cccs.cpp \
@@ -65,6 +68,7 @@ SOURCES       = src/main.cpp \
 		src/devices/vccs.cpp \
 		src/devices/vcvs.cpp \
 		src/devices/vs.cpp \
+		src/devices/diode.cpp \
 		src/mainwindow/mainwindow.cpp \
 		src/parser/parser.cpp \
 		src/parser/scanner.cpp \
@@ -79,6 +83,9 @@ SOURCES       = src/main.cpp \
 		build/moc_qcustomplot.cpp
 OBJECTS       = build/main.o \
 		build/analyser.o \
+		build/analyser_dc.o \
+		build/analyser_ac.o \
+		build/analyser_tran.o \
 		build/circuit.o \
 		build/capacitor.o \
 		build/cccs.o \
@@ -90,6 +97,7 @@ OBJECTS       = build/main.o \
 		build/vccs.o \
 		build/vcvs.o \
 		build/vs.o \
+		build/diode.o \
 		build/mainwindow.o \
 		build/parser.o \
 		build/scanner.o \
@@ -191,7 +199,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		main.pro src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/circuit/node.h \
+		src/devices/all_device.h \
 		src/devices/device.h \
+		src/devices/nonlinear_device.h \
 		src/mainwindow/mainwindow.h \
 		src/parser/parser.hpp \
 		src/parser/scanner.hpp \
@@ -206,6 +216,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/function_generator/function_generator.h \
 		src/spice-log/log.h src/main.cpp \
 		src/analyser/analyser.cpp \
+		src/analyser/analyser_dc.cpp \
+		src/analyser/analyser_ac.cpp \
+		src/analyser/analyser_tran.cpp \
 		src/circuit/circuit.cpp \
 		src/devices/capacitor.cpp \
 		src/devices/cccs.cpp \
@@ -217,6 +230,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/devices/vccs.cpp \
 		src/devices/vcvs.cpp \
 		src/devices/vs.cpp \
+		src/devices/diode.cpp \
 		src/mainwindow/mainwindow.cpp \
 		src/parser/parser.cpp \
 		src/parser/scanner.cpp \
@@ -429,8 +443,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents src/mainwindow/mainwindow.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/analyser/analyser.h src/circuit/circuit.h src/circuit/node.h src/devices/device.h src/mainwindow/mainwindow.h src/parser/parser.hpp src/parser/scanner.hpp src/simulator_interface/simulator_interface.h src/spice_command/command_plot.h src/spice_command/command_ac.h src/spice_command/command_dc.h src/spice_command/command_tran.h src/result_recorder/result_recorder.h src/plotter/qcustomplot/qcustomplot.h src/plotter/plotter.h src/function_generator/function_generator.h src/spice-log/log.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/analyser/analyser.cpp src/circuit/circuit.cpp src/devices/capacitor.cpp src/devices/cccs.cpp src/devices/ccvs.cpp src/devices/cs.cpp src/devices/device.cpp src/devices/inductor.cpp src/devices/resistor.cpp src/devices/vccs.cpp src/devices/vcvs.cpp src/devices/vs.cpp src/mainwindow/mainwindow.cpp src/parser/parser.cpp src/parser/scanner.cpp src/simulator_interface/simulator_interface.cpp src/result_recorder/result_recorder.cpp src/plotter/plotter.cpp src/plotter/qcustomplot/qcustomplot.cpp src/function_generator/pulse.cpp src/function_generator/sin.cpp src/spice-log/log.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/analyser/analyser.h src/circuit/circuit.h src/circuit/node.h src/devices/all_device.h src/devices/device.h src/devices/nonlinear_device.h src/mainwindow/mainwindow.h src/parser/parser.hpp src/parser/scanner.hpp src/simulator_interface/simulator_interface.h src/spice_command/command_plot.h src/spice_command/command_ac.h src/spice_command/command_dc.h src/spice_command/command_tran.h src/result_recorder/result_recorder.h src/plotter/qcustomplot/qcustomplot.h src/plotter/plotter.h src/function_generator/function_generator.h src/spice-log/log.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/analyser/analyser.cpp src/analyser/analyser_dc.cpp src/analyser/analyser_ac.cpp src/analyser/analyser_tran.cpp src/circuit/circuit.cpp src/devices/capacitor.cpp src/devices/cccs.cpp src/devices/ccvs.cpp src/devices/cs.cpp src/devices/device.cpp src/devices/inductor.cpp src/devices/resistor.cpp src/devices/vccs.cpp src/devices/vcvs.cpp src/devices/vs.cpp src/devices/diode.cpp src/mainwindow/mainwindow.cpp src/parser/parser.cpp src/parser/scanner.cpp src/simulator_interface/simulator_interface.cpp src/result_recorder/result_recorder.cpp src/plotter/plotter.cpp src/plotter/qcustomplot/qcustomplot.cpp src/function_generator/pulse.cpp src/function_generator/sin.cpp src/spice-log/log.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -519,184 +533,324 @@ build/main.o: src/main.cpp src/mainwindow/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/main.o src/main.cpp
 
 build/analyser.o: src/analyser/analyser.cpp src/analyser/analyser.h \
+		src/devices/all_device.h \
 		src/devices/device.h \
 		src/circuit/node.h \
 		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/analyser.o src/analyser/analyser.cpp
 
-build/circuit.o: src/circuit/circuit.cpp src/circuit/circuit.h \
-		src/analyser/analyser.h \
+build/analyser_dc.o: src/analyser/analyser_dc.cpp src/analyser/analyser.h \
+		src/devices/all_device.h \
 		src/devices/device.h \
 		src/circuit/node.h \
 		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
+		src/circuit/circuit.h \
+		src/spice_command/command.h \
+		src/spice_command/command_op.h \
+		src/spice_command/command_ac.h \
+		src/spice_command/command_dc.h \
+		src/spice_command/command_tran.h \
+		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
+		src/result_recorder/result_recorder.h \
+		src/plotter/plotter.h \
+		src/plotter/qcustomplot/qcustomplot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/analyser_dc.o src/analyser/analyser_dc.cpp
+
+build/analyser_ac.o: src/analyser/analyser_ac.cpp src/analyser/analyser.h \
+		src/devices/all_device.h \
+		src/devices/device.h \
+		src/circuit/node.h \
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
+		src/circuit/circuit.h \
+		src/spice_command/command.h \
+		src/spice_command/command_op.h \
+		src/spice_command/command_ac.h \
+		src/spice_command/command_dc.h \
+		src/spice_command/command_tran.h \
+		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
+		src/result_recorder/result_recorder.h \
+		src/plotter/plotter.h \
+		src/plotter/qcustomplot/qcustomplot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/analyser_ac.o src/analyser/analyser_ac.cpp
+
+build/analyser_tran.o: src/analyser/analyser_tran.cpp src/analyser/analyser.h \
+		src/devices/all_device.h \
+		src/devices/device.h \
+		src/circuit/node.h \
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
+		src/circuit/circuit.h \
+		src/spice_command/command.h \
+		src/spice_command/command_op.h \
+		src/spice_command/command_ac.h \
+		src/spice_command/command_dc.h \
+		src/spice_command/command_tran.h \
+		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
+		src/result_recorder/result_recorder.h \
+		src/plotter/plotter.h \
+		src/plotter/qcustomplot/qcustomplot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/analyser_tran.o src/analyser/analyser_tran.cpp
+
+build/circuit.o: src/circuit/circuit.cpp src/circuit/circuit.h \
+		src/analyser/analyser.h \
+		src/devices/all_device.h \
+		src/devices/device.h \
+		src/circuit/node.h \
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/circuit.o src/circuit/circuit.cpp
 
-build/capacitor.o: src/devices/capacitor.cpp src/devices/device.h \
+build/capacitor.o: src/devices/capacitor.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/capacitor.o src/devices/capacitor.cpp
 
-build/cccs.o: src/devices/cccs.cpp src/devices/device.h \
+build/cccs.o: src/devices/cccs.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/cccs.o src/devices/cccs.cpp
 
-build/ccvs.o: src/devices/ccvs.cpp src/devices/device.h \
+build/ccvs.o: src/devices/ccvs.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/ccvs.o src/devices/ccvs.cpp
 
-build/cs.o: src/devices/cs.cpp src/devices/device.h \
+build/cs.o: src/devices/cs.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/cs.o src/devices/cs.cpp
 
-build/device.o: src/devices/device.cpp src/devices/device.h \
+build/device.o: src/devices/device.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/device.o src/devices/device.cpp
 
-build/inductor.o: src/devices/inductor.cpp src/devices/device.h \
+build/inductor.o: src/devices/inductor.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/inductor.o src/devices/inductor.cpp
 
-build/resistor.o: src/devices/resistor.cpp src/devices/device.h \
+build/resistor.o: src/devices/resistor.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/resistor.o src/devices/resistor.cpp
 
-build/vccs.o: src/devices/vccs.cpp src/devices/device.h \
+build/vccs.o: src/devices/vccs.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vccs.o src/devices/vccs.cpp
 
-build/vcvs.o: src/devices/vcvs.cpp src/devices/device.h \
+build/vcvs.o: src/devices/vcvs.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vcvs.o src/devices/vcvs.cpp
 
-build/vs.o: src/devices/vs.cpp src/devices/device.h \
+build/vs.o: src/devices/vs.cpp src/devices/all_device.h \
+		src/devices/device.h \
 		src/analyser/analyser.h \
 		src/circuit/circuit.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
 		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
 		src/circuit/node.h \
-		src/function_generator/function_generator.h
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/vs.o src/devices/vs.cpp
+
+build/diode.o: src/devices/diode.cpp src/devices/all_device.h \
+		src/devices/device.h \
+		src/analyser/analyser.h \
+		src/circuit/circuit.h \
+		src/spice_command/command.h \
+		src/spice_command/command_op.h \
+		src/spice_command/command_ac.h \
+		src/spice_command/command_dc.h \
+		src/spice_command/command_tran.h \
+		src/spice_command/command_plot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
+		src/result_recorder/result_recorder.h \
+		src/plotter/plotter.h \
+		src/plotter/qcustomplot/qcustomplot.h \
+		src/circuit/node.h \
+		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/diode.o src/devices/diode.cpp
 
 build/mainwindow.o: src/mainwindow/mainwindow.cpp src/mainwindow/mainwindow.h \
 		src/simulator_interface/simulator_interface.h
@@ -705,13 +859,18 @@ build/mainwindow.o: src/mainwindow/mainwindow.cpp src/mainwindow/mainwindow.h \
 build/parser.o: src/parser/parser.cpp src/parser/parser.hpp \
 		src/circuit/circuit.h \
 		src/analyser/analyser.h \
+		src/devices/all_device.h \
 		src/devices/device.h \
 		src/circuit/node.h \
 		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \
@@ -724,13 +883,18 @@ build/scanner.o: src/parser/scanner.cpp src/parser/parser.hpp
 build/simulator_interface.o: src/simulator_interface/simulator_interface.cpp src/parser/parser.hpp \
 		src/circuit/circuit.h \
 		src/analyser/analyser.h \
+		src/devices/all_device.h \
 		src/devices/device.h \
 		src/circuit/node.h \
 		src/function_generator/function_generator.h \
+		src/devices/nonlinear_device.h \
 		src/result_recorder/result_recorder.h \
 		src/plotter/plotter.h \
 		src/plotter/qcustomplot/qcustomplot.h \
+		src/spice-log/log.h \
+		src/mainwindow/mainwindow.h \
 		src/spice_command/command.h \
+		src/spice_command/command_op.h \
 		src/spice_command/command_ac.h \
 		src/spice_command/command_dc.h \
 		src/spice_command/command_tran.h \

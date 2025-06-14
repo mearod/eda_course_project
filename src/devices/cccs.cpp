@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 #include <assert.h>
 
@@ -76,4 +76,19 @@ void Cccs::stampTRAN(Analyser* analyser,bool initFlag){
     else{
         //do nothing
     }
+};
+
+double Cccs::getIDC(Analyser* analyser)
+{
+    return real(analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1));
+};
+
+complex<double> Cccs::getIAC(Analyser* analyser)
+{
+    return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
+};
+
+double Cccs::getITRAN(Analyser* analyser)
+{
+    return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };

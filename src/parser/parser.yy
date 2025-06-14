@@ -29,12 +29,12 @@
 %token<f> FLOAT
 %token<s> STRING 
 %token<n> INTEGER
-%token<s> INDUCTOR CAPACITOR RESISTOR VS VCCS VCVS CS CCVS CCCS
+%token<s> INDUCTOR CAPACITOR RESISTOR VS VCCS VCVS CS CCVS CCCS DIODE
 %token<s> COMMENTLINE
 %token<f> VALUE
-%type<s> inductor capacitor resistor vccs vs vcvs cs ccvs cccs
+%type<s> inductor capacitor resistor vccs vs vcvs cs ccvs cccs diode
 %type<f> value
-%type<s> node
+%type<s> node modelName
 %token END EOL
 %token<s> VAR_V VAR_I
 %token<s> RK_OP RK_AC RK_DC RK_TRAN RK_DEC RK_OCT RK_LIN
@@ -47,7 +47,7 @@
 %{
 #include <cstdio>
 #include "../circuit/circuit.h"
-#include "../devices/device.h"
+#include "../devices/all_device.h"
 #include "../spice_command/command_plot.h"
 
     extern int yylineno;
@@ -96,7 +96,8 @@ bool checkName(std::string device_name)
     if (circuit->namemap.find(device_name) != circuit->namemap.end()) {
         return false;
     } else {
-        circuit->namemap[device_name] = 1;
+        circuit->namemap[device_name] = circuit->device_num;
+        circuit->device_num ++;
         return true;
     }
 }
@@ -177,6 +178,14 @@ void ParseCccs(char const *name, char const *node1, char const *node2, char cons
     circuit->devices.push_back(d);
 }
 
+void ParseDiode(char const *name, char const *node1, char const *node2, char const *model)
+{
+    if (!checkName(name)) return;
+    addNode(node1); addNode(node2);
+    Diode* d = new Diode(name, model, node1, node2);
+    circuit->devices.push_back(d);
+}
+
 %}
 
 
@@ -209,6 +218,7 @@ component: resistor
          | cs
          | cccs
          | ccvs
+         | diode
 ;
 
 command: print
@@ -343,18 +353,24 @@ cs: CS node node
 cccs: CCCS node node VS value
     {   
         ParseCccs($1, $2, $3, $4, $5);
-        printf("[VCVS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", $1, $2, $3, $4, $5);
+        printf("[CCCS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", $1, $2, $3, $4, $5);
     }
 ;
 
 ccvs: CCVS node node VS value
     {   
-        ParseCccs($1, $2, $3, $4, $5);
+        ParseCcvs($1, $2, $3, $4, $5);
         printf("[CCVS Line] Name(%s) N+(%s) N-(%s) VS(%s) val(%f)\n", $1, $2, $3, $4, $5);
         vsrc_number ++;
     }
 ;
 
+diode: DIODE node node modelName
+    {
+        printf("[DIODE Line] Name(%s) N+(%s) N-(%s) model(%s)\n", $1, $2, $3, $4);
+        ParseDiode($1, $2, $3, $4);
+    }
+;
 
 op: CMD_OP
     {
@@ -489,6 +505,9 @@ plot: CMD_PLOT RK_AC
     }
 ;
 
+modelName: node
+;
+
 node: STRING
     {
         $$ = new char[strlen($1) + 1];
@@ -510,6 +529,7 @@ node: STRING
     | INDUCTOR    { $$ = strdup($1); node_add($$);}
     | VS          { $$ = strdup($1); node_add($$);}
     | VCCS        { $$ = strdup($1); node_add($$);}
+    
 ;
 
 value: VALUE

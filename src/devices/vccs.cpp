@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 
 
@@ -34,4 +34,30 @@ void Vccs::stampTRAN(Analyser* analyser,bool initFlag){
     else{
         //do nothing
     }
+};
+
+double Vccs::getIDC(Analyser* analyser)
+{
+    return g_value*
+    real(
+        (analyser->circuit->nodemap[posC].isGround ? 0 : analyser->x(analyser->circuit->nodemap[posC].id)) 
+        - (analyser->circuit->nodemap[negC].isGround ? 0 : analyser->x(analyser->circuit->nodemap[negC].id))
+    );
+};
+
+complex<double> Vccs::getIAC(Analyser* analyser)
+{
+    return g_value*
+    (
+        (analyser->circuit->nodemap[posC].isGround ? 0 : analyser->x(analyser->circuit->nodemap[posC].id)) 
+        - (analyser->circuit->nodemap[negC].isGround ? 0 : analyser->x(analyser->circuit->nodemap[negC].id))
+    );
+};
+double Vccs::getITRAN(Analyser* analyser)
+{
+    return g_value*
+    real(
+        (analyser->circuit->nodemap[posC].isGround ? 0 : analyser->xTran(analyser->circuit->nodemap[posC].id)) 
+        - (analyser->circuit->nodemap[negC].isGround ? 0 : analyser->xTran(analyser->circuit->nodemap[negC].id))
+    );
 };

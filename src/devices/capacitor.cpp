@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include <complex>
 #include "../analyser/analyser.h"
 
@@ -45,4 +45,18 @@ void Capacitor::stampTRAN(Analyser* analyser,bool initFlag){
         analyser->rhsTranNext(this->bTypeDeviceNo+analyser->nodeNum -1) = 
         analyser->rhsTranInit(this->bTypeDeviceNo+analyser->nodeNum) + (voltageTRAN * c_value) / analyser->tranStep; //-1 for excluding the ground node
     }
+};
+
+double Capacitor::getIDC(Analyser* analyser)
+{
+    return 0;
+};
+
+complex<double> Capacitor::getIAC(Analyser* analyser)
+{
+    return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
+};
+double Capacitor::getITRAN(Analyser* analyser)
+{
+    return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };

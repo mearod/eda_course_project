@@ -5,7 +5,7 @@
 #include <armadillo>
 #include <unordered_map>
 #include "../analyser/analyser.h"
-#include "../devices/device.h"
+#include "../devices/all_device.h"
 #include "../spice_command/command.h"
 #include "../spice-log/log.h"
 
@@ -20,7 +20,8 @@ public:
     std::string title;
 
     int node_num;
-
+    int device_num;
+    
     struct Node{
         int number;
         int id;

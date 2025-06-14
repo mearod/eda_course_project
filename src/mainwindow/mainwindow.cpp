@@ -327,12 +327,12 @@ void MainWindow::slotSimulateAC()
 
 void MainWindow::slotSimulateTRAN()
 {
-    logMessage("TRAN simulation started.");
+    logTextEdit->append("TRAN simulation started.");
 
     char *fileNameChar;
     QByteArray ba = this->fileName.toLatin1();
     fileNameChar = ba.data();
     startTRANSimulate(fileNameChar);
 
-    logMessage("TRAN simulation ended.");
+    logTextEdit->append("TRAN simulation ended.");
 }

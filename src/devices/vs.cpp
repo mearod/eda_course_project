@@ -1,4 +1,5 @@
-#include "device.h"
+#include "all_device.h"
+#include <complex>
 #include "../analyser/analyser.h"
 using namespace arma;
 
@@ -48,4 +49,21 @@ void Vs::stampTRAN(Analyser* analyser,bool initFlag){
         analyser->rhsTranNext(this->bTypeDeviceNo+analyser->nodeNum -1) = 
         analyser->rhsTranInit(this->bTypeDeviceNo+analyser->nodeNum) + stampValue; //-1 for excluding the ground node
     }
+};
+
+
+
+double Vs::getIDC(Analyser* analyser)
+{
+    return real(analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1));
+};
+
+complex<double> Vs::getIAC(Analyser* analyser)
+{
+    return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
+};
+
+double Vs::getITRAN(Analyser* analyser)
+{
+    return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };

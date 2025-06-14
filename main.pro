@@ -29,7 +29,9 @@ UI_DIR      = build
 HEADERS +=  src/analyser/analyser.h \
             src/circuit/circuit.h \
             src/circuit/node.h \
+            src/devices/all_device.h \
             src/devices/device.h \
+            src/devices/nonlinear_device.h \
             src/mainwindow/mainwindow.h \
             src/parser/parser.hpp \
             src/parser/scanner.hpp \
@@ -48,6 +50,9 @@ HEADERS +=  src/analyser/analyser.h \
 
 SOURCES +=  src/main.cpp \
             src/analyser/analyser.cpp \
+            src/analyser/analyser_dc.cpp \
+            src/analyser/analyser_ac.cpp \
+            src/analyser/analyser_tran.cpp \
             src/circuit/circuit.cpp \
             src/devices/capacitor.cpp \
             src/devices/cccs.cpp \
@@ -59,6 +64,7 @@ SOURCES +=  src/main.cpp \
             src/devices/vccs.cpp \
             src/devices/vcvs.cpp \
             src/devices/vs.cpp \
+            src/devices/diode.cpp \
             src/mainwindow/mainwindow.cpp \
             src/parser/parser.cpp \
             src/parser/scanner.cpp \

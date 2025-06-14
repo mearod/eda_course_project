@@ -10,10 +10,10 @@ R2 2 3 1
 c2 3 0 1u
 
 .ac dec 10 0.1 1G
-.plot ac  V(3)
+.plot ac  I(c1)
 
 .tran 100u
-.plot tran V(3)
+.plot tran I(c1)
 
 * Is 0 2 10
 

@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 
 
@@ -48,4 +48,19 @@ void Vcvs::stampTRAN(Analyser* analyser,bool initFlag){
     else{
         //do nothing
     }
+};
+
+double Vcvs::getIDC(Analyser* analyser)
+{
+    return real(analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1));
+};
+
+complex<double> Vcvs::getIAC(Analyser* analyser)
+{
+    return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
+};
+
+double Vcvs::getITRAN(Analyser* analyser)
+{
+    return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };

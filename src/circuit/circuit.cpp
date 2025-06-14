@@ -6,7 +6,7 @@
 
 Circuit::Circuit() {
     node_num = 0;
-
+    device_num = 0;
     commandPlot.plotEnable = 0;
 }
 

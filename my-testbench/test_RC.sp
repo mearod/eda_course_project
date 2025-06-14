@@ -3,15 +3,14 @@ netlist example
 * this is a line of comment
 
 
-Vin 3 0 1
-R1 3 2 200m
-C1 2 1 100m
-L1 1 0 100m
+Vin 2 0  -2
+R2 2 1 1
+D2 1 0  model
 
-.ac dec 10 1 1000000000
-.plot ac V(2)
-.tran 4
-.plot tran  V(2)
+.op
+.dc Vin -2 0 0.01
+.plot dc V(1) I(D2)
+
 
 * Is 0 2 10
 

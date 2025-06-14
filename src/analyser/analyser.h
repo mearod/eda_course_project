@@ -1,7 +1,7 @@
 #ifndef _ANALYSER_H_
 #define _ANALYSER_H_
 #include <armadillo>
-#include "../devices/device.h"
+#include "../devices/all_device.h"
 #include "../circuit/circuit.h"
 #include "../result_recorder/result_recorder.h"
 #include "../spice-log/log.h"
@@ -22,6 +22,8 @@ private:
     void solveAC();
     void solveTRAN();
 
+    void solveIte();
+
     void matrixNodeRecordDC(double scanValue,ResultRecorder* resultRecorder);
     void matrixNodeRecordAC(double scanValue,ResultRecorder* resultRecorder);
     void matrixNodeRecordTRAN(ResultRecorder* resultRecorder); 
@@ -30,6 +32,7 @@ private:
 
     void analyseInitTRAN();
     bool checkPlotNodeExists();
+
 public:
 
     ResultRecorder* resultRecorderDC;
@@ -56,6 +59,12 @@ public:
     double tranTime;
     double tranStopTime;
     double tranStep;
+
+
+//non-linear analysis
+    cx_mat mnaIte;
+    cx_vec rhsIte;
+    cx_vec xIte;
 
 public:
     Analyser(Circuit* circuit);

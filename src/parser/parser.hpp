@@ -73,30 +73,31 @@ extern int yydebug;
     CS = 267,                      /* CS  */
     CCVS = 268,                    /* CCVS  */
     CCCS = 269,                    /* CCCS  */
-    COMMENTLINE = 270,             /* COMMENTLINE  */
-    VALUE = 271,                   /* VALUE  */
-    END = 272,                     /* END  */
-    EOL = 273,                     /* EOL  */
-    VAR_V = 274,                   /* VAR_V  */
-    VAR_I = 275,                   /* VAR_I  */
-    RK_OP = 276,                   /* RK_OP  */
-    RK_AC = 277,                   /* RK_AC  */
-    RK_DC = 278,                   /* RK_DC  */
-    RK_TRAN = 279,                 /* RK_TRAN  */
-    RK_DEC = 280,                  /* RK_DEC  */
-    RK_OCT = 281,                  /* RK_OCT  */
-    RK_LIN = 282,                  /* RK_LIN  */
-    RK_PULSE = 283,                /* RK_PULSE  */
-    RK_SIN = 284,                  /* RK_SIN  */
-    CMD_PRINT = 285,               /* CMD_PRINT  */
-    CMD_OP = 286,                  /* CMD_OP  */
-    CMD_DC = 287,                  /* CMD_DC  */
-    CMD_AC = 288,                  /* CMD_AC  */
-    CMD_PLOT = 289,                /* CMD_PLOT  */
-    CMD_OPTION = 290,              /* CMD_OPTION  */
-    CMD_TRAN = 291,                /* CMD_TRAN  */
-    LBRACKET = 292,                /* LBRACKET  */
-    RBRACKET = 293                 /* RBRACKET  */
+    DIODE = 270,                   /* DIODE  */
+    COMMENTLINE = 271,             /* COMMENTLINE  */
+    VALUE = 272,                   /* VALUE  */
+    END = 273,                     /* END  */
+    EOL = 274,                     /* EOL  */
+    VAR_V = 275,                   /* VAR_V  */
+    VAR_I = 276,                   /* VAR_I  */
+    RK_OP = 277,                   /* RK_OP  */
+    RK_AC = 278,                   /* RK_AC  */
+    RK_DC = 279,                   /* RK_DC  */
+    RK_TRAN = 280,                 /* RK_TRAN  */
+    RK_DEC = 281,                  /* RK_DEC  */
+    RK_OCT = 282,                  /* RK_OCT  */
+    RK_LIN = 283,                  /* RK_LIN  */
+    RK_PULSE = 284,                /* RK_PULSE  */
+    RK_SIN = 285,                  /* RK_SIN  */
+    CMD_PRINT = 286,               /* CMD_PRINT  */
+    CMD_OP = 287,                  /* CMD_OP  */
+    CMD_DC = 288,                  /* CMD_DC  */
+    CMD_AC = 289,                  /* CMD_AC  */
+    CMD_PLOT = 290,                /* CMD_PLOT  */
+    CMD_OPTION = 291,              /* CMD_OPTION  */
+    CMD_TRAN = 292,                /* CMD_TRAN  */
+    LBRACKET = 293,                /* LBRACKET  */
+    RBRACKET = 294                 /* RBRACKET  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -111,7 +112,7 @@ union YYSTYPE
     int    n;
     char  *s;
 
-#line 115 "parser.hpp"
+#line 116 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

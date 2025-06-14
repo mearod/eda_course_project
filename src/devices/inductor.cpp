@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 
 
@@ -43,4 +43,19 @@ void Inductor::stampTRAN(Analyser* analyser,bool initFlag){
         analyser->rhsTranNext(this->bTypeDeviceNo+analyser->nodeNum -1) = 
         analyser->rhsTranInit(this->bTypeDeviceNo+analyser->nodeNum) - (currentTRAN  * l_value) / analyser->tranStep; //-1 for excluding the ground node
     }
+};
+
+double Inductor::getIDC(Analyser* analyser)
+{
+    return real(analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1));
+};
+
+complex<double> Inductor::getIAC(Analyser* analyser)
+{
+    return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
+};
+
+double Inductor::getITRAN(Analyser* analyser)
+{
+    return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };

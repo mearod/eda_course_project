@@ -1,4 +1,4 @@
-#include "device.h"
+#include "all_device.h"
 #include "../analyser/analyser.h"
 
 
@@ -42,4 +42,19 @@ void Cs::stampTRAN(Analyser* analyser,bool initFlag){
             = analyser->rhsTranInit(analyser->circuit->nodemap[neg].id,0) + stampValue ;
         }
     }
+};
+
+double Cs::getIDC(Analyser* analyser)
+{
+    return dc_value;
+};
+
+complex<double> Cs::getIAC(Analyser* analyser)
+{
+    return ac_value;
+};
+
+double Cs::getITRAN(Analyser* analyser)
+{
+    return dc_value;
 };
