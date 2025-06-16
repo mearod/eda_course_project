@@ -2,7 +2,7 @@
 
 V1 n1 0 sin(0 1 1 0 0)
 R1 n1 n2 10k
-D1 n2 0  d
+D1 n2 0  diode1
 
 * for simulating with ngspice
 *.model diode1 D

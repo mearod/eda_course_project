@@ -4,6 +4,9 @@
 #include "../analyser/analyser.h"
 using namespace std;
 
+#define ABOSOLUTE_ERROR 1e-6
+#define RELATIVE_ERROR 1e-3
+
 Diode::Diode(std::string name,string model,string pos, string neg, double Vd,double Is, double Vt):
 BaseDevice(name,G_TYPE,D,true), NonlinearDevice(),model(model),pos(pos),neg(neg)
 {
@@ -29,8 +32,6 @@ void Diode::stampTRAN(Analyser* analyser,bool initFlag){
 };
 
 void Diode::stampIteration(Analyser* analyser,bool isFirstStamp){
-    Vd = isFirstStamp ? 0.7 : Vd;
-    Id = isFirstStamp ? Is * (exp(this->Vd/Vt) - 1) : Id;
 
     double g = Is/Vt*exp(Vd/Vt);
     double j = Id-g*Vd;
@@ -74,7 +75,10 @@ void Diode::NonlinearValueIteration(Analyser* analyser){
 }
 
 bool Diode::checkConvergence(){
-
+    if(abs(Vd-lastVd)<ABOSOLUTE_ERROR && abs(Vd-lastVd)<RELATIVE_ERROR*abs(lastVd))
+        return true;
+    else
+        return false;
 };
 
 double Diode::getIDC(Analyser* analyser)

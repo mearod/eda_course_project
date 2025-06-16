@@ -529,6 +529,11 @@ node: STRING
     | INDUCTOR    { $$ = strdup($1); node_add($$);}
     | VS          { $$ = strdup($1); node_add($$);}
     | VCCS        { $$ = strdup($1); node_add($$);}
+    | VCVS        { $$ = strdup($1); node_add($$);}
+    | CS          { $$ = strdup($1); node_add($$);}
+    | CCCS        { $$ = strdup($1); node_add($$);}
+    | CCVS        { $$ = strdup($1); node_add($$);}
+    | DIODE       { $$ = strdup($1); node_add($$);}
     
 ;
 

@@ -2,6 +2,10 @@ TEMPLATE = app
 TARGET = Y-SPICE
 INCLUDEPATH += $$PWD/src
 
+QMAKE_CC = ccache gcc
+QMAKE_CXX = ccache g++
+
+
 QT += widgets printsupport
 
 CONFIG += debug
@@ -32,6 +36,7 @@ HEADERS +=  src/analyser/analyser.h \
             src/devices/all_device.h \
             src/devices/device.h \
             src/devices/nonlinear_device.h \
+            src/devices/dynamic_device.h \
             src/mainwindow/mainwindow.h \
             src/parser/parser.hpp \
             src/parser/scanner.hpp \

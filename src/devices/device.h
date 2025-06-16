@@ -65,45 +65,6 @@ public:
     double getITRAN(Analyser* analyser);
 };
 
-class Capacitor: virtual public BaseDevice
-{
-public:
-    string pos;
-    string neg;
-    double c_value;
-
-    double voltageTRAN;
-
-    Capacitor(string name,string pos,string neg,double c_value): BaseDevice(name,B_TYPE,C,false),pos(pos),neg(neg),c_value(c_value){};
-
-    void stampDC(Analyser* analyser);
-    void stampAC(Analyser* analyser);
-    void stampTRAN(Analyser* analyser,bool initFlag);
-
-    double getIDC(Analyser* analyser);
-    complex<double> getIAC(Analyser* analyser);
-    double getITRAN(Analyser* analyser);
-};
-
-class Inductor: virtual public BaseDevice
-{
-public:
-    string pos;
-    string neg;
-    double l_value;
-
-    double currentTRAN;
-
-    Inductor(string name,string pos,string neg,double l_value): BaseDevice(name,B_TYPE,L,false),pos(pos),neg(neg),l_value(l_value){};
-
-    void stampDC(Analyser* analyser);
-    void stampAC(Analyser* analyser);
-    void stampTRAN(Analyser* analyser,bool initFlag);
-
-    double getIDC(Analyser* analyser);
-    complex<double> getIAC(Analyser* analyser);
-    double getITRAN(Analyser* analyser);
-};
 
 class Vccs: virtual public BaseDevice
 {

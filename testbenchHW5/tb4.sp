@@ -8,7 +8,7 @@ R1 n1 n2 10
 L1 n1 n2 1u
 C2 n2 0  100p
 
-.tran 0.1n 60n
+.tran 1n 60n
 .plot tran v(n2)
 
 .end

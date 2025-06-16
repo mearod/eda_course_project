@@ -31,21 +31,11 @@ void Analyser::analyseStepDC(){
     rhsIte = rhs;
 
 
-    for(int k=0;k<10;k++)
-    {
-    for (int i=0; i < circuit->devices.size(); i++){
-        bool firstStampFlag = (k==0);
-        if(circuit->devices[i]->isNonLinearDevice == true){
-            dynamic_cast<NonlinearDevice*>(circuit->devices[i])->stampIteration(this,firstStampFlag);
-        }
-    }
 
-    solve(xIte, mnaIte, rhsIte, arma::solve_opts::allow_ugly);
-    for (int i=0; i < circuit->devices.size(); i++){
-        if(circuit->devices[i]->isNonLinearDevice == true){
-            dynamic_cast<NonlinearDevice*>(circuit->devices[i])->NonlinearValueIteration(this);
-        }
-    }
+
+    if(!IterationSolve(10))
+    {
+        logOutput("DC iteration failed after 10 times iteration.",true);
     }
 
 
@@ -111,7 +101,7 @@ void Analyser::analyseDC(){
 
     if(sourceDevice == NULL)
     {
-        cout<<"DC analyse error: source device not found,please ensure the source device exists in the circuit."<<std::endl;
+        logOutput("DC analyse error: source device not found,please ensure the source device exists in the circuit.",true);
         return;
     }
 

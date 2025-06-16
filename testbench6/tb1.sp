@@ -1,7 +1,7 @@
 * Testbench 1 for homework 6
 
 V1 n1 0 1
-D1 n1 n2 d
+D1 n1 n2 diode1
 V2 n2 0 0
 
 * for simulating with ngspice

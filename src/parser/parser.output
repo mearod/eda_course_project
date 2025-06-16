@@ -106,31 +106,36 @@ Grammar
    73     | INDUCTOR
    74     | VS
    75     | VCCS
+   76     | VCVS
+   77     | CS
+   78     | CCCS
+   79     | CCVS
+   80     | DIODE
 
-   76 value: VALUE
-   77      | FLOAT
-   78      | INTEGER
+   81 value: VALUE
+   82      | FLOAT
+   83      | INTEGER
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256) 9
-    FLOAT <f> (258) 77
+    FLOAT <f> (258) 82
     STRING <s> (259) 69
-    INTEGER <n> (260) 70 78
+    INTEGER <n> (260) 70 83
     INDUCTOR <s> (261) 28 73
     CAPACITOR <s> (262) 27 72
     RESISTOR <s> (263) 26 71
     VS <s> (264) 30 31 43 44 48 74
     VCCS <s> (265) 29 75
-    VCVS <s> (266) 36
-    CS <s> (267) 37 38 49
-    CCVS <s> (268) 44
-    CCCS <s> (269) 43
-    DIODE <s> (270) 45
+    VCVS <s> (266) 36 76
+    CS <s> (267) 37 38 49 77
+    CCVS <s> (268) 44 79
+    CCCS <s> (269) 43 78
+    DIODE <s> (270) 45 80
     COMMENTLINE <s> (271)
-    VALUE <f> (272) 76
+    VALUE <f> (272) 81
     END (273) 3
     EOL (274) 2 6 7 8 9
     VAR_V <s> (275) 60 66
@@ -229,10 +234,10 @@ Nonterminals, with rules where they appear
         on left: 68
         on right: 45
     node <s> (64)
-        on left: 69 70 71 72 73 74 75
+        on left: 69 70 71 72 73 74 75 76 77 78 79 80
         on right: 26 27 28 29 30 31 36 37 38 43 44 45 68
     value <f> (65)
-        on left: 76 77 78
+        on left: 81 82 83
         on right: 26 27 28 29 31 32 33 34 35 36 38 39 40 41 42 43 44 48 49 50 51 52 53 54 55
 
 
@@ -300,8 +305,13 @@ State 2
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 48
+    node  go to state 53
 
 
 State 3
@@ -315,8 +325,13 @@ State 3
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 49
+    node  go to state 54
 
 
 State 4
@@ -330,8 +345,13 @@ State 4
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 50
+    node  go to state 55
 
 
 State 5
@@ -346,8 +366,13 @@ State 5
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 51
+    node  go to state 56
 
 
 State 6
@@ -361,8 +386,13 @@ State 6
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 52
+    node  go to state 57
 
 
 State 7
@@ -376,8 +406,13 @@ State 7
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 53
+    node  go to state 58
 
 
 State 8
@@ -392,8 +427,13 @@ State 8
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 54
+    node  go to state 59
 
 
 State 9
@@ -407,8 +447,13 @@ State 9
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 55
+    node  go to state 60
 
 
 State 10
@@ -422,8 +467,13 @@ State 10
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 56
+    node  go to state 61
 
 
 State 11
@@ -437,8 +487,13 @@ State 11
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 57
+    node  go to state 62
 
 
 State 12
@@ -455,10 +510,10 @@ State 13
    58      | CMD_PRINT • RK_OP
    59      | CMD_PRINT • RK_TRAN
 
-    RK_OP    shift, and go to state 58
-    RK_AC    shift, and go to state 59
-    RK_DC    shift, and go to state 60
-    RK_TRAN  shift, and go to state 61
+    RK_OP    shift, and go to state 63
+    RK_AC    shift, and go to state 64
+    RK_DC    shift, and go to state 65
+    RK_TRAN  shift, and go to state 66
 
 
 State 14
@@ -481,9 +536,9 @@ State 16
    51   | CMD_AC • RK_LIN value value value
    52   | CMD_AC • RK_OCT value value value
 
-    RK_DEC  shift, and go to state 62
-    RK_OCT  shift, and go to state 63
-    RK_LIN  shift, and go to state 64
+    RK_DEC  shift, and go to state 67
+    RK_OCT  shift, and go to state 68
+    RK_LIN  shift, and go to state 69
 
 
 State 17
@@ -493,10 +548,10 @@ State 17
    64     | CMD_PLOT • RK_OP
    65     | CMD_PLOT • RK_TRAN
 
-    RK_OP    shift, and go to state 65
-    RK_AC    shift, and go to state 66
-    RK_DC    shift, and go to state 67
-    RK_TRAN  shift, and go to state 68
+    RK_OP    shift, and go to state 70
+    RK_AC    shift, and go to state 71
+    RK_DC    shift, and go to state 72
+    RK_TRAN  shift, and go to state 73
 
 
 State 18
@@ -505,18 +560,18 @@ State 18
    54     | CMD_TRAN • value value
    55     | CMD_TRAN • value value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 72
+    value  go to state 77
 
 
 State 19
 
     0 $accept: spice • $end
 
-    $end  shift, and go to state 73
+    $end  shift, and go to state 78
 
 
 State 20
@@ -535,7 +590,7 @@ State 20
     CCVS       shift, and go to state 9
     CCCS       shift, and go to state 10
     DIODE      shift, and go to state 11
-    END        shift, and go to state 74
+    END        shift, and go to state 79
     EOL        shift, and go to state 12
     CMD_PRINT  shift, and go to state 13
     CMD_OP     shift, and go to state 14
@@ -544,8 +599,8 @@ State 20
     CMD_PLOT   shift, and go to state 17
     CMD_TRAN   shift, and go to state 18
 
-    end        go to state 75
-    line       go to state 76
+    end        go to state 80
+    line       go to state 81
     component  go to state 22
     command    go to state 23
     resistor   go to state 24
@@ -577,14 +632,14 @@ State 22
 
     6 line: component • EOL
 
-    EOL  shift, and go to state 77
+    EOL  shift, and go to state 82
 
 
 State 23
 
     7 line: command • EOL
 
-    EOL  shift, and go to state 78
+    EOL  shift, and go to state 83
 
 
 State 24
@@ -623,10 +678,10 @@ State 28
    34   | vs • RK_PULSE LBRACKET value value value value value value value RBRACKET
    35   | vs • RK_SIN LBRACKET value value value value value RBRACKET
 
-    RK_AC     shift, and go to state 79
-    RK_DC     shift, and go to state 80
-    RK_PULSE  shift, and go to state 81
-    RK_SIN    shift, and go to state 82
+    RK_AC     shift, and go to state 84
+    RK_DC     shift, and go to state 85
+    RK_PULSE  shift, and go to state 86
+    RK_SIN    shift, and go to state 87
 
     $default  reduce using rule 14 (component)
 
@@ -646,10 +701,10 @@ State 30
    41   | cs • RK_PULSE LBRACKET value value value value value value value RBRACKET
    42   | cs • RK_SIN LBRACKET value value value value value RBRACKET
 
-    RK_AC     shift, and go to state 83
-    RK_DC     shift, and go to state 84
-    RK_PULSE  shift, and go to state 85
-    RK_SIN    shift, and go to state 86
+    RK_AC     shift, and go to state 88
+    RK_DC     shift, and go to state 89
+    RK_PULSE  shift, and go to state 90
+    RK_SIN    shift, and go to state 91
 
     $default  reduce using rule 16 (component)
 
@@ -688,8 +743,8 @@ State 35
    48 dc: dc • VS value value value
    49   | dc • CS value value value
 
-    VS  shift, and go to state 87
-    CS  shift, and go to state 88
+    VS  shift, and go to state 92
+    CS  shift, and go to state 93
 
     $default  reduce using rule 21 (command)
 
@@ -714,8 +769,8 @@ State 38
    60 print: print • VAR_V
    61      | print • VAR_I
 
-    VAR_V  shift, and go to state 89
-    VAR_I  shift, and go to state 90
+    VAR_V  shift, and go to state 94
+    VAR_I  shift, and go to state 95
 
     $default  reduce using rule 20 (command)
 
@@ -726,8 +781,8 @@ State 39
    66 plot: plot • VAR_V
    67     | plot • VAR_I
 
-    VAR_V  shift, and go to state 91
-    VAR_I  shift, and go to state 92
+    VAR_V  shift, and go to state 96
+    VAR_I  shift, and go to state 97
 
     $default  reduce using rule 25 (command)
 
@@ -790,6 +845,41 @@ State 47
 
 State 48
 
+   76 node: VCVS •
+
+    $default  reduce using rule 76 (node)
+
+
+State 49
+
+   77 node: CS •
+
+    $default  reduce using rule 77 (node)
+
+
+State 50
+
+   79 node: CCVS •
+
+    $default  reduce using rule 79 (node)
+
+
+State 51
+
+   78 node: CCCS •
+
+    $default  reduce using rule 78 (node)
+
+
+State 52
+
+   80 node: DIODE •
+
+    $default  reduce using rule 80 (node)
+
+
+State 53
+
    28 inductor: INDUCTOR node • node value
 
     STRING     shift, and go to state 41
@@ -799,11 +889,16 @@ State 48
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 93
+    node  go to state 98
 
 
-State 49
+State 54
 
    27 capacitor: CAPACITOR node • node value
 
@@ -814,11 +909,16 @@ State 49
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 94
+    node  go to state 99
 
 
-State 50
+State 55
 
    26 resistor: RESISTOR node • node value
 
@@ -829,11 +929,16 @@ State 50
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 95
+    node  go to state 100
 
 
-State 51
+State 56
 
    30 vs: VS node • node
    31   | VS node • node value
@@ -845,11 +950,16 @@ State 51
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 96
+    node  go to state 101
 
 
-State 52
+State 57
 
    29 vccs: VCCS node • node node node value
 
@@ -860,11 +970,16 @@ State 52
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 97
+    node  go to state 102
 
 
-State 53
+State 58
 
    36 vcvs: VCVS node • node node node value
 
@@ -875,11 +990,16 @@ State 53
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 98
+    node  go to state 103
 
 
-State 54
+State 59
 
    37 cs: CS node • node
    38   | CS node • node value
@@ -891,11 +1011,16 @@ State 54
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 99
+    node  go to state 104
 
 
-State 55
+State 60
 
    44 ccvs: CCVS node • node VS value
 
@@ -906,11 +1031,16 @@ State 55
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 100
+    node  go to state 105
 
 
-State 56
+State 61
 
    43 cccs: CCCS node • node VS value
 
@@ -921,11 +1051,16 @@ State 56
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 101
+    node  go to state 106
 
 
-State 57
+State 62
 
    45 diode: DIODE node • node modelName
 
@@ -936,350 +1071,355 @@ State 57
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 102
+    node  go to state 107
 
 
-State 58
+State 63
 
    58 print: CMD_PRINT RK_OP •
 
     $default  reduce using rule 58 (print)
 
 
-State 59
+State 64
 
    56 print: CMD_PRINT RK_AC •
 
     $default  reduce using rule 56 (print)
 
 
-State 60
+State 65
 
    57 print: CMD_PRINT RK_DC •
 
     $default  reduce using rule 57 (print)
 
 
-State 61
+State 66
 
    59 print: CMD_PRINT RK_TRAN •
 
     $default  reduce using rule 59 (print)
 
 
-State 62
+State 67
 
    50 ac: CMD_AC RK_DEC • value value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 103
+    value  go to state 108
 
 
-State 63
+State 68
 
    52 ac: CMD_AC RK_OCT • value value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 104
+    value  go to state 109
 
 
-State 64
+State 69
 
    51 ac: CMD_AC RK_LIN • value value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 105
+    value  go to state 110
 
 
-State 65
+State 70
 
    64 plot: CMD_PLOT RK_OP •
 
     $default  reduce using rule 64 (plot)
 
 
-State 66
+State 71
 
    62 plot: CMD_PLOT RK_AC •
 
     $default  reduce using rule 62 (plot)
 
 
-State 67
+State 72
 
    63 plot: CMD_PLOT RK_DC •
 
     $default  reduce using rule 63 (plot)
 
 
-State 68
+State 73
 
    65 plot: CMD_PLOT RK_TRAN •
 
     $default  reduce using rule 65 (plot)
 
 
-State 69
+State 74
 
-   77 value: FLOAT •
+   82 value: FLOAT •
 
-    $default  reduce using rule 77 (value)
-
-
-State 70
-
-   78 value: INTEGER •
-
-    $default  reduce using rule 78 (value)
+    $default  reduce using rule 82 (value)
 
 
-State 71
+State 75
 
-   76 value: VALUE •
+   83 value: INTEGER •
 
-    $default  reduce using rule 76 (value)
+    $default  reduce using rule 83 (value)
 
 
-State 72
+State 76
+
+   81 value: VALUE •
+
+    $default  reduce using rule 81 (value)
+
+
+State 77
 
    53 tran: CMD_TRAN value •
    54     | CMD_TRAN value • value
    55     | CMD_TRAN value • value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     $default  reduce using rule 53 (tran)
 
-    value  go to state 106
+    value  go to state 111
 
 
-State 73
+State 78
 
     0 $accept: spice $end •
 
     $default  accept
 
 
-State 74
+State 79
 
     3 end: END •
 
     $default  reduce using rule 3 (end)
 
 
-State 75
+State 80
 
     1 spice: netlist end •
     2 end: end • EOL
 
-    EOL  shift, and go to state 107
+    EOL  shift, and go to state 112
 
     $default  reduce using rule 1 (spice)
 
 
-State 76
+State 81
 
     4 netlist: netlist line •
 
     $default  reduce using rule 4 (netlist)
 
 
-State 77
+State 82
 
     6 line: component EOL •
 
     $default  reduce using rule 6 (line)
 
 
-State 78
+State 83
 
     7 line: command EOL •
 
     $default  reduce using rule 7 (line)
 
 
-State 79
+State 84
 
    33 vs: vs RK_AC • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 108
-
-
-State 80
-
-   32 vs: vs RK_DC • value
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 109
-
-
-State 81
-
-   34 vs: vs RK_PULSE • LBRACKET value value value value value value value RBRACKET
-
-    LBRACKET  shift, and go to state 110
-
-
-State 82
-
-   35 vs: vs RK_SIN • LBRACKET value value value value value RBRACKET
-
-    LBRACKET  shift, and go to state 111
-
-
-State 83
-
-   40 cs: cs RK_AC • value
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 112
-
-
-State 84
-
-   39 cs: cs RK_DC • value
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 113
 
 
 State 85
 
-   41 cs: cs RK_PULSE • LBRACKET value value value value value value value RBRACKET
+   32 vs: vs RK_DC • value
 
-    LBRACKET  shift, and go to state 114
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 114
 
 
 State 86
 
-   42 cs: cs RK_SIN • LBRACKET value value value value value RBRACKET
+   34 vs: vs RK_PULSE • LBRACKET value value value value value value value RBRACKET
 
     LBRACKET  shift, and go to state 115
 
 
 State 87
 
-   48 dc: dc VS • value value value
+   35 vs: vs RK_SIN • LBRACKET value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 116
+    LBRACKET  shift, and go to state 116
 
 
 State 88
 
-   49 dc: dc CS • value value value
+   40 cs: cs RK_AC • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 117
 
 
 State 89
 
+   39 cs: cs RK_DC • value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 118
+
+
+State 90
+
+   41 cs: cs RK_PULSE • LBRACKET value value value value value value value RBRACKET
+
+    LBRACKET  shift, and go to state 119
+
+
+State 91
+
+   42 cs: cs RK_SIN • LBRACKET value value value value value RBRACKET
+
+    LBRACKET  shift, and go to state 120
+
+
+State 92
+
+   48 dc: dc VS • value value value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 121
+
+
+State 93
+
+   49 dc: dc CS • value value value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 122
+
+
+State 94
+
    60 print: print VAR_V •
 
     $default  reduce using rule 60 (print)
 
 
-State 90
+State 95
 
    61 print: print VAR_I •
 
     $default  reduce using rule 61 (print)
 
 
-State 91
+State 96
 
    66 plot: plot VAR_V •
 
     $default  reduce using rule 66 (plot)
 
 
-State 92
+State 97
 
    67 plot: plot VAR_I •
 
     $default  reduce using rule 67 (plot)
 
 
-State 93
+State 98
 
    28 inductor: INDUCTOR node node • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 118
+    value  go to state 123
 
 
-State 94
+State 99
 
    27 capacitor: CAPACITOR node node • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 119
+    value  go to state 124
 
 
-State 95
+State 100
 
    26 resistor: RESISTOR node node • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 120
+    value  go to state 125
 
 
-State 96
+State 101
 
    30 vs: VS node node •
    31   | VS node node • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     $default  reduce using rule 30 (vs)
 
-    value  go to state 121
+    value  go to state 126
 
 
-State 97
+State 102
 
    29 vccs: VCCS node node • node node value
 
@@ -1290,11 +1430,16 @@ State 97
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 122
+    node  go to state 127
 
 
-State 98
+State 103
 
    36 vcvs: VCVS node node • node node value
 
@@ -1305,39 +1450,44 @@ State 98
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 123
+    node  go to state 128
 
 
-State 99
+State 104
 
    37 cs: CS node node •
    38   | CS node node • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     $default  reduce using rule 37 (cs)
 
-    value  go to state 124
+    value  go to state 129
 
 
-State 100
+State 105
 
    44 ccvs: CCVS node node • VS value
 
-    VS  shift, and go to state 125
+    VS  shift, and go to state 130
 
 
-State 101
+State 106
 
    43 cccs: CCCS node node • VS value
 
-    VS  shift, and go to state 126
+    VS  shift, and go to state 131
 
 
-State 102
+State 107
 
    45 diode: DIODE node node • modelName
 
@@ -1348,188 +1498,193 @@ State 102
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    modelName  go to state 127
-    node       go to state 128
+    modelName  go to state 132
+    node       go to state 133
 
 
-State 103
+State 108
 
    50 ac: CMD_AC RK_DEC value • value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 129
+    value  go to state 134
 
 
-State 104
+State 109
 
    52 ac: CMD_AC RK_OCT value • value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 130
+    value  go to state 135
 
 
-State 105
+State 110
 
    51 ac: CMD_AC RK_LIN value • value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 131
+    value  go to state 136
 
 
-State 106
+State 111
 
    54 tran: CMD_TRAN value value •
    55     | CMD_TRAN value value • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     $default  reduce using rule 54 (tran)
 
-    value  go to state 132
+    value  go to state 137
 
 
-State 107
+State 112
 
     2 end: end EOL •
 
     $default  reduce using rule 2 (end)
 
 
-State 108
+State 113
 
    33 vs: vs RK_AC value •
 
     $default  reduce using rule 33 (vs)
 
 
-State 109
+State 114
 
    32 vs: vs RK_DC value •
 
     $default  reduce using rule 32 (vs)
 
 
-State 110
+State 115
 
    34 vs: vs RK_PULSE LBRACKET • value value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 133
+    value  go to state 138
 
 
-State 111
+State 116
 
    35 vs: vs RK_SIN LBRACKET • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 134
+    value  go to state 139
 
 
-State 112
+State 117
 
    40 cs: cs RK_AC value •
 
     $default  reduce using rule 40 (cs)
 
 
-State 113
+State 118
 
    39 cs: cs RK_DC value •
 
     $default  reduce using rule 39 (cs)
 
 
-State 114
+State 119
 
    41 cs: cs RK_PULSE LBRACKET • value value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 135
+    value  go to state 140
 
 
-State 115
+State 120
 
    42 cs: cs RK_SIN LBRACKET • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 136
+    value  go to state 141
 
 
-State 116
+State 121
 
    48 dc: dc VS value • value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 137
+    value  go to state 142
 
 
-State 117
+State 122
 
    49 dc: dc CS value • value value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 138
+    value  go to state 143
 
 
-State 118
+State 123
 
    28 inductor: INDUCTOR node node value •
 
     $default  reduce using rule 28 (inductor)
 
 
-State 119
+State 124
 
    27 capacitor: CAPACITOR node node value •
 
     $default  reduce using rule 27 (capacitor)
 
 
-State 120
+State 125
 
    26 resistor: RESISTOR node node value •
 
     $default  reduce using rule 26 (resistor)
 
 
-State 121
+State 126
 
    31 vs: VS node node value •
 
     $default  reduce using rule 31 (vs)
 
 
-State 122
+State 127
 
    29 vccs: VCCS node node node • node value
 
@@ -1540,11 +1695,16 @@ State 122
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 139
+    node  go to state 144
 
 
-State 123
+State 128
 
    36 vcvs: VCVS node node node • node value
 
@@ -1555,470 +1715,475 @@ State 123
     RESISTOR   shift, and go to state 45
     VS         shift, and go to state 46
     VCCS       shift, and go to state 47
+    VCVS       shift, and go to state 48
+    CS         shift, and go to state 49
+    CCVS       shift, and go to state 50
+    CCCS       shift, and go to state 51
+    DIODE      shift, and go to state 52
 
-    node  go to state 140
+    node  go to state 145
 
 
-State 124
+State 129
 
    38 cs: CS node node value •
 
     $default  reduce using rule 38 (cs)
 
 
-State 125
+State 130
 
    44 ccvs: CCVS node node VS • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 141
+    value  go to state 146
 
 
-State 126
+State 131
 
    43 cccs: CCCS node node VS • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 142
+    value  go to state 147
 
 
-State 127
+State 132
 
    45 diode: DIODE node node modelName •
 
     $default  reduce using rule 45 (diode)
 
 
-State 128
+State 133
 
    68 modelName: node •
 
     $default  reduce using rule 68 (modelName)
 
 
-State 129
+State 134
 
    50 ac: CMD_AC RK_DEC value value • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 143
+    value  go to state 148
 
 
-State 130
+State 135
 
    52 ac: CMD_AC RK_OCT value value • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 144
+    value  go to state 149
 
 
-State 131
+State 136
 
    51 ac: CMD_AC RK_LIN value value • value
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 145
+    value  go to state 150
 
 
-State 132
+State 137
 
    55 tran: CMD_TRAN value value value •
 
     $default  reduce using rule 55 (tran)
 
 
-State 133
+State 138
 
    34 vs: vs RK_PULSE LBRACKET value • value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 146
-
-
-State 134
-
-   35 vs: vs RK_SIN LBRACKET value • value value value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 147
-
-
-State 135
-
-   41 cs: cs RK_PULSE LBRACKET value • value value value value value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 148
-
-
-State 136
-
-   42 cs: cs RK_SIN LBRACKET value • value value value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 149
-
-
-State 137
-
-   48 dc: dc VS value value • value
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 150
-
-
-State 138
-
-   49 dc: dc CS value value • value
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 151
 
 
 State 139
 
-   29 vccs: VCCS node node node node • value
+   35 vs: vs RK_SIN LBRACKET value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 152
 
 
 State 140
 
-   36 vcvs: VCVS node node node node • value
+   41 cs: cs RK_PULSE LBRACKET value • value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 153
 
 
 State 141
 
+   42 cs: cs RK_SIN LBRACKET value • value value value value RBRACKET
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 154
+
+
+State 142
+
+   48 dc: dc VS value value • value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 155
+
+
+State 143
+
+   49 dc: dc CS value value • value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 156
+
+
+State 144
+
+   29 vccs: VCCS node node node node • value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 157
+
+
+State 145
+
+   36 vcvs: VCVS node node node node • value
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 158
+
+
+State 146
+
    44 ccvs: CCVS node node VS value •
 
     $default  reduce using rule 44 (ccvs)
 
 
-State 142
+State 147
 
    43 cccs: CCCS node node VS value •
 
     $default  reduce using rule 43 (cccs)
 
 
-State 143
+State 148
 
    50 ac: CMD_AC RK_DEC value value value •
 
     $default  reduce using rule 50 (ac)
 
 
-State 144
+State 149
 
    52 ac: CMD_AC RK_OCT value value value •
 
     $default  reduce using rule 52 (ac)
 
 
-State 145
+State 150
 
    51 ac: CMD_AC RK_LIN value value value •
 
     $default  reduce using rule 51 (ac)
 
 
-State 146
+State 151
 
    34 vs: vs RK_PULSE LBRACKET value value • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 154
+    value  go to state 159
 
 
-State 147
+State 152
 
    35 vs: vs RK_SIN LBRACKET value value • value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 155
+    value  go to state 160
 
 
-State 148
+State 153
 
    41 cs: cs RK_PULSE LBRACKET value value • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 156
+    value  go to state 161
 
 
-State 149
+State 154
 
    42 cs: cs RK_SIN LBRACKET value value • value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 157
+    value  go to state 162
 
 
-State 150
+State 155
 
    48 dc: dc VS value value value •
 
     $default  reduce using rule 48 (dc)
 
 
-State 151
+State 156
 
    49 dc: dc CS value value value •
 
     $default  reduce using rule 49 (dc)
 
 
-State 152
+State 157
 
    29 vccs: VCCS node node node node value •
 
     $default  reduce using rule 29 (vccs)
 
 
-State 153
+State 158
 
    36 vcvs: VCVS node node node node value •
 
     $default  reduce using rule 36 (vcvs)
 
 
-State 154
+State 159
 
    34 vs: vs RK_PULSE LBRACKET value value value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 158
-
-
-State 155
-
-   35 vs: vs RK_SIN LBRACKET value value value • value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 159
-
-
-State 156
-
-   41 cs: cs RK_PULSE LBRACKET value value value • value value value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 160
-
-
-State 157
-
-   42 cs: cs RK_SIN LBRACKET value value value • value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 161
-
-
-State 158
-
-   34 vs: vs RK_PULSE LBRACKET value value value value • value value value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
-
-    value  go to state 162
-
-
-State 159
-
-   35 vs: vs RK_SIN LBRACKET value value value value • value RBRACKET
-
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 163
 
 
 State 160
 
-   41 cs: cs RK_PULSE LBRACKET value value value value • value value value RBRACKET
+   35 vs: vs RK_SIN LBRACKET value value value • value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 164
 
 
 State 161
 
-   42 cs: cs RK_SIN LBRACKET value value value value • value RBRACKET
+   41 cs: cs RK_PULSE LBRACKET value value value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 165
 
 
 State 162
 
-   34 vs: vs RK_PULSE LBRACKET value value value value value • value value RBRACKET
+   42 cs: cs RK_SIN LBRACKET value value value • value value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 166
 
 
 State 163
 
-   35 vs: vs RK_SIN LBRACKET value value value value value • RBRACKET
+   34 vs: vs RK_PULSE LBRACKET value value value value • value value value RBRACKET
 
-    RBRACKET  shift, and go to state 167
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 167
 
 
 State 164
 
-   41 cs: cs RK_PULSE LBRACKET value value value value value • value value RBRACKET
+   35 vs: vs RK_SIN LBRACKET value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 168
 
 
 State 165
 
-   42 cs: cs RK_SIN LBRACKET value value value value value • RBRACKET
+   41 cs: cs RK_PULSE LBRACKET value value value value • value value value RBRACKET
 
-    RBRACKET  shift, and go to state 169
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 169
 
 
 State 166
 
-   34 vs: vs RK_PULSE LBRACKET value value value value value value • value RBRACKET
+   42 cs: cs RK_SIN LBRACKET value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
     value  go to state 170
 
 
 State 167
 
+   34 vs: vs RK_PULSE LBRACKET value value value value value • value value RBRACKET
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 171
+
+
+State 168
+
+   35 vs: vs RK_SIN LBRACKET value value value value value • RBRACKET
+
+    RBRACKET  shift, and go to state 172
+
+
+State 169
+
+   41 cs: cs RK_PULSE LBRACKET value value value value value • value value RBRACKET
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 173
+
+
+State 170
+
+   42 cs: cs RK_SIN LBRACKET value value value value value • RBRACKET
+
+    RBRACKET  shift, and go to state 174
+
+
+State 171
+
+   34 vs: vs RK_PULSE LBRACKET value value value value value value • value RBRACKET
+
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
+
+    value  go to state 175
+
+
+State 172
+
    35 vs: vs RK_SIN LBRACKET value value value value value RBRACKET •
 
     $default  reduce using rule 35 (vs)
 
 
-State 168
+State 173
 
    41 cs: cs RK_PULSE LBRACKET value value value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 69
-    INTEGER  shift, and go to state 70
-    VALUE    shift, and go to state 71
+    FLOAT    shift, and go to state 74
+    INTEGER  shift, and go to state 75
+    VALUE    shift, and go to state 76
 
-    value  go to state 171
+    value  go to state 176
 
 
-State 169
+State 174
 
    42 cs: cs RK_SIN LBRACKET value value value value value RBRACKET •
 
     $default  reduce using rule 42 (cs)
 
 
-State 170
+State 175
 
    34 vs: vs RK_PULSE LBRACKET value value value value value value value • RBRACKET
 
-    RBRACKET  shift, and go to state 172
+    RBRACKET  shift, and go to state 177
 
 
-State 171
+State 176
 
    41 cs: cs RK_PULSE LBRACKET value value value value value value value • RBRACKET
 
-    RBRACKET  shift, and go to state 173
+    RBRACKET  shift, and go to state 178
 
 
-State 172
+State 177
 
    34 vs: vs RK_PULSE LBRACKET value value value value value value value RBRACKET •
 
     $default  reduce using rule 34 (vs)
 
 
-State 173
+State 178
 
    41 cs: cs RK_PULSE LBRACKET value value value value value value value RBRACKET •
 

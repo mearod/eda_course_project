@@ -38,10 +38,10 @@ void Inductor::stampTRAN(Analyser* analyser,bool initFlag){
         currentTRAN = analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum-1);
 
         analyser->mnaTranNext(this->bTypeDeviceNo+analyser->nodeNum -1,this->bTypeDeviceNo+analyser->nodeNum -1) = 
-        analyser->mnaTranInit(this->bTypeDeviceNo+analyser->nodeNum,this->bTypeDeviceNo+analyser->nodeNum) - l_value / analyser->tranStep;
+        analyser->mnaTranInit(this->bTypeDeviceNo+analyser->nodeNum,this->bTypeDeviceNo+analyser->nodeNum) - l_value / analyser->tranStepMin;
 
         analyser->rhsTranNext(this->bTypeDeviceNo+analyser->nodeNum -1) = 
-        analyser->rhsTranInit(this->bTypeDeviceNo+analyser->nodeNum) - (currentTRAN  * l_value) / analyser->tranStep; //-1 for excluding the ground node
+        analyser->rhsTranInit(this->bTypeDeviceNo+analyser->nodeNum) - (currentTRAN  * l_value) / analyser->tranStepMin; //-1 for excluding the ground node
     }
 };
 
@@ -59,3 +59,16 @@ double Inductor::getITRAN(Analyser* analyser)
 {
     return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };
+
+double Inductor::filterLTE(Analyser* analyser, double step) {
+    double currentV = getITRAN(analyser);
+    double tmp = 2*this->l_value/(std::abs(currentV-VLastTranStep))*1e-3;
+    VLastTranStep = currentV;
+
+    if (step > tmp)
+        return step / 2;
+    else if (step * 2 < tmp)
+        return step * 2;
+    else
+        return step;
+} 

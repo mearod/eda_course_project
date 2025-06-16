@@ -12,21 +12,9 @@ void Analyser::analyseStepTRAN(){
     rhsIte = arma::cx_mat(rhsTranNext, arma::zeros<arma::mat>(size(rhsTranNext)));
 
 
-    for(int k=0;k<20;k++)
+    if(!IterationSolve(32))
     {
-    for (int i=0; i < circuit->devices.size(); i++){
-        bool firstStampFlag = (k==0);
-        if(circuit->devices[i]->isNonLinearDevice == true){
-            dynamic_cast<NonlinearDevice*>(circuit->devices[i])->stampIteration(this,firstStampFlag);
-        }
-    }
-
-    solve(xIte, mnaIte, rhsIte, arma::solve_opts::allow_ugly);
-    for (int i=0; i < circuit->devices.size(); i++){
-        if(circuit->devices[i]->isNonLinearDevice == true){
-            dynamic_cast<NonlinearDevice*>(circuit->devices[i])->NonlinearValueIteration(this);
-        }
-    }
+        logOutput("TRAN iteration failed after 32 times iteration at time "+std::to_string(tranTime)+"s.",true);
     }
     
     solveTRAN();
@@ -48,23 +36,44 @@ void Analyser::devicesStampTRAN(bool initFlag){
 
 void Analyser::solveTRAN(){
     bool status = solve(xTran, real(mnaIte), real(rhsIte), arma::solve_opts::allow_ugly);
+    xIte = cx_vec(xTran,arma::zeros<arma::vec>(size(xTran)));
     xTran.print("tran solve result:");
     printf("\n");
 }
 
+void Analyser::stepControlTRAN(){
+    double stepMinTemp = 1e10;
+
+    for (auto& device : circuit->devices) {
+        DynamicDevice* dynamicDevice = dynamic_cast<DynamicDevice*>(device);
+        if (dynamicDevice)
+        {
+            double value = dynamicDevice->filterLTE(this, tranStep);
+            stepMinTemp = std::min(stepMinTemp, value);
+        }
+    }
+
+    tranStep = std::min(tranStepMin, stepMinTemp);
+    
+}
+
 void Analyser::analyseTRAN(){
     analyseInitTRAN();
-    if(tranStep<0){
+    if(tranStepMin<0){
         cout<<"TRAN analyse error: step time cannot be negative."<<std::endl;
         return;
     }
     while(tranTime < tranStopTime){
         analyseStepTRAN();
         matrixNodeRecordTRAN(resultRecorderTRAN);
+        stepControlTRAN();
+        logOutput("tran step time: "+std::to_string(tranStep*1e9)+"ns.",false);
+        TotalStepTRAN ++;
         tranTime += tranStep;
     }
     resultRecorderTRAN->debug_print();
     resultRecorderTRAN->debugPlotAllRecords();
+    logOutput("TRAN analyse finished. Total steps: "+std::to_string(TotalStepTRAN)+".",false);
 }
 
 void Analyser::analyseInitTRAN(){
@@ -73,7 +82,8 @@ void Analyser::analyseInitTRAN(){
     }
     tranTime = circuit->commandTRAN.startTime;
     tranStopTime = circuit->commandTRAN.stopTime;
-    tranStep = (circuit->commandTRAN.stepTime < 0) ? tranStopTime/1000 : circuit->commandTRAN.stepTime;//Tran time set
+    tranStepMin = (circuit->commandTRAN.stepTime < 0) ? tranStopTime/10000 : circuit->commandTRAN.stepTime;//Tran time set
+    tranStep    = tranStepMin;
 
     nodeNum = circuit->node_num;
     bTypeDeviceCounter = 0;
@@ -121,9 +131,19 @@ void Analyser::analyseInitTRAN(){
 
 void Analyser::matrixNodeRecordTRAN(ResultRecorder* resultRecorder){
     for (auto it = circuit->commandPlot.nodePlotQueue.begin();it!=circuit->commandPlot.nodePlotQueue.end();it++){
-        double yRecord = circuit->nodemap[it->nodeName].isGround? 0 : xTran(circuit->nodemap[it->nodeName].id);
         string description = it->prefix+it->nodeName;
+        string xLabel = circuit->commandDC.sourceName;
         string yLabel = it->prefix;
-        resultRecorder->addRecord(description,"Time(s)",yLabel,tranTime,yRecord);
+        if(it->prefix == "V")
+        {
+            double yRecord = circuit->nodemap[it->nodeName].isGround? 0 : real(xTran(circuit->nodemap[it->nodeName].id));
+            resultRecorder->addRecord(description,"Time(s)",yLabel,tranTime,yRecord);
+        }
+        else if(it->prefix == "I")
+        {   
+            double yRecord = circuit->devices[circuit->namemap[it->nodeName]]->getITRAN(this);
+            resultRecorder->addRecord(description,"Time(s)",yLabel,tranTime,yRecord);
+        }
+        else{assert(0);}
     }
 }

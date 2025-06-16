@@ -22,17 +22,19 @@ private:
     void solveAC();
     void solveTRAN();
 
-    void solveIte();
+    bool IterationSolve(int maxConvergenceTimes);
 
     void matrixNodeRecordDC(double scanValue,ResultRecorder* resultRecorder);
     void matrixNodeRecordAC(double scanValue,ResultRecorder* resultRecorder);
     void matrixNodeRecordTRAN(ResultRecorder* resultRecorder); 
     
     void analyseStepTRAN();
+    void stepControlTRAN();
 
     void analyseInitTRAN();
     bool checkPlotNodeExists();
 
+    int TotalStepTRAN;
 public:
 
     ResultRecorder* resultRecorderDC;
@@ -58,6 +60,7 @@ public:
     
     double tranTime;
     double tranStopTime;
+    double tranStepMin;
     double tranStep;
 
 

@@ -56,7 +56,21 @@ complex<double> Capacitor::getIAC(Analyser* analyser)
 {
     return analyser->x(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };
+
 double Capacitor::getITRAN(Analyser* analyser)
 {
     return analyser->xTran(this->bTypeDeviceNo+analyser->nodeNum - 1);
 };
+
+double Capacitor::filterLTE(Analyser* analyser, double step) {
+    double currentI = getITRAN(analyser);
+    double tmp = 2*this->c_value/(std::abs(currentI-ILastTranStep))*1e-3;
+    ILastTranStep = currentI;
+
+    if (step > tmp)
+        return step / 2;
+    else if (step * 2 < tmp)
+        return step * 2;
+    else
+        return step;
+} 

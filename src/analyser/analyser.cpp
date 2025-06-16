@@ -12,6 +12,7 @@ Analyser::Analyser(Circuit* circuit){
     nodeNum = circuit->node_num;
     bTypeDeviceNum = 0;
     bTypeDeviceCounter = 0;
+    TotalStepTRAN = 0;
     mna.zeros();
     mna.set_size(1,1);
 }
@@ -57,12 +58,36 @@ void Analyser::opResultPrint(){
     logOutput(resultInfo,false);
 }
 
-void Analyser::solveIte(){
-    mnaIte.shed_col(nodeNum-1);
-    mnaIte.shed_row(nodeNum-1);
-    rhsIte.shed_row(nodeNum-1);//delete ground node
-    bool status = solve(xIte, mnaIte, rhsIte, arma::solve_opts::allow_ugly);
-    real(xIte).print("iteration solve result:");
-    printf("\n");
+bool Analyser::IterationSolve(int maxConvergenceTimes){
+    bool convergenceFlag = true;
+    int k;
+    for(k=0;k<maxConvergenceTimes;k++)
+    {
+        convergenceFlag = true;
+        for (int i=0; i < circuit->devices.size(); i++){
+            bool firstStampFlag = (k==0);
+            if(circuit->devices[i]->isNonLinearDevice == true){
+                dynamic_cast<NonlinearDevice*>(circuit->devices[i])->stampIteration(this,firstStampFlag);
+            }
+        }
+
+        solve(xIte, mnaIte, rhsIte, arma::solve_opts::allow_ugly);
+
+        for (int i=0; i < circuit->devices.size(); i++){
+            if(circuit->devices[i]->isNonLinearDevice == true){
+                dynamic_cast<NonlinearDevice*>(circuit->devices[i])->NonlinearValueIteration(this);
+            }
+        }
+
+        for (int i=0; i < circuit->devices.size(); i++){
+            bool firstStampFlag = (k==0);
+            if(circuit->devices[i]->isNonLinearDevice == true){
+                convergenceFlag = convergenceFlag && dynamic_cast<NonlinearDevice*>(circuit->devices[i])->checkConvergence();
+            }
+        }
+        if(convergenceFlag) break;
+    }
+    cout << "Iteration " << k+1 << " converges." << endl;
+    return convergenceFlag;
 }
 

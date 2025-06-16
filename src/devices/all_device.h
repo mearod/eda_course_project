@@ -3,5 +3,6 @@
 
 #include "device.h"
 #include "nonlinear_device.h"
+#include "dynamic_device.h"
 
 #endif
