@@ -2,7 +2,7 @@
 
 V1 pos 0 sin(0 10 1 0 0)
 R1 1 2 1k
-C1 1 2 1m
+C1 1 2 10m
 D1 pos 1  d
 D2 0 1 d
 D3 2 pos d

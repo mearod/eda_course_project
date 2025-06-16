@@ -37,7 +37,7 @@ void Analyser::devicesStampTRAN(bool initFlag){
 void Analyser::solveTRAN(){
     bool status = solve(xTran, real(mnaIte), real(rhsIte), arma::solve_opts::allow_ugly);
     xIte = cx_vec(xTran,arma::zeros<arma::vec>(size(xTran)));
-    xTran.print("tran solve result:");
+    //xTran.print("tran solve result:");
     printf("\n");
 }
 

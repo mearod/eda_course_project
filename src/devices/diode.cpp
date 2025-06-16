@@ -10,7 +10,7 @@ using namespace std;
 Diode::Diode(std::string name,string model,string pos, string neg, double Vd,double Is, double Vt):
 BaseDevice(name,G_TYPE,D,true), NonlinearDevice(),model(model),pos(pos),neg(neg)
 {
-    this->Is = Is;
+    this->Is = 2e-14;
     this->Vt = 0.026;
     this->Vd = 0.7;
     this->Id = Is * (exp(this->Vd/Vt) - 1);
