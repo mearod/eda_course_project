@@ -2,3 +2,9 @@
 如果出现错误，请检查 相关环境是否配置正确。
 make clean：清理编译文件。
 make linecount：统计非外部库源文件行数。
+
+所需要安装的软件包:
+qt5base-dev
+armadillo
+flex
+bison

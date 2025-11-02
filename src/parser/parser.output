@@ -1,10 +1,10 @@
-Terminals unused in grammar
+终端机在文法中未使用
 
     COMMENTLINE
     CMD_OPTION
 
 
-Grammar
+语法
 
     0 $accept: spice $end
 
@@ -117,7 +117,7 @@ Grammar
    83      | INTEGER
 
 
-Terminals, with rules where they appear
+终结语词，附有它们出现处的规则
 
     $end (0) 0
     error (256) 9
@@ -160,7 +160,7 @@ Terminals, with rules where they appear
     RBRACKET <str> (294) 34 35 41 42
 
 
-Nonterminals, with rules where they appear
+非终结语词，附有它们出现处的规则
 
     $accept (40)
         on left: 0
@@ -241,436 +241,436 @@ Nonterminals, with rules where they appear
         on right: 26 27 28 29 31 32 33 34 35 36 38 39 40 41 42 43 44 48 49 50 51 52 53 54 55
 
 
-State 0
+状态 0
 
     0 $accept: • spice $end
 
-    error      shift, and go to state 1
-    INDUCTOR   shift, and go to state 2
-    CAPACITOR  shift, and go to state 3
-    RESISTOR   shift, and go to state 4
-    VS         shift, and go to state 5
-    VCCS       shift, and go to state 6
-    VCVS       shift, and go to state 7
-    CS         shift, and go to state 8
-    CCVS       shift, and go to state 9
-    CCCS       shift, and go to state 10
-    DIODE      shift, and go to state 11
-    EOL        shift, and go to state 12
-    CMD_PRINT  shift, and go to state 13
-    CMD_OP     shift, and go to state 14
-    CMD_DC     shift, and go to state 15
-    CMD_AC     shift, and go to state 16
-    CMD_PLOT   shift, and go to state 17
-    CMD_TRAN   shift, and go to state 18
+    error      偏移，并进入状态 1
+    INDUCTOR   偏移，并进入状态 2
+    CAPACITOR  偏移，并进入状态 3
+    RESISTOR   偏移，并进入状态 4
+    VS         偏移，并进入状态 5
+    VCCS       偏移，并进入状态 6
+    VCVS       偏移，并进入状态 7
+    CS         偏移，并进入状态 8
+    CCVS       偏移，并进入状态 9
+    CCCS       偏移，并进入状态 10
+    DIODE      偏移，并进入状态 11
+    EOL        偏移，并进入状态 12
+    CMD_PRINT  偏移，并进入状态 13
+    CMD_OP     偏移，并进入状态 14
+    CMD_DC     偏移，并进入状态 15
+    CMD_AC     偏移，并进入状态 16
+    CMD_PLOT   偏移，并进入状态 17
+    CMD_TRAN   偏移，并进入状态 18
 
-    spice      go to state 19
-    netlist    go to state 20
-    line       go to state 21
-    component  go to state 22
-    command    go to state 23
-    resistor   go to state 24
-    capacitor  go to state 25
-    inductor   go to state 26
-    vccs       go to state 27
-    vs         go to state 28
-    vcvs       go to state 29
-    cs         go to state 30
-    cccs       go to state 31
-    ccvs       go to state 32
-    diode      go to state 33
-    op         go to state 34
-    dc         go to state 35
-    ac         go to state 36
-    tran       go to state 37
-    print      go to state 38
-    plot       go to state 39
+    spice      转到状态 19
+    netlist    转到状态 20
+    line       转到状态 21
+    component  转到状态 22
+    command    转到状态 23
+    resistor   转到状态 24
+    capacitor  转到状态 25
+    inductor   转到状态 26
+    vccs       转到状态 27
+    vs         转到状态 28
+    vcvs       转到状态 29
+    cs         转到状态 30
+    cccs       转到状态 31
+    ccvs       转到状态 32
+    diode      转到状态 33
+    op         转到状态 34
+    dc         转到状态 35
+    ac         转到状态 36
+    tran       转到状态 37
+    print      转到状态 38
+    plot       转到状态 39
 
 
-State 1
+状态 1
 
     9 line: error • EOL
 
-    EOL  shift, and go to state 40
+    EOL  偏移，并进入状态 40
 
 
-State 2
+状态 2
 
    28 inductor: INDUCTOR • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 53
+    node  转到状态 53
 
 
-State 3
+状态 3
 
    27 capacitor: CAPACITOR • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 54
+    node  转到状态 54
 
 
-State 4
+状态 4
 
    26 resistor: RESISTOR • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 55
+    node  转到状态 55
 
 
-State 5
+状态 5
 
    30 vs: VS • node node
    31   | VS • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 56
+    node  转到状态 56
 
 
-State 6
+状态 6
 
    29 vccs: VCCS • node node node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 57
+    node  转到状态 57
 
 
-State 7
+状态 7
 
    36 vcvs: VCVS • node node node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 58
+    node  转到状态 58
 
 
-State 8
+状态 8
 
    37 cs: CS • node node
    38   | CS • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 59
+    node  转到状态 59
 
 
-State 9
+状态 9
 
    44 ccvs: CCVS • node node VS value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 60
+    node  转到状态 60
 
 
-State 10
+状态 10
 
    43 cccs: CCCS • node node VS value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 61
+    node  转到状态 61
 
 
-State 11
+状态 11
 
    45 diode: DIODE • node node modelName
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 62
+    node  转到状态 62
 
 
-State 12
+状态 12
 
     8 line: EOL •
 
-    $default  reduce using rule 8 (line)
+    $default  使用规则 8 以归约 (line)
 
 
-State 13
+状态 13
 
    56 print: CMD_PRINT • RK_AC
    57      | CMD_PRINT • RK_DC
    58      | CMD_PRINT • RK_OP
    59      | CMD_PRINT • RK_TRAN
 
-    RK_OP    shift, and go to state 63
-    RK_AC    shift, and go to state 64
-    RK_DC    shift, and go to state 65
-    RK_TRAN  shift, and go to state 66
+    RK_OP    偏移，并进入状态 63
+    RK_AC    偏移，并进入状态 64
+    RK_DC    偏移，并进入状态 65
+    RK_TRAN  偏移，并进入状态 66
 
 
-State 14
+状态 14
 
    46 op: CMD_OP •
 
-    $default  reduce using rule 46 (op)
+    $default  使用规则 46 以归约 (op)
 
 
-State 15
+状态 15
 
    47 dc: CMD_DC •
 
-    $default  reduce using rule 47 (dc)
+    $default  使用规则 47 以归约 (dc)
 
 
-State 16
+状态 16
 
    50 ac: CMD_AC • RK_DEC value value value
    51   | CMD_AC • RK_LIN value value value
    52   | CMD_AC • RK_OCT value value value
 
-    RK_DEC  shift, and go to state 67
-    RK_OCT  shift, and go to state 68
-    RK_LIN  shift, and go to state 69
+    RK_DEC  偏移，并进入状态 67
+    RK_OCT  偏移，并进入状态 68
+    RK_LIN  偏移，并进入状态 69
 
 
-State 17
+状态 17
 
    62 plot: CMD_PLOT • RK_AC
    63     | CMD_PLOT • RK_DC
    64     | CMD_PLOT • RK_OP
    65     | CMD_PLOT • RK_TRAN
 
-    RK_OP    shift, and go to state 70
-    RK_AC    shift, and go to state 71
-    RK_DC    shift, and go to state 72
-    RK_TRAN  shift, and go to state 73
+    RK_OP    偏移，并进入状态 70
+    RK_AC    偏移，并进入状态 71
+    RK_DC    偏移，并进入状态 72
+    RK_TRAN  偏移，并进入状态 73
 
 
-State 18
+状态 18
 
    53 tran: CMD_TRAN • value
    54     | CMD_TRAN • value value
    55     | CMD_TRAN • value value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 77
+    value  转到状态 77
 
 
-State 19
+状态 19
 
     0 $accept: spice • $end
 
-    $end  shift, and go to state 78
+    $end  偏移，并进入状态 78
 
 
-State 20
+状态 20
 
     1 spice: netlist • end
     4 netlist: netlist • line
 
-    error      shift, and go to state 1
-    INDUCTOR   shift, and go to state 2
-    CAPACITOR  shift, and go to state 3
-    RESISTOR   shift, and go to state 4
-    VS         shift, and go to state 5
-    VCCS       shift, and go to state 6
-    VCVS       shift, and go to state 7
-    CS         shift, and go to state 8
-    CCVS       shift, and go to state 9
-    CCCS       shift, and go to state 10
-    DIODE      shift, and go to state 11
-    END        shift, and go to state 79
-    EOL        shift, and go to state 12
-    CMD_PRINT  shift, and go to state 13
-    CMD_OP     shift, and go to state 14
-    CMD_DC     shift, and go to state 15
-    CMD_AC     shift, and go to state 16
-    CMD_PLOT   shift, and go to state 17
-    CMD_TRAN   shift, and go to state 18
+    error      偏移，并进入状态 1
+    INDUCTOR   偏移，并进入状态 2
+    CAPACITOR  偏移，并进入状态 3
+    RESISTOR   偏移，并进入状态 4
+    VS         偏移，并进入状态 5
+    VCCS       偏移，并进入状态 6
+    VCVS       偏移，并进入状态 7
+    CS         偏移，并进入状态 8
+    CCVS       偏移，并进入状态 9
+    CCCS       偏移，并进入状态 10
+    DIODE      偏移，并进入状态 11
+    END        偏移，并进入状态 79
+    EOL        偏移，并进入状态 12
+    CMD_PRINT  偏移，并进入状态 13
+    CMD_OP     偏移，并进入状态 14
+    CMD_DC     偏移，并进入状态 15
+    CMD_AC     偏移，并进入状态 16
+    CMD_PLOT   偏移，并进入状态 17
+    CMD_TRAN   偏移，并进入状态 18
 
-    end        go to state 80
-    line       go to state 81
-    component  go to state 22
-    command    go to state 23
-    resistor   go to state 24
-    capacitor  go to state 25
-    inductor   go to state 26
-    vccs       go to state 27
-    vs         go to state 28
-    vcvs       go to state 29
-    cs         go to state 30
-    cccs       go to state 31
-    ccvs       go to state 32
-    diode      go to state 33
-    op         go to state 34
-    dc         go to state 35
-    ac         go to state 36
-    tran       go to state 37
-    print      go to state 38
-    plot       go to state 39
+    end        转到状态 80
+    line       转到状态 81
+    component  转到状态 22
+    command    转到状态 23
+    resistor   转到状态 24
+    capacitor  转到状态 25
+    inductor   转到状态 26
+    vccs       转到状态 27
+    vs         转到状态 28
+    vcvs       转到状态 29
+    cs         转到状态 30
+    cccs       转到状态 31
+    ccvs       转到状态 32
+    diode      转到状态 33
+    op         转到状态 34
+    dc         转到状态 35
+    ac         转到状态 36
+    tran       转到状态 37
+    print      转到状态 38
+    plot       转到状态 39
 
 
-State 21
+状态 21
 
     5 netlist: line •
 
-    $default  reduce using rule 5 (netlist)
+    $default  使用规则 5 以归约 (netlist)
 
 
-State 22
+状态 22
 
     6 line: component • EOL
 
-    EOL  shift, and go to state 82
+    EOL  偏移，并进入状态 82
 
 
-State 23
+状态 23
 
     7 line: command • EOL
 
-    EOL  shift, and go to state 83
+    EOL  偏移，并进入状态 83
 
 
-State 24
+状态 24
 
    10 component: resistor •
 
-    $default  reduce using rule 10 (component)
+    $default  使用规则 10 以归约 (component)
 
 
-State 25
+状态 25
 
    11 component: capacitor •
 
-    $default  reduce using rule 11 (component)
+    $default  使用规则 11 以归约 (component)
 
 
-State 26
+状态 26
 
    12 component: inductor •
 
-    $default  reduce using rule 12 (component)
+    $default  使用规则 12 以归约 (component)
 
 
-State 27
+状态 27
 
    13 component: vccs •
 
-    $default  reduce using rule 13 (component)
+    $default  使用规则 13 以归约 (component)
 
 
-State 28
+状态 28
 
    14 component: vs •
    32 vs: vs • RK_DC value
@@ -678,22 +678,22 @@ State 28
    34   | vs • RK_PULSE LBRACKET value value value value value value value RBRACKET
    35   | vs • RK_SIN LBRACKET value value value value value RBRACKET
 
-    RK_AC     shift, and go to state 84
-    RK_DC     shift, and go to state 85
-    RK_PULSE  shift, and go to state 86
-    RK_SIN    shift, and go to state 87
+    RK_AC     偏移，并进入状态 84
+    RK_DC     偏移，并进入状态 85
+    RK_PULSE  偏移，并进入状态 86
+    RK_SIN    偏移，并进入状态 87
 
-    $default  reduce using rule 14 (component)
+    $default  使用规则 14 以归约 (component)
 
 
-State 29
+状态 29
 
    15 component: vcvs •
 
-    $default  reduce using rule 15 (component)
+    $default  使用规则 15 以归约 (component)
 
 
-State 30
+状态 30
 
    16 component: cs •
    39 cs: cs • RK_DC value
@@ -701,1490 +701,1490 @@ State 30
    41   | cs • RK_PULSE LBRACKET value value value value value value value RBRACKET
    42   | cs • RK_SIN LBRACKET value value value value value RBRACKET
 
-    RK_AC     shift, and go to state 88
-    RK_DC     shift, and go to state 89
-    RK_PULSE  shift, and go to state 90
-    RK_SIN    shift, and go to state 91
+    RK_AC     偏移，并进入状态 88
+    RK_DC     偏移，并进入状态 89
+    RK_PULSE  偏移，并进入状态 90
+    RK_SIN    偏移，并进入状态 91
 
-    $default  reduce using rule 16 (component)
+    $default  使用规则 16 以归约 (component)
 
 
-State 31
+状态 31
 
    17 component: cccs •
 
-    $default  reduce using rule 17 (component)
+    $default  使用规则 17 以归约 (component)
 
 
-State 32
+状态 32
 
    18 component: ccvs •
 
-    $default  reduce using rule 18 (component)
+    $default  使用规则 18 以归约 (component)
 
 
-State 33
+状态 33
 
    19 component: diode •
 
-    $default  reduce using rule 19 (component)
+    $default  使用规则 19 以归约 (component)
 
 
-State 34
+状态 34
 
    24 command: op •
 
-    $default  reduce using rule 24 (command)
+    $default  使用规则 24 以归约 (command)
 
 
-State 35
+状态 35
 
    21 command: dc •
    48 dc: dc • VS value value value
    49   | dc • CS value value value
 
-    VS  shift, and go to state 92
-    CS  shift, and go to state 93
+    VS  偏移，并进入状态 92
+    CS  偏移，并进入状态 93
 
-    $default  reduce using rule 21 (command)
+    $default  使用规则 21 以归约 (command)
 
 
-State 36
+状态 36
 
    22 command: ac •
 
-    $default  reduce using rule 22 (command)
+    $default  使用规则 22 以归约 (command)
 
 
-State 37
+状态 37
 
    23 command: tran •
 
-    $default  reduce using rule 23 (command)
+    $default  使用规则 23 以归约 (command)
 
 
-State 38
+状态 38
 
    20 command: print •
    60 print: print • VAR_V
    61      | print • VAR_I
 
-    VAR_V  shift, and go to state 94
-    VAR_I  shift, and go to state 95
+    VAR_V  偏移，并进入状态 94
+    VAR_I  偏移，并进入状态 95
 
-    $default  reduce using rule 20 (command)
+    $default  使用规则 20 以归约 (command)
 
 
-State 39
+状态 39
 
    25 command: plot •
    66 plot: plot • VAR_V
    67     | plot • VAR_I
 
-    VAR_V  shift, and go to state 96
-    VAR_I  shift, and go to state 97
+    VAR_V  偏移，并进入状态 96
+    VAR_I  偏移，并进入状态 97
 
-    $default  reduce using rule 25 (command)
+    $default  使用规则 25 以归约 (command)
 
 
-State 40
+状态 40
 
     9 line: error EOL •
 
-    $default  reduce using rule 9 (line)
+    $default  使用规则 9 以归约 (line)
 
 
-State 41
+状态 41
 
    69 node: STRING •
 
-    $default  reduce using rule 69 (node)
+    $default  使用规则 69 以归约 (node)
 
 
-State 42
+状态 42
 
    70 node: INTEGER •
 
-    $default  reduce using rule 70 (node)
+    $default  使用规则 70 以归约 (node)
 
 
-State 43
+状态 43
 
    73 node: INDUCTOR •
 
-    $default  reduce using rule 73 (node)
+    $default  使用规则 73 以归约 (node)
 
 
-State 44
+状态 44
 
    72 node: CAPACITOR •
 
-    $default  reduce using rule 72 (node)
+    $default  使用规则 72 以归约 (node)
 
 
-State 45
+状态 45
 
    71 node: RESISTOR •
 
-    $default  reduce using rule 71 (node)
+    $default  使用规则 71 以归约 (node)
 
 
-State 46
+状态 46
 
    74 node: VS •
 
-    $default  reduce using rule 74 (node)
+    $default  使用规则 74 以归约 (node)
 
 
-State 47
+状态 47
 
    75 node: VCCS •
 
-    $default  reduce using rule 75 (node)
+    $default  使用规则 75 以归约 (node)
 
 
-State 48
+状态 48
 
    76 node: VCVS •
 
-    $default  reduce using rule 76 (node)
+    $default  使用规则 76 以归约 (node)
 
 
-State 49
+状态 49
 
    77 node: CS •
 
-    $default  reduce using rule 77 (node)
+    $default  使用规则 77 以归约 (node)
 
 
-State 50
+状态 50
 
    79 node: CCVS •
 
-    $default  reduce using rule 79 (node)
+    $default  使用规则 79 以归约 (node)
 
 
-State 51
+状态 51
 
    78 node: CCCS •
 
-    $default  reduce using rule 78 (node)
+    $default  使用规则 78 以归约 (node)
 
 
-State 52
+状态 52
 
    80 node: DIODE •
 
-    $default  reduce using rule 80 (node)
+    $default  使用规则 80 以归约 (node)
 
 
-State 53
+状态 53
 
    28 inductor: INDUCTOR node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 98
+    node  转到状态 98
 
 
-State 54
+状态 54
 
    27 capacitor: CAPACITOR node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 99
+    node  转到状态 99
 
 
-State 55
+状态 55
 
    26 resistor: RESISTOR node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 100
+    node  转到状态 100
 
 
-State 56
+状态 56
 
    30 vs: VS node • node
    31   | VS node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 101
+    node  转到状态 101
 
 
-State 57
+状态 57
 
    29 vccs: VCCS node • node node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 102
+    node  转到状态 102
 
 
-State 58
+状态 58
 
    36 vcvs: VCVS node • node node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 103
+    node  转到状态 103
 
 
-State 59
+状态 59
 
    37 cs: CS node • node
    38   | CS node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 104
+    node  转到状态 104
 
 
-State 60
+状态 60
 
    44 ccvs: CCVS node • node VS value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 105
+    node  转到状态 105
 
 
-State 61
+状态 61
 
    43 cccs: CCCS node • node VS value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 106
+    node  转到状态 106
 
 
-State 62
+状态 62
 
    45 diode: DIODE node • node modelName
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 107
+    node  转到状态 107
 
 
-State 63
+状态 63
 
    58 print: CMD_PRINT RK_OP •
 
-    $default  reduce using rule 58 (print)
+    $default  使用规则 58 以归约 (print)
 
 
-State 64
+状态 64
 
    56 print: CMD_PRINT RK_AC •
 
-    $default  reduce using rule 56 (print)
+    $default  使用规则 56 以归约 (print)
 
 
-State 65
+状态 65
 
    57 print: CMD_PRINT RK_DC •
 
-    $default  reduce using rule 57 (print)
+    $default  使用规则 57 以归约 (print)
 
 
-State 66
+状态 66
 
    59 print: CMD_PRINT RK_TRAN •
 
-    $default  reduce using rule 59 (print)
+    $default  使用规则 59 以归约 (print)
 
 
-State 67
+状态 67
 
    50 ac: CMD_AC RK_DEC • value value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 108
+    value  转到状态 108
 
 
-State 68
+状态 68
 
    52 ac: CMD_AC RK_OCT • value value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 109
+    value  转到状态 109
 
 
-State 69
+状态 69
 
    51 ac: CMD_AC RK_LIN • value value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 110
+    value  转到状态 110
 
 
-State 70
+状态 70
 
    64 plot: CMD_PLOT RK_OP •
 
-    $default  reduce using rule 64 (plot)
+    $default  使用规则 64 以归约 (plot)
 
 
-State 71
+状态 71
 
    62 plot: CMD_PLOT RK_AC •
 
-    $default  reduce using rule 62 (plot)
+    $default  使用规则 62 以归约 (plot)
 
 
-State 72
+状态 72
 
    63 plot: CMD_PLOT RK_DC •
 
-    $default  reduce using rule 63 (plot)
+    $default  使用规则 63 以归约 (plot)
 
 
-State 73
+状态 73
 
    65 plot: CMD_PLOT RK_TRAN •
 
-    $default  reduce using rule 65 (plot)
+    $default  使用规则 65 以归约 (plot)
 
 
-State 74
+状态 74
 
    82 value: FLOAT •
 
-    $default  reduce using rule 82 (value)
+    $default  使用规则 82 以归约 (value)
 
 
-State 75
+状态 75
 
    83 value: INTEGER •
 
-    $default  reduce using rule 83 (value)
+    $default  使用规则 83 以归约 (value)
 
 
-State 76
+状态 76
 
    81 value: VALUE •
 
-    $default  reduce using rule 81 (value)
+    $default  使用规则 81 以归约 (value)
 
 
-State 77
+状态 77
 
    53 tran: CMD_TRAN value •
    54     | CMD_TRAN value • value
    55     | CMD_TRAN value • value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    $default  reduce using rule 53 (tran)
+    $default  使用规则 53 以归约 (tran)
 
-    value  go to state 111
+    value  转到状态 111
 
 
-State 78
+状态 78
 
     0 $accept: spice $end •
 
-    $default  accept
+    $default  接受
 
 
-State 79
+状态 79
 
     3 end: END •
 
-    $default  reduce using rule 3 (end)
+    $default  使用规则 3 以归约 (end)
 
 
-State 80
+状态 80
 
     1 spice: netlist end •
     2 end: end • EOL
 
-    EOL  shift, and go to state 112
+    EOL  偏移，并进入状态 112
 
-    $default  reduce using rule 1 (spice)
+    $default  使用规则 1 以归约 (spice)
 
 
-State 81
+状态 81
 
     4 netlist: netlist line •
 
-    $default  reduce using rule 4 (netlist)
+    $default  使用规则 4 以归约 (netlist)
 
 
-State 82
+状态 82
 
     6 line: component EOL •
 
-    $default  reduce using rule 6 (line)
+    $default  使用规则 6 以归约 (line)
 
 
-State 83
+状态 83
 
     7 line: command EOL •
 
-    $default  reduce using rule 7 (line)
+    $default  使用规则 7 以归约 (line)
 
 
-State 84
+状态 84
 
    33 vs: vs RK_AC • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 113
+    value  转到状态 113
 
 
-State 85
+状态 85
 
    32 vs: vs RK_DC • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 114
+    value  转到状态 114
 
 
-State 86
+状态 86
 
    34 vs: vs RK_PULSE • LBRACKET value value value value value value value RBRACKET
 
-    LBRACKET  shift, and go to state 115
+    LBRACKET  偏移，并进入状态 115
 
 
-State 87
+状态 87
 
    35 vs: vs RK_SIN • LBRACKET value value value value value RBRACKET
 
-    LBRACKET  shift, and go to state 116
+    LBRACKET  偏移，并进入状态 116
 
 
-State 88
+状态 88
 
    40 cs: cs RK_AC • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 117
+    value  转到状态 117
 
 
-State 89
+状态 89
 
    39 cs: cs RK_DC • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 118
+    value  转到状态 118
 
 
-State 90
+状态 90
 
    41 cs: cs RK_PULSE • LBRACKET value value value value value value value RBRACKET
 
-    LBRACKET  shift, and go to state 119
+    LBRACKET  偏移，并进入状态 119
 
 
-State 91
+状态 91
 
    42 cs: cs RK_SIN • LBRACKET value value value value value RBRACKET
 
-    LBRACKET  shift, and go to state 120
+    LBRACKET  偏移，并进入状态 120
 
 
-State 92
+状态 92
 
    48 dc: dc VS • value value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 121
+    value  转到状态 121
 
 
-State 93
+状态 93
 
    49 dc: dc CS • value value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 122
+    value  转到状态 122
 
 
-State 94
+状态 94
 
    60 print: print VAR_V •
 
-    $default  reduce using rule 60 (print)
+    $default  使用规则 60 以归约 (print)
 
 
-State 95
+状态 95
 
    61 print: print VAR_I •
 
-    $default  reduce using rule 61 (print)
+    $default  使用规则 61 以归约 (print)
 
 
-State 96
+状态 96
 
    66 plot: plot VAR_V •
 
-    $default  reduce using rule 66 (plot)
+    $default  使用规则 66 以归约 (plot)
 
 
-State 97
+状态 97
 
    67 plot: plot VAR_I •
 
-    $default  reduce using rule 67 (plot)
+    $default  使用规则 67 以归约 (plot)
 
 
-State 98
+状态 98
 
    28 inductor: INDUCTOR node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 123
+    value  转到状态 123
 
 
-State 99
+状态 99
 
    27 capacitor: CAPACITOR node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 124
+    value  转到状态 124
 
 
-State 100
+状态 100
 
    26 resistor: RESISTOR node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 125
+    value  转到状态 125
 
 
-State 101
+状态 101
 
    30 vs: VS node node •
    31   | VS node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    $default  reduce using rule 30 (vs)
+    $default  使用规则 30 以归约 (vs)
 
-    value  go to state 126
+    value  转到状态 126
 
 
-State 102
+状态 102
 
    29 vccs: VCCS node node • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 127
+    node  转到状态 127
 
 
-State 103
+状态 103
 
    36 vcvs: VCVS node node • node node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 128
+    node  转到状态 128
 
 
-State 104
+状态 104
 
    37 cs: CS node node •
    38   | CS node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    $default  reduce using rule 37 (cs)
+    $default  使用规则 37 以归约 (cs)
 
-    value  go to state 129
+    value  转到状态 129
 
 
-State 105
+状态 105
 
    44 ccvs: CCVS node node • VS value
 
-    VS  shift, and go to state 130
+    VS  偏移，并进入状态 130
 
 
-State 106
+状态 106
 
    43 cccs: CCCS node node • VS value
 
-    VS  shift, and go to state 131
+    VS  偏移，并进入状态 131
 
 
-State 107
+状态 107
 
    45 diode: DIODE node node • modelName
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    modelName  go to state 132
-    node       go to state 133
+    modelName  转到状态 132
+    node       转到状态 133
 
 
-State 108
+状态 108
 
    50 ac: CMD_AC RK_DEC value • value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 134
+    value  转到状态 134
 
 
-State 109
+状态 109
 
    52 ac: CMD_AC RK_OCT value • value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 135
+    value  转到状态 135
 
 
-State 110
+状态 110
 
    51 ac: CMD_AC RK_LIN value • value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 136
+    value  转到状态 136
 
 
-State 111
+状态 111
 
    54 tran: CMD_TRAN value value •
    55     | CMD_TRAN value value • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    $default  reduce using rule 54 (tran)
+    $default  使用规则 54 以归约 (tran)
 
-    value  go to state 137
+    value  转到状态 137
 
 
-State 112
+状态 112
 
     2 end: end EOL •
 
-    $default  reduce using rule 2 (end)
+    $default  使用规则 2 以归约 (end)
 
 
-State 113
+状态 113
 
    33 vs: vs RK_AC value •
 
-    $default  reduce using rule 33 (vs)
+    $default  使用规则 33 以归约 (vs)
 
 
-State 114
+状态 114
 
    32 vs: vs RK_DC value •
 
-    $default  reduce using rule 32 (vs)
+    $default  使用规则 32 以归约 (vs)
 
 
-State 115
+状态 115
 
    34 vs: vs RK_PULSE LBRACKET • value value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 138
+    value  转到状态 138
 
 
-State 116
+状态 116
 
    35 vs: vs RK_SIN LBRACKET • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 139
+    value  转到状态 139
 
 
-State 117
+状态 117
 
    40 cs: cs RK_AC value •
 
-    $default  reduce using rule 40 (cs)
+    $default  使用规则 40 以归约 (cs)
 
 
-State 118
+状态 118
 
    39 cs: cs RK_DC value •
 
-    $default  reduce using rule 39 (cs)
+    $default  使用规则 39 以归约 (cs)
 
 
-State 119
+状态 119
 
    41 cs: cs RK_PULSE LBRACKET • value value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 140
+    value  转到状态 140
 
 
-State 120
+状态 120
 
    42 cs: cs RK_SIN LBRACKET • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 141
+    value  转到状态 141
 
 
-State 121
+状态 121
 
    48 dc: dc VS value • value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 142
+    value  转到状态 142
 
 
-State 122
+状态 122
 
    49 dc: dc CS value • value value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 143
+    value  转到状态 143
 
 
-State 123
+状态 123
 
    28 inductor: INDUCTOR node node value •
 
-    $default  reduce using rule 28 (inductor)
+    $default  使用规则 28 以归约 (inductor)
 
 
-State 124
+状态 124
 
    27 capacitor: CAPACITOR node node value •
 
-    $default  reduce using rule 27 (capacitor)
+    $default  使用规则 27 以归约 (capacitor)
 
 
-State 125
+状态 125
 
    26 resistor: RESISTOR node node value •
 
-    $default  reduce using rule 26 (resistor)
+    $default  使用规则 26 以归约 (resistor)
 
 
-State 126
+状态 126
 
    31 vs: VS node node value •
 
-    $default  reduce using rule 31 (vs)
+    $default  使用规则 31 以归约 (vs)
 
 
-State 127
+状态 127
 
    29 vccs: VCCS node node node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 144
+    node  转到状态 144
 
 
-State 128
+状态 128
 
    36 vcvs: VCVS node node node • node value
 
-    STRING     shift, and go to state 41
-    INTEGER    shift, and go to state 42
-    INDUCTOR   shift, and go to state 43
-    CAPACITOR  shift, and go to state 44
-    RESISTOR   shift, and go to state 45
-    VS         shift, and go to state 46
-    VCCS       shift, and go to state 47
-    VCVS       shift, and go to state 48
-    CS         shift, and go to state 49
-    CCVS       shift, and go to state 50
-    CCCS       shift, and go to state 51
-    DIODE      shift, and go to state 52
+    STRING     偏移，并进入状态 41
+    INTEGER    偏移，并进入状态 42
+    INDUCTOR   偏移，并进入状态 43
+    CAPACITOR  偏移，并进入状态 44
+    RESISTOR   偏移，并进入状态 45
+    VS         偏移，并进入状态 46
+    VCCS       偏移，并进入状态 47
+    VCVS       偏移，并进入状态 48
+    CS         偏移，并进入状态 49
+    CCVS       偏移，并进入状态 50
+    CCCS       偏移，并进入状态 51
+    DIODE      偏移，并进入状态 52
 
-    node  go to state 145
+    node  转到状态 145
 
 
-State 129
+状态 129
 
    38 cs: CS node node value •
 
-    $default  reduce using rule 38 (cs)
+    $default  使用规则 38 以归约 (cs)
 
 
-State 130
+状态 130
 
    44 ccvs: CCVS node node VS • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 146
+    value  转到状态 146
 
 
-State 131
+状态 131
 
    43 cccs: CCCS node node VS • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 147
+    value  转到状态 147
 
 
-State 132
+状态 132
 
    45 diode: DIODE node node modelName •
 
-    $default  reduce using rule 45 (diode)
+    $default  使用规则 45 以归约 (diode)
 
 
-State 133
+状态 133
 
    68 modelName: node •
 
-    $default  reduce using rule 68 (modelName)
+    $default  使用规则 68 以归约 (modelName)
 
 
-State 134
+状态 134
 
    50 ac: CMD_AC RK_DEC value value • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 148
+    value  转到状态 148
 
 
-State 135
+状态 135
 
    52 ac: CMD_AC RK_OCT value value • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 149
+    value  转到状态 149
 
 
-State 136
+状态 136
 
    51 ac: CMD_AC RK_LIN value value • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 150
+    value  转到状态 150
 
 
-State 137
+状态 137
 
    55 tran: CMD_TRAN value value value •
 
-    $default  reduce using rule 55 (tran)
+    $default  使用规则 55 以归约 (tran)
 
 
-State 138
+状态 138
 
    34 vs: vs RK_PULSE LBRACKET value • value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 151
+    value  转到状态 151
 
 
-State 139
+状态 139
 
    35 vs: vs RK_SIN LBRACKET value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 152
+    value  转到状态 152
 
 
-State 140
+状态 140
 
    41 cs: cs RK_PULSE LBRACKET value • value value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 153
+    value  转到状态 153
 
 
-State 141
+状态 141
 
    42 cs: cs RK_SIN LBRACKET value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 154
+    value  转到状态 154
 
 
-State 142
+状态 142
 
    48 dc: dc VS value value • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 155
+    value  转到状态 155
 
 
-State 143
+状态 143
 
    49 dc: dc CS value value • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 156
+    value  转到状态 156
 
 
-State 144
+状态 144
 
    29 vccs: VCCS node node node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 157
+    value  转到状态 157
 
 
-State 145
+状态 145
 
    36 vcvs: VCVS node node node node • value
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 158
+    value  转到状态 158
 
 
-State 146
+状态 146
 
    44 ccvs: CCVS node node VS value •
 
-    $default  reduce using rule 44 (ccvs)
+    $default  使用规则 44 以归约 (ccvs)
 
 
-State 147
+状态 147
 
    43 cccs: CCCS node node VS value •
 
-    $default  reduce using rule 43 (cccs)
+    $default  使用规则 43 以归约 (cccs)
 
 
-State 148
+状态 148
 
    50 ac: CMD_AC RK_DEC value value value •
 
-    $default  reduce using rule 50 (ac)
+    $default  使用规则 50 以归约 (ac)
 
 
-State 149
+状态 149
 
    52 ac: CMD_AC RK_OCT value value value •
 
-    $default  reduce using rule 52 (ac)
+    $default  使用规则 52 以归约 (ac)
 
 
-State 150
+状态 150
 
    51 ac: CMD_AC RK_LIN value value value •
 
-    $default  reduce using rule 51 (ac)
+    $default  使用规则 51 以归约 (ac)
 
 
-State 151
+状态 151
 
    34 vs: vs RK_PULSE LBRACKET value value • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 159
+    value  转到状态 159
 
 
-State 152
+状态 152
 
    35 vs: vs RK_SIN LBRACKET value value • value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 160
+    value  转到状态 160
 
 
-State 153
+状态 153
 
    41 cs: cs RK_PULSE LBRACKET value value • value value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 161
+    value  转到状态 161
 
 
-State 154
+状态 154
 
    42 cs: cs RK_SIN LBRACKET value value • value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 162
+    value  转到状态 162
 
 
-State 155
+状态 155
 
    48 dc: dc VS value value value •
 
-    $default  reduce using rule 48 (dc)
+    $default  使用规则 48 以归约 (dc)
 
 
-State 156
+状态 156
 
    49 dc: dc CS value value value •
 
-    $default  reduce using rule 49 (dc)
+    $default  使用规则 49 以归约 (dc)
 
 
-State 157
+状态 157
 
    29 vccs: VCCS node node node node value •
 
-    $default  reduce using rule 29 (vccs)
+    $default  使用规则 29 以归约 (vccs)
 
 
-State 158
+状态 158
 
    36 vcvs: VCVS node node node node value •
 
-    $default  reduce using rule 36 (vcvs)
+    $default  使用规则 36 以归约 (vcvs)
 
 
-State 159
+状态 159
 
    34 vs: vs RK_PULSE LBRACKET value value value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 163
+    value  转到状态 163
 
 
-State 160
+状态 160
 
    35 vs: vs RK_SIN LBRACKET value value value • value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 164
+    value  转到状态 164
 
 
-State 161
+状态 161
 
    41 cs: cs RK_PULSE LBRACKET value value value • value value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 165
+    value  转到状态 165
 
 
-State 162
+状态 162
 
    42 cs: cs RK_SIN LBRACKET value value value • value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 166
+    value  转到状态 166
 
 
-State 163
+状态 163
 
    34 vs: vs RK_PULSE LBRACKET value value value value • value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 167
+    value  转到状态 167
 
 
-State 164
+状态 164
 
    35 vs: vs RK_SIN LBRACKET value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 168
+    value  转到状态 168
 
 
-State 165
+状态 165
 
    41 cs: cs RK_PULSE LBRACKET value value value value • value value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 169
+    value  转到状态 169
 
 
-State 166
+状态 166
 
    42 cs: cs RK_SIN LBRACKET value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 170
+    value  转到状态 170
 
 
-State 167
+状态 167
 
    34 vs: vs RK_PULSE LBRACKET value value value value value • value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 171
+    value  转到状态 171
 
 
-State 168
+状态 168
 
    35 vs: vs RK_SIN LBRACKET value value value value value • RBRACKET
 
-    RBRACKET  shift, and go to state 172
+    RBRACKET  偏移，并进入状态 172
 
 
-State 169
+状态 169
 
    41 cs: cs RK_PULSE LBRACKET value value value value value • value value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 173
+    value  转到状态 173
 
 
-State 170
+状态 170
 
    42 cs: cs RK_SIN LBRACKET value value value value value • RBRACKET
 
-    RBRACKET  shift, and go to state 174
+    RBRACKET  偏移，并进入状态 174
 
 
-State 171
+状态 171
 
    34 vs: vs RK_PULSE LBRACKET value value value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 175
+    value  转到状态 175
 
 
-State 172
+状态 172
 
    35 vs: vs RK_SIN LBRACKET value value value value value RBRACKET •
 
-    $default  reduce using rule 35 (vs)
+    $default  使用规则 35 以归约 (vs)
 
 
-State 173
+状态 173
 
    41 cs: cs RK_PULSE LBRACKET value value value value value value • value RBRACKET
 
-    FLOAT    shift, and go to state 74
-    INTEGER  shift, and go to state 75
-    VALUE    shift, and go to state 76
+    FLOAT    偏移，并进入状态 74
+    INTEGER  偏移，并进入状态 75
+    VALUE    偏移，并进入状态 76
 
-    value  go to state 176
+    value  转到状态 176
 
 
-State 174
+状态 174
 
    42 cs: cs RK_SIN LBRACKET value value value value value RBRACKET •
 
-    $default  reduce using rule 42 (cs)
+    $default  使用规则 42 以归约 (cs)
 
 
-State 175
+状态 175
 
    34 vs: vs RK_PULSE LBRACKET value value value value value value value • RBRACKET
 
-    RBRACKET  shift, and go to state 177
+    RBRACKET  偏移，并进入状态 177
 
 
-State 176
+状态 176
 
    41 cs: cs RK_PULSE LBRACKET value value value value value value value • RBRACKET
 
-    RBRACKET  shift, and go to state 178
+    RBRACKET  偏移，并进入状态 178
 
 
-State 177
+状态 177
 
    34 vs: vs RK_PULSE LBRACKET value value value value value value value RBRACKET •
 
-    $default  reduce using rule 34 (vs)
+    $default  使用规则 34 以归约 (vs)
 
 
-State 178
+状态 178
 
    41 cs: cs RK_PULSE LBRACKET value value value value value value value RBRACKET •
 
-    $default  reduce using rule 41 (cs)
+    $default  使用规则 41 以归约 (cs)

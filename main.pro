@@ -2,8 +2,8 @@ TEMPLATE = app
 TARGET = Y-SPICE
 INCLUDEPATH += $$PWD/src
 
-QMAKE_CC = ccache gcc
-QMAKE_CXX = ccache g++
+QMAKE_CC = gcc
+QMAKE_CXX = g++
 
 
 QT += widgets printsupport
@@ -84,7 +84,7 @@ SOURCES +=  src/main.cpp \
            
 RESOURCES += src/mainwindow/mainwindow.qrc
 
-LIBS += -larmadillo -llapack -lblas -lfl -ly
+LIBS += -larmadillo -llapack -lblas -lfl
 
 PRE_TARGETDEPS += flexBison
 
